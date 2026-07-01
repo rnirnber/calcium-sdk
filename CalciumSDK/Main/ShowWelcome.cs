@@ -9,7 +9,7 @@ namespace CalciumSDK
         public static void ShowWelcome()
         {
             Console.Clear();
-            "Welcome to Calcium".ToCharArray().ToList().ForEach(c =>
+            "Welcome to Calcium SDK".ToCharArray().ToList().ForEach(c =>
             {
                 Console.Write(c);
                 Thread.Sleep(40);
