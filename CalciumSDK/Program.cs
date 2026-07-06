@@ -72,7 +72,21 @@
                         Console.WriteLine(idx.ToString() + ":" + dir);
                         idx++;
                     });
-                    var x = Console.ReadLine();
+                    var selected_project = Console.ReadLine().Trim();
+                    var begin_idx = 1;
+                    var end_idx = project_names.Count();
+                    if (Convert.ToInt32(selected_project) >= begin_idx && Convert.ToInt32(selected_project) <= end_idx)
+                    {
+                        Console.WriteLine("Selected Project Valid");
+                        Thread.Sleep(2000);
+                    }
+                    else
+                    {
+                        Console.Clear();     
+                        Console.WriteLine("You cannot select an empty project:");
+                        Thread.Sleep(2000);
+
+                    }
                 }
             }
             var selectProject = (() =>
