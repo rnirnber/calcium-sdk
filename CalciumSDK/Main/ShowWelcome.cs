@@ -14,7 +14,7 @@ namespace CalciumSDK
                 Console.Write(c);
                 Thread.Sleep(40);
             });
-            Thread.Sleep(500);
+            Thread.Sleep(1250);
         }
     }
 }

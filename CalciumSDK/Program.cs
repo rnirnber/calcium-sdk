@@ -14,8 +14,12 @@
                 switch(main_action)
                 {
                     case "1":
-                        var project_name = Program.PromptForProjectName();
-                        CreateProject(project_name);
+                        var success = false;
+                        while(!success)
+                        {
+                            var project_name = Program.PromptForProjectName();
+                            success = Program.TryCreateProject(project_name);
+                        }
                         breakMainLoop = true;
                         break;
                     default:
