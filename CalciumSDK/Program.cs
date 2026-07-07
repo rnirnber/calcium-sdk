@@ -9,6 +9,7 @@ namespace CalciumSDK
             Program.ShowWelcome();
             var breakMainLoop = false;
             var proceedToSelectProject = false;
+            var sel_proj_name = "";
             while (true)
             {
                 
@@ -45,6 +46,11 @@ namespace CalciumSDK
                 }
             }
             var hasSelected = false;
+            var selected_proj = "";
+            
+            Dictionary<int, string> selectedProjectDict = new Dictionary<int, string>();
+            var selected_proj_idx = -1;
+
             while(!hasSelected)
             {
                 Console.Clear();
@@ -78,6 +84,7 @@ namespace CalciumSDK
                     final_project_names.ForEach((dir) =>
                     {
                         Console.WriteLine(idx.ToString() + "): " + dir);
+                        selectedProjectDict[idx] = dir;
                         idx++;
                     });
                     Console.WriteLine();                    
@@ -94,6 +101,7 @@ namespace CalciumSDK
                         final_project_names.ForEach((dir) =>
                         {
                             Console.WriteLine(idx2.ToString() + "): " + dir);
+                            selectedProjectDict[idx2] = dir;
                             idx2++;
                         });
                         var selected_project = Console.ReadLine().Trim();
@@ -105,6 +113,7 @@ namespace CalciumSDK
                                 Console.WriteLine("Selected Project Valid, Proceeding...");
                                 Thread.Sleep(1000);
                                 selection_is_valid = true;
+                                selected_proj = Convert.ToInt32(selected_project).ToString();                                
                                 break;
                             }
                             else
@@ -127,6 +136,24 @@ namespace CalciumSDK
             }
             Console.Clear();
             Console.WriteLine("To be continued...");
+
+            var this_proj_nayme = selectedProjectDict[Convert.ToInt32(selected_proj)];
+            var promptForRootProjectActions = true;
+
+            while(promptForRootProjectActions)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine(this_proj_nayme);
+                Console.WriteLine("===================");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine();
+                Console.WriteLine();
+
+                Console.WriteLine("Please type A-Z, then press enter to select an action:");
+                var choice = Console.ReadLine();
+            }
+
         }
         
     }
