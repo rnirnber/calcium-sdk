@@ -31,6 +31,9 @@
 	<EmbeddedResource Include="v2_assets\cactus_edited.bmp">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+		<EmbeddedResource Include="v2_assets\asset_white.bmp">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
 </ItemGroup>
 
 </Project>

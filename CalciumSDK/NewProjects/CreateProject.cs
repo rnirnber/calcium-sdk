@@ -35,7 +35,8 @@ namespace CalciumSDK
                 {"outdoors_0012.bmp", "asset_0001.bmp" },
                 {"outdoors_0009.bmp", "asset_0002.bmp" },
                 {"asset_black.bmp", "asset_0003.bmp" },
-                {"cactus.bmp", "asset_0004.bmp"}
+                {"cactus.bmp", "asset_0004.bmp"},
+                {"asset_white.bmp", "asset_0005.bmp" }
             };
 
             assets_to_copy.Keys.ToList().ForEach((key) =>
