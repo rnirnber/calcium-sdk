@@ -13,10 +13,22 @@
     <Folder Include="Preflight\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Assets\outdoors_0012.bmp">
+    <EmbeddedResource Include="v2_assets\outdoors_0012.bmp">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-	<EmbeddedResource Include="Assets\outdoors_0009.bmp">
+	<EmbeddedResource Include="v2_assets\outdoors_0009.bmp">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+	<EmbeddedResource Include="v2_assets\asset_black.bmp">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+	<EmbeddedResource Include="v2_assets\scene1.bmp">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+	<EmbeddedResource Include="v2_assets\cactus.bmp">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+	<EmbeddedResource Include="v2_assets\cactus_edited.bmp">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
 </ItemGroup>

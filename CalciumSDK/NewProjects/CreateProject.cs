@@ -23,13 +23,38 @@ namespace CalciumSDK
                 return false;
             }
             var new_path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName;
+
             Directory.CreateDirectory(new_path);
             Directory.CreateDirectory(new_path + Path.DirectorySeparatorChar + "assets");
+            Directory.CreateDirectory(new_path + Path.DirectorySeparatorChar + "scenes");
+            Directory.CreateDirectory(new_path + Path.DirectorySeparatorChar + "asset_edits");
 
             var assembly = Assembly.GetExecutingAssembly();
-            string first_asset_name = "CalciumSDK.Assets.outdoors_0012.bmp";
+            var assets_to_copy = new Dictionary<string, string>()
+            {
+                {"outdoors_0012.bmp", "asset_0001.bmp" },
+                {"outdoors_0009.bmp", "asset_0002.bmp" },
+                {"asset_black.bmp", "asset_0003.bmp" },
+                {"cactus.bmp", "asset_0004.bmp"}
+            };
 
-            using (Stream stream = assembly.GetManifestResourceStream(first_asset_name))
+            assets_to_copy.Keys.ToList().ForEach((key) =>
+            {
+                using (Stream stream = assembly.GetManifestResourceStream("CalciumSDK.v2_assets." + key))
+                {
+                    if (stream != null)
+                    {
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            stream.CopyTo(ms);
+                            byte[] resourceBytes = ms.ToArray();
+
+                            File.WriteAllBytes(new_path + Path.DirectorySeparatorChar + "assets" + Path.DirectorySeparatorChar + assets_to_copy[key], resourceBytes);
+                        }
+                    }
+                }
+            });
+            using (Stream stream = assembly.GetManifestResourceStream("CalciumSDK.v2_assets.cactus_edited.bmp"))
             {
                 if (stream != null)
                 {
@@ -38,27 +63,32 @@ namespace CalciumSDK
                         stream.CopyTo(ms);
                         byte[] resourceBytes = ms.ToArray();
 
-                        File.WriteAllBytes(new_path + Path.DirectorySeparatorChar + "assets" + Path.DirectorySeparatorChar + "asset_0001.bmp", resourceBytes);
+                        File.WriteAllBytes(new_path + Path.DirectorySeparatorChar + "asset_edits" + Path.DirectorySeparatorChar + "asset_0004.bmp", resourceBytes);
                     }
                 }
             }
-            string second_asset_name = "CalciumSDK.Assets.outdoors_0009.bmp";
-            using (Stream stream = assembly.GetManifestResourceStream(second_asset_name))
+
+            var scenes_to_copy = new Dictionary<string, string>()
             {
-                if (stream != null)
-                {
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        stream.CopyTo(ms);
-                        byte[] resourceBytes = ms.ToArray();
+                {"scene1.bmp", "scene_0001.bmp"}
+            };
 
-                        File.WriteAllBytes(new_path + Path.DirectorySeparatorChar + "assets" + Path.DirectorySeparatorChar + "asset_0002.bmp", resourceBytes);
+            scenes_to_copy.Keys.ToList().ForEach((key) =>
+            {
+                using (Stream stream = assembly.GetManifestResourceStream("CalciumSDK.v2_assets." + key))
+                {
+                    if (stream != null)
+                    {
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            stream.CopyTo(ms);
+                            byte[] resourceBytes = ms.ToArray();
+
+                            File.WriteAllBytes(new_path + Path.DirectorySeparatorChar + "scenes" + Path.DirectorySeparatorChar + scenes_to_copy[key], resourceBytes);
+                        }
                     }
                 }
-            }
-
-
-            // Add logic to create the project here
+            });            
             Thread.Sleep(1000);
             Console.WriteLine("Project created successfully!");
             Thread.Sleep(1000);
