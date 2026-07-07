@@ -1,4 +1,6 @@
-﻿namespace CalciumSDK
+﻿using System.Runtime.InteropServices;
+
+namespace CalciumSDK
 {
     public static partial class Program
     {
@@ -19,8 +21,14 @@
                         {
                             var project_name = Program.PromptForProjectName();
                             success = Program.TryCreateProject(project_name);
+                            if(!success)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("There was an error creating the project. Please try again.");
+                                System.Threading.Thread.Sleep(2000);
+                            }
+                            break;
                         }
-                        breakMainLoop = true;
                         break;
                     case "2":
                         breakMainLoop = true;
@@ -69,37 +77,56 @@
                     var idx = 1;
                     final_project_names.ForEach((dir) =>
                     {
-                        Console.WriteLine(idx.ToString() + ":" + dir);
+                        Console.WriteLine(idx.ToString() + "): " + dir);
                         idx++;
                     });
-                    var selected_project = Console.ReadLine().Trim();
+                    Console.WriteLine();                    
                     var begin_idx = 1;
                     var end_idx = project_names.Count();
-                    if (Convert.ToInt32(selected_project) >= begin_idx && Convert.ToInt32(selected_project) <= end_idx)
-                    {
-                        Console.WriteLine("Selected Project Valid");
-                        Thread.Sleep(2000);
-                    }
-                    else
-                    {
-                        Console.Clear();     
-                        Console.WriteLine("You cannot select an empty project:");
-                        Thread.Sleep(2000);
 
+                    var selection_is_valid = false;
+                    while(!selection_is_valid)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Please type a number and hit enter for selecting your project:");
+                        
+                        var idx2 = 1;
+                        final_project_names.ForEach((dir) =>
+                        {
+                            Console.WriteLine(idx2.ToString() + "): " + dir);
+                            idx2++;
+                        });
+                        var selected_project = Console.ReadLine().Trim();
+                        try
+                        {
+                            if (Convert.ToInt32(selected_project) >= begin_idx && Convert.ToInt32(selected_project) <= end_idx)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Selected Project Valid, Proceeding...");
+                                Thread.Sleep(1000);
+                                selection_is_valid = true;
+                                break;
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                Console.WriteLine("You cannot select an empty project:");
+                                Thread.Sleep(2000);
+
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Selected project is invalid");
+                            Thread.Sleep(2000);
+                        }
                     }
+                    hasSelected = true;
                 }
             }
-            var selectProject = (() =>
-            {
-                
-            });
-            if(proceedToSelectProject)
-            {
-                
-                
-                Console.WriteLine("Please select a project:");
-
-            }
+            Console.Clear();
+            Console.WriteLine("To be continued...");
         }
         
     }
