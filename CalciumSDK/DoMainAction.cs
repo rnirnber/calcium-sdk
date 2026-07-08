@@ -6,13 +6,18 @@ namespace CalciumSDK
 {
     public static partial class Program
     {
-        public static void DoMainAction(string action)
+        public static void DoMainAction(string action, string projectName)
         {
             switch(action)
             {
                 case "A":
                     Console.WriteLine("Hydrating Assets...");
-                    Thread.Sleep(3000 * 100);
+                    Thread.Sleep(1000 * 2);
+                    var success = Preflight.VerifyAssetsForHydration(projectName);
+                    if(!success)
+                    {
+                        return;
+                    }
                     break;
                 default:
                     break;

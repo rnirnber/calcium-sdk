@@ -155,7 +155,7 @@ namespace CalciumSDK
                 Console.WriteLine("A) Hydrate Assets");
 
                 var choice = Console.ReadLine();
-                DoMainAction(choice);
+                DoMainAction(choice, this_proj_nayme);
             }
 
         }

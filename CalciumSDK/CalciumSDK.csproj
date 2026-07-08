@@ -8,10 +8,6 @@
     <PublishAot>true</PublishAot>
     <InvariantGlobalization>true</InvariantGlobalization>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Preflight\" />
-  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="v2_assets\outdoors_0012.bmp">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
