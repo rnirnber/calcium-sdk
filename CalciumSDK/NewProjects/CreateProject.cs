@@ -31,7 +31,6 @@ namespace CalciumSDK
                 Directory.CreateDirectory(new_path);
                 Directory.CreateDirectory(new_path + Path.DirectorySeparatorChar + "assets");
                 Directory.CreateDirectory(new_path + Path.DirectorySeparatorChar + "scenes");
-                Directory.CreateDirectory(new_path + Path.DirectorySeparatorChar + "asset_edits");
 
                 var assembly = Assembly.GetExecutingAssembly();
                 var assets_to_copy = new Dictionary<string, string>()
@@ -55,28 +54,22 @@ namespace CalciumSDK
                                 byte[] resourceBytes = ms.ToArray();
 
                                 File.WriteAllBytes(new_path + Path.DirectorySeparatorChar + "assets" + Path.DirectorySeparatorChar + assets_to_copy[key], resourceBytes);
+
+                                using (SHA512 sha512 = SHA512.Create())
+                                {
+                                    byte[] sig_bytes = sha512.ComputeHash(resourceBytes.ToArray());
+                                    string hash_str = BitConverter.ToString(sig_bytes).Replace("-", "").ToLowerInvariant();
+                                    File.WriteAllText(new_path + Path.DirectorySeparatorChar + "assets" + Path.DirectorySeparatorChar + assets_to_copy[key].Replace(".bmp", ".signature"), hash_str);
+                                }
                             }
                         }
                     }
-                });
-                using (Stream stream = assembly.GetManifestResourceStream("CalciumSDK.v2_assets.cactus_edited.bmp"))
-                {
-                    if (stream != null)
-                    {
-                        using (MemoryStream ms = new MemoryStream())
-                        {
-                            stream.CopyTo(ms);
-                            byte[] resourceBytes = ms.ToArray();
-
-                            File.WriteAllBytes(new_path + Path.DirectorySeparatorChar + "asset_edits" + Path.DirectorySeparatorChar + "asset_0004.bmp", resourceBytes);
-                        }
-                    }
-                }
+                });                
 
                 var scenes_to_copy = new Dictionary<string, string>()
-            {
-                {"scene1.bmp", "scene_0001.bmp"}
-            };
+                {
+                    {"scene1.bmp", "scene_0001.bmp"}
+                };
 
                 scenes_to_copy.Keys.ToList().ForEach((key) =>
                 {
@@ -90,38 +83,17 @@ namespace CalciumSDK
                                 byte[] resourceBytes = ms.ToArray();
 
                                 File.WriteAllBytes(new_path + Path.DirectorySeparatorChar + "scenes" + Path.DirectorySeparatorChar + scenes_to_copy[key], resourceBytes);
+
+                                using (SHA512 sha512 = SHA512.Create())
+                                {
+                                    byte[] sig_bytes = sha512.ComputeHash(resourceBytes.ToArray());
+                                    string hash_str = BitConverter.ToString(sig_bytes).Replace("-", "").ToLowerInvariant();
+                                    File.WriteAllText(new_path + Path.DirectorySeparatorChar + "scenes" + Path.DirectorySeparatorChar + scenes_to_copy[key].Replace(".bmp", ".signature"), hash_str);
+                                }
                             }
                         }
                     }
-                });
-
-                var hash_bytes = new List<byte>();
-                assets_to_copy.Keys.ToList().ForEach((k) =>
-                {
-                    var asset_name = assets_to_copy[k];
-                    hash_bytes.AddRange(File.ReadAllBytes(new_path + Path.DirectorySeparatorChar + "assets" + Path.DirectorySeparatorChar + asset_name));
-                });
-
-                using (Stream stream = assembly.GetManifestResourceStream("CalciumSDK.v2_assets.cactus_edited.bmp"))
-                {
-                    if (stream != null)
-                    {
-                        using (MemoryStream ms = new MemoryStream())
-                        {
-                            stream.CopyTo(ms);
-                            byte[] resourceBytes = ms.ToArray();
-                            hash_bytes.AddRange(resourceBytes);
-                        }
-                    }
-                }
-                using (SHA512 sha512 = SHA512.Create())
-                {
-                    byte[] sig_bytes = sha512.ComputeHash(hash_bytes.ToArray());
-                    string hash_str = BitConverter.ToString(sig_bytes).Replace("-", "").ToLowerInvariant();
-                    File.WriteAllText(new_path + Path.DirectorySeparatorChar + "assets" + Path.DirectorySeparatorChar + "signature.sig", hash_str);
-                }
-
-
+                });              
 
                 Console.WriteLine("Project created successfully!");
                 Thread.Sleep(1000);
