@@ -18,6 +18,7 @@ namespace CalciumSDK
                     {
                         return;
                     }
+
                     break;
                 default:
                     break;
