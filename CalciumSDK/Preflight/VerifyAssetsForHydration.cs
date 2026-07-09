@@ -20,7 +20,7 @@ namespace CalciumSDK
                 }
 
                 var ret_early0 = false;
-                var success0 = false;
+                var success0 = true;
                 all_files.ForEach((f) =>
                 {
                     if(ret_early0)
@@ -84,6 +84,7 @@ namespace CalciumSDK
                 {
                     Console.Clear();
                     Console.WriteLine("There was an invalid filename for a signature in the assets folder. File: " + bad_sig_file + ".signature");
+                    Console.Out.Flush();
                     Thread.Sleep(1000 * 5);
                     return false;
                 }
