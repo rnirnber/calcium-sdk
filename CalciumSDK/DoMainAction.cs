@@ -12,6 +12,7 @@ namespace CalciumSDK
             {
                 case "A":
                     Console.WriteLine("Hydrating Assets Preflight Check...");
+                    Console.Out.Flush();
                     Thread.Sleep(1000 * 2);
                     var success = Preflight.VerifyAssetsForHydration(projectName);
                     if(!success)

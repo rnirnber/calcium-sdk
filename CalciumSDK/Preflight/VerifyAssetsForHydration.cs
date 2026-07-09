@@ -33,6 +33,7 @@ namespace CalciumSDK
                         Console.WriteLine("A foreign file was detected.\n");
                         Console.WriteLine("The following file should not exist in the assets folder:");
                         Console.WriteLine(f.Split(Path.DirectorySeparatorChar).ToList().Last());
+                        Console.Out.Flush();
                         Thread.Sleep(1000 * 8);
                         success0 = false;
                         ret_early0 = true;
@@ -62,6 +63,7 @@ namespace CalciumSDK
                 {
                     Console.Clear();
                     Console.WriteLine("There was an invalid filename for a bitmap in the assets folder. File: " + bad_file + ".bmp");
+                    Console.Out.Flush();
                     Thread.Sleep(1000 * 5);
                     return false;
                 }
@@ -103,6 +105,7 @@ namespace CalciumSDK
                         Console.WriteLine("");
                         Console.WriteLine("Bitmap File: " + a_name + ".bmp");
                         Console.WriteLine("No .signature file was found. Please create an empty file called:\n" + a_name + ".signature");
+                        Console.Out.Flush();
                         Thread.Sleep(1000 * 10);
                         success1 = false;
                         ret_early1 = true;
@@ -132,6 +135,7 @@ namespace CalciumSDK
                         Console.WriteLine("");
                         Console.WriteLine("Signature File: " + a_name + ".signature");
                         Console.WriteLine("Please add a bitmap file called :\n" + a_name + ".bmp");
+                        Console.Out.Flush();
                         Thread.Sleep(1000 * 8);
                         success2 = false;
                         ret_early2 = true;
@@ -171,6 +175,7 @@ namespace CalciumSDK
                 {
                     Console.Clear();
                     Console.WriteLine("An image dimensions error occured. The following file has a width and/or height that is not 53 pixels: \n\n" + wrong_filename);
+                    Console.Out.Flush();
                     Thread.Sleep(5000);
                 }
 

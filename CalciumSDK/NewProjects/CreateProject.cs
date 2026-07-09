@@ -23,6 +23,7 @@ namespace CalciumSDK
                 {
                     Console.Clear();
                     Console.WriteLine($"Project {projectName} already exists. Please choose a different name.");
+                    Console.Out.Flush();
                     Thread.Sleep(2000);
                     return false;
                 }
@@ -96,12 +97,14 @@ namespace CalciumSDK
                 });              
 
                 Console.WriteLine("Project created successfully!");
+                Console.Out.Flush();
                 Thread.Sleep(1000);
                 return true;
             }
             catch(Exception ex)
             {
                 Console.WriteLine("There was an error in creating the project.");
+                Console.Out.Flush();
                 Thread.Sleep(1000 * 3);
                 return false;
             }

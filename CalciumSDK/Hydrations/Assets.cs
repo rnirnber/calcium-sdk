@@ -12,6 +12,7 @@ namespace CalciumSDK
             {
                 Console.Clear();
                 Console.WriteLine("Scanning assets...");
+                Console.Out.Flush();
                 Thread.Sleep(750);
 
                 var bitmamp_paths = new List<string>();

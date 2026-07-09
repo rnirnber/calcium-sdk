@@ -18,6 +18,7 @@ namespace CalciumSDK
             {
                 Console.Clear();
                 Console.WriteLine("Invalid characters found. Please use only A-Z and underscores.");
+                Console.Out.Flush();
                 Thread.Sleep(2000);
                 return PromptForProjectName();
             }

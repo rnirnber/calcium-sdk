@@ -26,6 +26,7 @@ namespace CalciumSDK
                             {
                                 Console.Clear();
                                 Console.WriteLine("There was an error creating the project. Please try again.");
+                                Console.Out.Flush();
                                 System.Threading.Thread.Sleep(2000);
                             }
                             break;
@@ -37,6 +38,7 @@ namespace CalciumSDK
                         break;
                     default:
                         Console.WriteLine("You must type \"1\" or \"2\" to provide a valid action.");
+                        Console.Out.Flush();
                         System.Threading.Thread.Sleep(2000);
                         break;
                 }
@@ -111,6 +113,7 @@ namespace CalciumSDK
                             {
                                 Console.Clear();
                                 Console.WriteLine("Selected Project Valid, Proceeding...");
+                                Console.Out.Flush();
                                 Thread.Sleep(1000);
                                 selection_is_valid = true;
                                 selected_proj = Convert.ToInt32(selected_project).ToString();                                
@@ -120,6 +123,7 @@ namespace CalciumSDK
                             {
                                 Console.Clear();
                                 Console.WriteLine("You cannot select an empty project:");
+                                Console.Out.Flush();
                                 Thread.Sleep(2000);
 
                             }
@@ -128,6 +132,7 @@ namespace CalciumSDK
                         {
                             Console.Clear();
                             Console.WriteLine("Selected project is invalid");
+                            Console.Out.Flush();
                             Thread.Sleep(2000);
                         }
                     }
