@@ -177,7 +177,9 @@ namespace CalciumSDK
                     Console.Clear();
                     Console.WriteLine("An image dimensions error occured. The following file has a width and/or height that is not 53 pixels: \n\n" + wrong_filename);
                     Console.Out.Flush();
-                    Thread.Sleep(5000);
+                    Thread.Sleep(5000 * 2);
+                    var x2 = Console.ReadLine();
+                    Environment.Exit(0);
                 }
 
 

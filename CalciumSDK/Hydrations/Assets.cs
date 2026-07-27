@@ -8,8 +8,10 @@ namespace CalciumSDK
     {
         public static partial class Assets
         {
-            public static bool ListAndConfirm()
+            public static List<string> GetPendingChangesList()
             {
+                var ret = new List<string>();
+
                 Console.Clear();
                 Console.WriteLine("Scanning assets...");
                 Console.Out.Flush();
@@ -18,7 +20,7 @@ namespace CalciumSDK
                 var bitmamp_paths = new List<string>();
                 var signature_paths = new List<string>();
 
-                string assetsPath = Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar + "assets";
+                string assetsPath = Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar + Program.SELECTED_PROJECT + Path.DirectorySeparatorChar + "assets";
 
                 var valid_asset_names = new List<string>();
                 var valid_bitmap_names = new List<string>();
@@ -31,8 +33,19 @@ namespace CalciumSDK
                 }
 
                 var bitmaps = Directory.GetFiles(assetsPath).ToList().Where((f) => f.IndexOf(".bmp") > -1).ToList();
+                bitmamp_paths.ForEach((bmp) =>
+                {
+                    var bytes = File.ReadAllBytes(bmp);
+                    var sig = File.ReadAllText(bmp.Replace(".bmp", ".signature"));
+                    var this_digest = Helpers.GetDigest(bytes);
 
-                return true;
+                    if (this_digest != sig)
+                    {
+                        ret.Add(bmp.Split(Path.DirectorySeparatorChar).ToList().Last().Replace(".bmp", ""));
+                    }
+                });
+
+                return ret;
             }
         }
     }

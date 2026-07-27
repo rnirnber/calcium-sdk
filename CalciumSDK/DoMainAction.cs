@@ -19,7 +19,14 @@ namespace CalciumSDK
                     {
                         return;
                     }
-
+                    var pending_changes = Hydrations.Assets.GetPendingChangesList();
+                    if(pending_changes == null || pending_changes.Count == 0)
+                    {
+                        Console.WriteLine("No pending asset changes.");
+                        Console.Out.Flush();
+                        Thread.Sleep(1000 * 3);
+                        break;
+                    }
                     break;
                 default:
                     break;

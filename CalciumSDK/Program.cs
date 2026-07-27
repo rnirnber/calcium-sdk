@@ -4,6 +4,7 @@ namespace CalciumSDK
 {
     public static partial class Program
     {
+        public static string SELECTED_PROJECT = "";
         static void Main(string[] args)
         {
             Program.ShowWelcome();
@@ -116,7 +117,7 @@ namespace CalciumSDK
                                 Console.Out.Flush();
                                 Thread.Sleep(1000);
                                 selection_is_valid = true;
-                                selected_proj = Convert.ToInt32(selected_project).ToString();                                
+                                selected_proj = Convert.ToInt32(selected_project).ToString();                          
                                 break;
                             }
                             else
@@ -143,6 +144,7 @@ namespace CalciumSDK
             Console.WriteLine("To be continued...");
 
             var this_proj_nayme = selectedProjectDict[Convert.ToInt32(selected_proj)];
+            Program.SELECTED_PROJECT = this_proj_nayme;
             var promptForRootProjectActions = true;
 
             while(promptForRootProjectActions)
