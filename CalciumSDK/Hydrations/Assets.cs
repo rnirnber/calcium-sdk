@@ -33,7 +33,7 @@ namespace CalciumSDK
                 }
 
                 var bitmaps = Directory.GetFiles(assetsPath).ToList().Where((f) => f.IndexOf(".bmp") > -1).ToList();
-                bitmamp_paths.ForEach((bmp) =>
+                bitmaps.ForEach((bmp) =>
                 {
                     var bytes = File.ReadAllBytes(bmp);
                     var sig = File.ReadAllText(bmp.Replace(".bmp", ".signature"));

@@ -27,6 +27,12 @@ namespace CalciumSDK
                         Thread.Sleep(1000 * 3);
                         break;
                     }
+                    pending_changes.ForEach((pc) =>
+                    {
+                        Console.WriteLine("Detected change w/" + pc);
+                        Console.Out.Flush();
+                    });
+                    Thread.Sleep(1000 * 3);
                     break;
                 default:
                     break;
