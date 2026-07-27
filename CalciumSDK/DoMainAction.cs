@@ -32,7 +32,15 @@ namespace CalciumSDK
                         Console.WriteLine("Detected change w/" + pc);
                         Console.Out.Flush();
                     });
-                    Thread.Sleep(1000 * 3);
+                    Thread.Sleep(1000 * 2);
+
+                    pending_changes.ForEach((pc) =>
+                    {
+                        var path = Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar + SELECTED_PROJECT + Path.DirectorySeparatorChar + "assets" + Path.DirectorySeparatorChar + pc + ".bmp";
+                        var bytes = File.ReadAllBytes(path);
+                        var hash = Helpers.GetDigest(bytes);
+                        File.WriteAllText(path.Replace(".bmp", ".signature"), hash);
+                    });
                     break;
                 default:
                     break;
