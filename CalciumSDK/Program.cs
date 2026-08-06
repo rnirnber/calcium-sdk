@@ -160,6 +160,7 @@ namespace CalciumSDK
                 Console.WriteLine("Please type A-Z, then press enter to select an action:");
                 Console.WriteLine("");
                 Console.WriteLine("A) Hydrate Assets");
+                Console.WriteLine("B) Hydrate Scenes");
 
                 var choice = Console.ReadLine();
                 DoMainAction(choice, this_proj_nayme);

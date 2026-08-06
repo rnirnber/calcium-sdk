@@ -30,6 +30,9 @@
 		<EmbeddedResource Include="v2_assets\asset_white.bmp">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="v2_assets\scene_0001.json">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
 </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SkiaSharp" Version="4.150.0" />

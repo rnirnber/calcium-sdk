@@ -42,6 +42,13 @@ namespace CalciumSDK
                         File.WriteAllText(path.Replace(".bmp", ".signature"), hash);
                     });
                     break;
+                case "B":
+                    var success2 = Preflight.VerifyScenesForHydration(projectName);
+                    if (!success2)
+                    {
+                        return;
+                    }
+                    break;
                 default:
                     break;
             }
