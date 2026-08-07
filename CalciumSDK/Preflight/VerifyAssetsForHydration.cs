@@ -58,16 +58,6 @@ namespace CalciumSDK
                 var bitmap_names = valid_bitmap_files.Select((f) => f.Replace(".bmp", "").Split(Path.DirectorySeparatorChar).ToList().Last()).ToList();
                 var bad_file = bitmap_names.FirstOrDefault((n) => (!valid_bitmap_names.Contains(n + ".bmp")));
 
-                // deprecated
-                if(bad_file != null && false)
-                {
-                    Console.Clear();
-                    Console.WriteLine("There was an invalid filename for a bitmap in the assets folder. File: " + bad_file + ".bmp");
-                    Console.Out.Flush();
-                    Thread.Sleep(1000 * 5);
-                    return false;
-                }
-
                 var signature_files = Directory.GetFiles(Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "assets").ToList()
                 .Where((f) => f.IndexOf(".signature") > 0)
                 .ToList();
