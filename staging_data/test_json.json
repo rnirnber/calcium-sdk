@@ -1,0 +1,259 @@
+{
+    "name": "Test",
+    "on_exit_statements":
+    {
+        "prime":
+        [
+            "statement_one_prime",
+            "statement_two_prime"
+        ],
+        "nspire":
+        [
+            "statement_three_nspire1",
+            "statement_three_nspire2"
+        ]
+    },
+    "inn_item_keys":
+    [
+        "potion1",
+        "potion_2"
+    ],
+    "monster_numbers":
+    [
+        1,
+        2,
+        3,
+        4
+    ],
+    "monsters_exp_min":
+    [
+        11,
+        12,
+        13,
+        14
+    ],
+    "monsters_exp_max":
+    [
+        13,
+        15,
+        17,
+        19
+    ],
+    "monsters_gold_min":
+    [
+        9,
+        10,
+        11,
+        12
+    ],
+    "monsters_gold_max":
+    [
+        21,
+        22,
+        23,
+        24
+    ],
+    "monsters_defense_min":
+    [
+        101,
+        102,
+        103,
+        104
+    ],
+    "monsters_defense_max":
+    [
+        202,
+        204,
+        206,
+        208
+    ],
+    "monsters_attack_min":
+    [
+        -1,
+        -2,
+        -3,
+        -4
+    ],
+    "monsters_attack_max":
+    [
+        -10,
+        -20,
+        -30,
+        -40
+    ],
+    "monsters_hp_min":
+    [
+        5001,
+        5002,
+        5003,
+        5004
+    ],
+    "monsters_hp_max":
+    [
+        -10,
+        -20,
+        -30,
+        -40
+    ],
+    "monsters_appearance_frequency": 3,
+
+    "on_entrance_statements":
+    {
+        "prime":
+        [
+            "local foo1 = bar1",
+            "local foo2 = bar2"
+        ],
+        "nspire":
+        [
+            "local foo3 = bar3",
+            "local foo4 = bar4"
+        ]
+    },
+    "initial_dialog": "Hello World - Initial",
+    
+    "alternative_player_activation_points":
+    [
+        {
+            "x": 5,
+            "y": 10
+        },
+        {
+            "x": 50,
+            "y": 100
+        }   
+    ],
+    "alternative_player_deactivation_points":
+    [
+        {
+            "x": 3,
+            "y": 30
+        },
+        {
+            "x": 40,
+            "y": 44
+        }   
+    ],
+    "follower_enabled_statements":
+    {
+        "prime":
+        [
+            "false"
+        ],
+        "nspire":
+        [
+            "false"
+        ]
+    },
+    "assets_used":
+    [
+        1,
+        2
+    ],
+    "forbidden_assets":
+    [
+        2
+    ],
+    "dialogs":
+    [
+        {
+            "x": 5,
+            "y": 6,
+            "required_dir": "up",
+            "txt": "Hello World Dialog",
+            "on_finished_callback_statements":
+            {
+                "nspire":
+                [
+                    "updatevar1",
+                    "updatevar2"
+                ],
+                "prime":
+                [
+                    "updatevar3",
+                    "updatevar4"
+                ]
+            },
+            "eligibility_failure_msg": "No dice.",
+            "eligibility_statements":
+            {
+                "nspire":
+                [
+                    "no1",
+                    "no2"
+                ],
+                "prime":
+                [
+                    "no4",
+                    "no5"
+                ]
+            },
+            "on_eligibility_failed_statements":
+            {
+                "prime":
+                [
+                    "123",
+                    "456"
+                ],
+                "nspire":
+                [
+                    "789",
+                    "087"
+                ]
+            }
+        }
+    ],
+    "warps":
+    [
+        {
+            "scene_number": 2,
+            "x": 5,
+            "y": 10,
+            "after_player_x": 20,
+            "after_player_y": 15,
+            "after_screen_x": 2,
+            "after_screen_y": 3,
+            "after_player_dir": "down",
+            "allowed_conditions":
+            {
+                "prime":
+                [
+                    "true",
+                    "5 == 5"
+                ],
+                "nspire":
+                [
+                    "false",
+                    "6 == 5"
+                ]
+            },
+            "on_condition_failed_msg": "error",
+            "on_finished_statements":
+            {
+                "prime":
+                [
+                    "done2",
+                    "done3"
+                ],
+                "nspire":
+                [
+                    "done4",
+                    "done5"
+                ]
+            },
+            "on_failed_statements":
+            {
+                "prime":
+                [
+                    "no1",
+                    "no2"
+                ],
+                "nspire":
+                [
+                    "no4",
+                    "no5"
+                ]
+            }
+        }
+    ]
+}
