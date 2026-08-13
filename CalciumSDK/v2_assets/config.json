@@ -30,5 +30,6 @@
             "value": "3.33",
             "data_type": "float"
         }
-    ]
+    ],
+    "background_forgiveness_threshold": 3
 }
