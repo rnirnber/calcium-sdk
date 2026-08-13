@@ -78,4 +78,7 @@ public class SceneBlueprint
     
     [JsonPropertyName("forbidden_assets")]
     public List<int> forbidden_assets { get; set; }
+    
+    [JsonPropertyName("dark_mode")]
+    public bool dark_mode { get; set; }
 }
