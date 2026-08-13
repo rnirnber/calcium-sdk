@@ -1,9 +1,158 @@
 {
-  "name": "Home Scene 1 - Gobi Desert",
-  "forbidden_assets": 
-  [
-    "0001",
-    "0002",
-    "0004"
-  ]
+    "name": "Test",
+    "on_exit_statements":
+    {
+        "prime":
+        [
+
+        ]
+    },
+    "inn_item_keys":
+    [
+
+    ],
+    "monster_numbers":
+    [
+        
+    ],
+    "monsters_exp_min":
+    [
+        
+    ],
+    "monsters_exp_max":
+    [
+        
+    ],
+    "monsters_gold_min":
+    [
+        
+    ],
+    "monsters_gold_max":
+    [
+        
+    ],
+    "monsters_defense_min":
+    [
+        
+    ],
+    "monsters_defense_max":
+    [
+        
+    ],
+    "monsters_attack_min":
+    [
+        
+    ],
+    "monsters_attack_max":
+    [
+        
+    ],
+    "monsters_hp_min":
+    [
+        
+    ],
+    "monsters_hp_max":
+    [
+        
+    ],
+    "monsters_appearance_frequency": 0,
+
+    "on_entrance_statements":
+    {
+        "prime":
+        [
+            
+        ]
+    },
+    "initial_dialog": "Hello World - Initial",
+    
+    "alternative_player_activation_points":
+    [
+           
+    ],
+    "alternative_player_deactivation_points":
+    [
+           
+    ],
+    "follower_enabled_statements":
+    {
+        "prime":
+        [
+            "false"
+        ]
+    },
+    "assets_used":
+    [
+        
+    ],
+    "forbidden_assets":
+    [
+        
+    ],
+    "dialogs":
+    [
+        {
+            "x": 5,
+            "y": 6,
+            "required_dir": "up",
+            "txt": "Hello World Dialog",
+            "on_finished_callback_statements":
+            {
+                "prime":
+                [
+        
+                ]
+            },
+            "eligibility_failure_msg": "No dice.",
+            "eligibility_statements":
+            {
+                "prime":
+                [
+        
+                ]
+            },
+            "on_eligibility_failed_statements":
+            {
+                "prime":
+                [
+                    
+                ]
+            }
+        }
+    ],
+    "warps":
+    [
+        {
+            "scene_number": 2,
+            "x": 5,
+            "y": 10,
+            "after_player_x": 20,
+            "after_player_y": 15,
+            "after_screen_x": 2,
+            "after_screen_y": 3,
+            "after_player_dir": "down",
+            "allowed_conditions":
+            {
+                "prime":
+                [
+                    
+                ]
+            },
+            "on_condition_failed_msg": "error",
+            "on_finished_statements":
+            {
+                "prime":
+                [
+                    
+                ]                
+            },
+            "on_failed_statements":
+            {
+                "prime":
+                [
+                    
+                ]
+            }
+        }
+    ]
 }

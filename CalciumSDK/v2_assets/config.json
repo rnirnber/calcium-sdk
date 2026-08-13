@@ -1,0 +1,34 @@
+{
+    "compilation_targets":
+    [
+        "prime"
+    ],
+    "new_game_player_x": 23,
+    "new_game_player_y": 7,
+    "new_game_screen_x": 2,
+    "new_game_screen_y": 1,
+    "new_game_player_dir": 1,
+    "global_vars":
+    [
+        {
+            "key": "HELLO_VAR_1",
+            "value": "Hello",
+            "data_type": "string"
+        },
+        {
+            "key": "BYE_VAR_1",
+            "value": "Goodbye",
+            "data_type": "string"
+        },
+        {
+            "key": "GLOBAL_INTEGER",
+            "value": "100",
+            "data_type": "integer"
+        },
+        {
+            "key": "GLOBAL_FLOAT",
+            "value": "3.33",
+            "data_type": "float"
+        }
+    ]
+}

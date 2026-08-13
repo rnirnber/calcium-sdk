@@ -9,6 +9,8 @@ namespace CalciumSDK.Models;
 [JsonSerializable(typeof(SceneBlueprint))]
 [JsonSerializable(typeof(WarpBlueprint))]
 [JsonSerializable(typeof(DialogBlueprint))]
+[JsonSerializable(typeof(Config))]
+[JsonSerializable(typeof(GlobalVar))]
 public partial class AppJsonContext : JsonSerializerContext
 {
 }
