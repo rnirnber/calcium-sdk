@@ -31,5 +31,11 @@
             "data_type": "float"
         }
     ],
-    "background_forgiveness_threshold": 3
+    "background_forgiveness_threshold": 3,
+    "alpha_step_one": [255, 255, 255],
+    "alpha_step_two": [240, 240, 240],
+    "alpha_step_three": [230, 230, 230],    
+    "alpha_step_four": [220, 220, 220],
+    "alpha_step_five": [210, 210, 210],
+    "dark_mode_color": [30, 30, 30]
 }

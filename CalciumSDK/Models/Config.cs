@@ -34,4 +34,25 @@ public class Config
     [JsonPropertyName("global_vars")]
     public List<GlobalVar> global_vars { get; set; }
     
+    [JsonPropertyName("background_forgiveness_threshold")]
+    public int background_forgiveness_threshold { get; set; }
+    
+    [JsonPropertyName("alpha_step_one")]
+    public List<int> alpha_step_one { get; set; }
+
+    [JsonPropertyName("alpha_step_two")]
+    public List<int> alpha_step_two { get; set; }
+    
+    [JsonPropertyName("alpha_step_three")]
+    public List<int> alpha_step_three { get; set; }
+    
+    [JsonPropertyName("alpha_step_four")]
+    public List<int> alpha_step_four { get; set; }
+    
+    [JsonPropertyName("alpha_step_five")]
+    public List<int> alpha_step_five { get; set; }
+    
+    [JsonPropertyName("dark_mode_color")]
+    public List<int> dark_mode_color { get; set; }
+    
 }
