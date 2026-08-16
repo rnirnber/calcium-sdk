@@ -156,7 +156,7 @@ BEGIN
   LOCAL i;
   LOCAL k;
   FOR i FROM 0 TO 5 DO
-    FOR k FROM 0 TO  DO
+    FOR k FROM 0 TO 3 DO
       BLIT_P(G0, i * 53, k * 53, (i * 53) + 52, (k * 53) + 52, G1, 0, 0, 52, 52);
     END;
   END;
