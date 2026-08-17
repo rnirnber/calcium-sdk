@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.Json;
 using CalciumSDK.Models;
 
@@ -7,21 +8,10 @@ namespace CalciumSDK
     public static partial class Program
     {
         public static string SELECTED_PROJECT = "";
+        
         static void Main(string[] args)
         {
             Program.ShowWelcome();
-            
-            //string jsonString = File.ReadAllText("/home/rnirnber/Documents/CalciumProjects/REM/scenes/test_json.json");
-            //var deserialized = JsonSerializer.Deserialize<SceneBlueprint>(jsonString, AppJsonContext.Default.SceneBlueprint);
-            
-            //string jsonString = File.ReadAllText("/home/rnirnber/Documents/GitHub/calcium-sdk/CalciumSDK/v2_assets/config.json");
-            //var deserialized = JsonSerializer.Deserialize<Config>(jsonString, AppJsonContext.Default.Config);
-
-            /*// Pass the source-generated JsonTypeInfo directly:
-            SceneBlueprint? scene = JsonSerializer.Deserialize(
-                jsonString, 
-                AppJsonContext.Default.SceneBlueprint
-            );*/
             
             var breakMainLoop = false;
             var proceedToSelectProject = false;

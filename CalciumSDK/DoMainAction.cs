@@ -40,6 +40,9 @@ namespace CalciumSDK
                         var bytes = File.ReadAllBytes(path);
                         var hash = Helpers.GetDigest(bytes);
                         File.WriteAllText(path.Replace(".bmp", ".signature"), hash);
+
+                        var asset_sb = Assets.GeneratePPL(path);
+
                     });
                     break;
                 case "B":
