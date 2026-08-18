@@ -5,7 +5,7 @@ namespace CalciumSDK;
 
 public static partial class Assets
 {
-    public static StringBuilder GeneratePPL(string path)
+    public static StringBuilder GenerateAssetPPL(string path)
     {
         var ret = new StringBuilder();
         var bmp = SkiaSharp.SKBitmap.Decode(path);
@@ -42,7 +42,7 @@ public static partial class Assets
         }
 
         var asset_name = path.Split(Path.DirectorySeparatorChar).ToList().Last().Replace(".bmp", "");
-        ret.AppendLine("EXPORT ___render_" + asset_name);
+        ret.AppendLine("EXPORT ZZZ_render_" + asset_name + "()");  
         ret.AppendLine("BEGIN");
         if (main_fill == "white")
         {

@@ -41,7 +41,7 @@ namespace CalciumSDK
                         var hash = Helpers.GetDigest(bytes);
                         File.WriteAllText(path.Replace(".bmp", ".signature"), hash);
 
-                        var asset_sb = Assets.GeneratePPL(path);
+                        var asset_sb = Assets.GenerateAssetPPL(path);
 
                     });
                     break;

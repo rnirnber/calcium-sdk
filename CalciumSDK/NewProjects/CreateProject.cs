@@ -117,6 +117,17 @@ namespace CalciumSDK
                     }
                 }
 
+                using (Stream stream = assembly.GetManifestResourceStream("CalciumSDK.v2_assets.game.hpppl"))
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        stream.CopyTo(ms);
+                        byte[] resourceBytes = ms.ToArray();
+
+                        File.WriteAllBytes(new_path + Path.DirectorySeparatorChar + "game.hpppl", resourceBytes);
+                    }
+                }
+
                 Console.WriteLine("Project created successfully!");
                 Console.Out.Flush();
                 Thread.Sleep(1000);
