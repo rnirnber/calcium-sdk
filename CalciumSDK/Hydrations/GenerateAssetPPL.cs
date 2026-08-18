@@ -42,6 +42,7 @@ public static partial class Assets
         }
 
         var asset_name = path.Split(Path.DirectorySeparatorChar).ToList().Last().Replace(".bmp", "");
+        ret.AppendLine();
         ret.AppendLine("EXPORT ZZZ_render_" + asset_name + "()");  
         ret.AppendLine("BEGIN");
         if (main_fill == "white")
@@ -87,6 +88,7 @@ public static partial class Assets
         ret.AppendLine("  END;");
         ret.AppendLine("  // FREEZE();");
         ret.AppendLine("END;");
+        ret.AppendLine();
         return ret;
     }
 }

@@ -34,6 +34,7 @@ namespace CalciumSDK
                     });
                     Thread.Sleep(1000 * 2);
 
+                    var all_assets = new StringBuilder();
                     pending_changes.ForEach((pc) =>
                     {
                         var path = Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar + SELECTED_PROJECT + Path.DirectorySeparatorChar + "assets" + Path.DirectorySeparatorChar + pc + ".bmp";
@@ -42,8 +43,9 @@ namespace CalciumSDK
                         File.WriteAllText(path.Replace(".bmp", ".signature"), hash);
 
                         var asset_sb = Assets.GenerateAssetPPL(path);
-
+                        all_assets.Append(asset_sb);
                     });
+                    File.WriteAllText(Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar + SELECTED_PROJECT + Path.DirectorySeparatorChar + "assets.ppl", all_assets.ToString());
                     break;
                 case "B":
                     var success2 = Preflight.VerifyScenesForHydration(projectName);

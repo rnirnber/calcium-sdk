@@ -40,7 +40,7 @@
     <EmbeddedResource Include="v2_assets\config.json">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="v2_assets\game.hpppl">
+    <EmbeddedResource Include="v2_assets\assets.ppl">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     
