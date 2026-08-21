@@ -81,7 +81,7 @@ public static partial class Assets
         ret.AppendLine("  LOCAL y := 0;");
         ret.AppendLine("  LOCAL stop_at := " + ((lines_to_use.Count + 3) - 3).ToString() + ";");
         ret.AppendLine("  FOR i FROM 1 TO stop_at STEP 3 DO");
-        ret.AppendLine("    y = rects[i];");
+        ret.AppendLine("    y := rects[i];");
         ret.AppendLine("    x_start := rects[i + 1];");
         ret.AppendLine("    x_end := rects[i + 2];");
         ret.AppendLine("    RECT_P(G1, x_start, y, x_end, y, rect_fill, rect_fill);");

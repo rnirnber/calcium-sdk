@@ -31,9 +31,9 @@ public static class MainMenu
             return;
         }
         var black_lines = new List<int>();
-        for (int i = 0; i < 53; i++)
+        for (int i = 0; i < 212; i++)
         {
-            var line_scan = PixelHelpers.GetBlackLines(bmp, i);
+            var line_scan = PixelHelpers.GetBlackLines(bmp, i, 0, null, null, 318);
             line_scan.ForEach((ls) =>
             {
                 black_lines.Add(ls.y);
@@ -43,9 +43,9 @@ public static class MainMenu
         }
 
         var white_lines = new List<int>();
-        for (int i = 0; i < 53; i++)
+        for (int i = 0; i < 212; i++)
         {
-            var line_scan = PixelHelpers.GetWhiteLines(bmp, i);
+            var line_scan = PixelHelpers.GetWhiteLines(bmp, i, 0, null, null, 318);
             line_scan.ForEach((ls) =>
             {
                 white_lines.Add(ls.y);
@@ -74,12 +74,11 @@ public static class MainMenu
         {
             sb.AppendLine("  LOCAL main_fill := RGB(0, 0, 0);");
             sb.AppendLine("  LOCAL rect_fill := RGB(255, 255, 255);");
-            sb.AppendLine("  LOCAL black_fill := RGB(0, 0, 0);");
         }
 
         sb.AppendLine("");
         sb.AppendLine("  DIMGROB_P(G1, 318, 212);");
-        sb.AppendLine("  RECT_P(G1, 0, 0, 317, 212, main_fill, main_fill);");
+        sb.AppendLine("  RECT_P(G1, 0, 0, 317, 211, main_fill, main_fill);");
         sb.AppendLine("");
         sb.AppendLine("  // [y offset, starting x, ending x");
         sb.Append(" LOCAL rects := [");
@@ -96,9 +95,6 @@ public static class MainMenu
         sb.Append("];");
         sb.AppendLine();
         sb.AppendLine();
-        sb.AppendLine("  RECT_P(G1, 0, 0, 1, 239, black_fill, black_fill)");
-        sb.AppendLine("  RECT_P(G1, 318, 0, 319, 239, black_fill, black_fill);");
-        sb.AppendLine("  RECT_P(G1, 0, 212, 319, 239, black_fill, black_fill);");
         sb.AppendLine();
         sb.AppendLine("  LOCAL i := 1;");
         sb.AppendLine("  LOCAL x_start := 0;");
@@ -106,13 +102,14 @@ public static class MainMenu
         sb.AppendLine("  LOCAL y := 0;");
         sb.AppendLine("  LOCAL stop_at := " + ((lines_to_use.Count + 3) - 3).ToString() + ";");
         sb.AppendLine("  FOR i FROM 1 TO stop_at STEP 3 DO");
-        sb.AppendLine("    y = rects[i];");
+        sb.AppendLine("    y := rects[i];");
         sb.AppendLine("    x_start := rects[i + 1];");
         sb.AppendLine("    x_end := rects[i + 2];");
         sb.AppendLine("    RECT_P(G1, x_start, y, x_end, y, rect_fill, rect_fill);");
         sb.AppendLine("  END;");
-        sb.AppendLine("  BLIT_P(G0, 1, 0, 317, 211, G1, 1, 0, 317, 211);");
-        sb.AppendLine("  // FREEZE();");
+        sb.AppendLine("   RECT_P(G0, 0, 0, 319, 239, RGB(0, 0, 0), RGB(0, 0, 0));");
+        sb.AppendLine("  BLIT_P(G0, 1, 14, 318, 226, G1, 0, 0, 317, 221);");
+        sb.AppendLine("  FREEZE();");
         sb.AppendLine("END;");
         sb.AppendLine();
 

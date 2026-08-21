@@ -34,13 +34,13 @@ public static class PixelHelpers
 
         return red > 175 || green > 175 || blue > 175;
     });
-    public static List<RectangleItem> GetBlackLines(SKBitmap bmp, int line_num, int current_idx = 0, RectangleItem current_line = null, List<RectangleItem> ret = null)
+    public static List<RectangleItem> GetBlackLines(SKBitmap bmp, int line_num, int current_idx = 0, RectangleItem current_line = null, List<RectangleItem> ret = null, int stop_at = 53)
     {
-        if (current_idx == 53)
+        if (current_idx == stop_at)
         {
-            if (isBlack(bmp.GetPixel(52, line_num)))
+            if (isBlack(bmp.GetPixel(stop_at - 1, line_num)))
             {
-                current_line.end = 52;
+                current_line.end = stop_at - 1;
                 ret.Add(current_line);
             }
             ret = ret.Where((r) =>
@@ -78,16 +78,16 @@ public static class PixelHelpers
 
             current_line = null;
         }
-        return GetBlackLines(bmp, line_num, current_idx + 1, current_line, ret);
+        return GetBlackLines(bmp, line_num, current_idx + 1, current_line, ret, stop_at);
 
     }
-    public static List<RectangleItem> GetWhiteLines(SKBitmap bmp, int line_num, int current_idx = 0, RectangleItem current_line = null, List<RectangleItem> ret = null)
+    public static List<RectangleItem> GetWhiteLines(SKBitmap bmp, int line_num, int current_idx = 0, RectangleItem current_line = null, List<RectangleItem> ret = null, int stop_at = 53)
     {
-        if (current_idx == 53)
+        if (current_idx == stop_at)
         {
-            if (isWhite(bmp.GetPixel(52, line_num)))
+            if (isWhite(bmp.GetPixel(stop_at - 1, line_num)))
             {
-                current_line.end = 52;
+                current_line.end = stop_at - 1;
                 ret.Add(current_line);
             }
             ret = ret.Where((r) =>
@@ -125,7 +125,7 @@ public static class PixelHelpers
 
             current_line = null;
         }
-        return GetWhiteLines(bmp, line_num, current_idx + 1, current_line, ret);
+        return GetWhiteLines(bmp, line_num, current_idx + 1, current_line, ret, stop_at);
 
     }
 }
