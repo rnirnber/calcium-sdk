@@ -110,6 +110,9 @@ namespace CalciumSDK
                     }
                 }
 
+                Directory.CreateDirectory(new_path + Path.DirectorySeparatorChar + "internals" + Path.DirectorySeparatorChar + "prime");
+                Directory.CreateDirectory(new_path + Path.DirectorySeparatorChar + "internals" +
+                                          Path.DirectorySeparatorChar + "ubuntu");
                 using (Stream stream = assembly.GetManifestResourceStream("CalciumSDK.v2_assets.assets.ppl"))
                 {
                     using (MemoryStream ms = new MemoryStream())

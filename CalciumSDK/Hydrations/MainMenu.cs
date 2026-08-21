@@ -114,6 +114,8 @@ public static class MainMenu
         sb.AppendLine();
 
         File.WriteAllText(Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar + projectName +
-                          Path.DirectorySeparatorChar + "main_menu_DO_NOT_EDIT", sb.ToString());
+                          Path.DirectorySeparatorChar + "internals" + "main_menu", sb.ToString());
+
+        var sb2 = new StringBuilder();
     }
 }
