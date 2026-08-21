@@ -106,13 +106,6 @@ namespace CalciumSDK
                             byte[] resourceBytes = ms.ToArray();
 
                             File.WriteAllBytes(new_path + Path.DirectorySeparatorChar + "main_menu.bmp", resourceBytes);
-
-                            using (SHA512 sha512 = SHA512.Create())
-                            {
-                                byte[] sig_bytes = sha512.ComputeHash(resourceBytes.ToArray());
-                                string hash_str = BitConverter.ToString(sig_bytes).Replace("-", "").ToLowerInvariant();
-                                File.WriteAllText(new_path + Path.DirectorySeparatorChar + "main_menu.signature" , hash_str);
-                            }
                         }
                     }
                 }

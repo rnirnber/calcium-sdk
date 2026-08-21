@@ -14,7 +14,6 @@ namespace CalciumSDK
             Program.ShowWelcome();
             
             var breakMainLoop = false;
-            var proceedToSelectProject = false;
             var sel_proj_name = "";
             while (true)
             {
@@ -40,7 +39,6 @@ namespace CalciumSDK
                         break;
                     case "2":
                         breakMainLoop = true;
-                        proceedToSelectProject = true;
                         break;
                     default:
                         Console.WriteLine("You must type \"1\" or \"2\" to provide a valid action.");
@@ -123,6 +121,7 @@ namespace CalciumSDK
                                 Thread.Sleep(1000);
                                 selection_is_valid = true;
                                 selected_proj = Convert.ToInt32(selected_project).ToString();                          
+                                MainMenu.Hydrate(selectedProjectDict[Convert.ToInt32(selected_proj)]);
                                 break;
                             }
                             else
