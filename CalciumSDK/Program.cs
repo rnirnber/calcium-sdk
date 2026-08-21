@@ -119,8 +119,12 @@ namespace CalciumSDK
                                 Console.WriteLine("Selected Project Valid, Proceeding...");
                                 Console.Out.Flush();
                                 Thread.Sleep(1000);
+                                Program.RootConfig = JsonSerializer.Deserialize<Config>(
+                                    File.ReadAllText(Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar +
+                                                     selectedProjectDict[idx2] + Path.DirectorySeparatorChar +
+                                                     "config.json"));
                                 selection_is_valid = true;
-                                selected_proj = Convert.ToInt32(selected_project).ToString();                          
+                                selected_proj = Convert.ToInt32(selected_project).ToString();
                                 MainMenu.Hydrate(selectedProjectDict[Convert.ToInt32(selected_proj)]);
                                 break;
                             }
@@ -165,6 +169,7 @@ namespace CalciumSDK
                 Console.WriteLine("");
                 Console.WriteLine("A) Hydrate Assets");
                 Console.WriteLine("B) Hydrate Scenes");
+                Console.WriteLine("Z) Compile");
 
                 var choice = Console.ReadLine();
                 DoMainAction(choice, this_proj_nayme);

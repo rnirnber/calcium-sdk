@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using CalciumSDK.Models;
 
 namespace CalciumSDK
 {
     public static partial class Program
     {
+        public static Config RootConfig; 
         public static void DoMainAction(string action, string projectName)
         {
             switch(action)
@@ -61,6 +63,9 @@ namespace CalciumSDK
                     {
                         return;
                     }
+                    break;
+                case "Z":
+                    var config = 
                     break;
                 default:
                     break;

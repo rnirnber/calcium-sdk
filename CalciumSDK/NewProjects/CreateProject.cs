@@ -124,6 +124,30 @@ namespace CalciumSDK
                     }
                 }
 
+                using (Stream stream = assembly.GetManifestResourceStream("CalciumSDK.v2_assets.ubuntu.txt"))
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        stream.CopyTo(ms);
+                        byte[] resourceBytes = ms.ToArray();
+
+                        File.WriteAllBytes(new_path + Path.DirectorySeparatorChar + "internals" + Path.DirectorySeparatorChar + "ubuntu" + "ubuntu", resourceBytes);
+                    }
+                }
+                using (Stream stream = assembly.GetManifestResourceStream("CalciumSDK.v2_assets.config.json"))
+                {
+                    if (stream != null)
+                    {
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            stream.CopyTo(ms);
+                            byte[] resourceBytes = ms.ToArray();
+
+                            File.WriteAllBytes(new_path + Path.DirectorySeparatorChar + "main_menu.bmp", resourceBytes);
+                        }
+                    }
+                }
+
                 Console.WriteLine("Project created successfully!");
                 Console.Out.Flush();
                 Thread.Sleep(1000);

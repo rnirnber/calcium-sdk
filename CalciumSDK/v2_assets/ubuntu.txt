@@ -1,0 +1,207 @@
+using Cairo;
+using Gio;
+using Gtk;
+
+namespace [PROJECT_NAME];
+
+class Program
+{
+    private static Gtk.Application _App;
+    private static Gtk.ApplicationWindow _Window;
+    private static int _WinWidth = 318;
+    private static int _WinHeight = 212;
+    private static int _XScaleFactor = 1;
+    private static int _YScaleFactor = 1;
+    private static DrawingArea _Canvas;
+    private static int _AppMode = 1;
+    private static int _LastAppMode = -1;
+    private static int _[MAIN_ALPHA_RED] = 255;
+    private static int _[MAIN_ALPHA_GREEN] = 255;
+    private static int _[MAIN_ALPHA_BLUE] = 255;
+    
+    [STAThread]
+    static void Main(string[] args)
+    {
+        var app = Gtk.Application.New("org.gir.core.[PROJECT_NAME]", ApplicationFlags.FlagsNone);
+        _App = app;
+        
+        app.OnActivate += (sender, e) =>
+        {
+            _WinWidth = GetWinWidth();
+            _WinHeight = GetWinHeight();
+            _XScaleFactor =  GetXScaleFactor(_WinWidth);
+            _YScaleFactor = GetYScaleFactor(_WinHeight);
+            
+            var win = Gtk.ApplicationWindow.New((Gtk.Application)sender!);
+            _Window = win;
+            win.Title = [PROJECT_NAME]
+            
+            _Canvas = Gtk.DrawingArea.New();
+            _Canvas.SetSizeRequest(_WinWidth, _WinHeight);
+            
+            win.SetDefaultSize(_WinWidth, _WinHeight);
+            win.Resizable = false;
+
+            var fixed_area = new Fixed();
+            fixed_area.Put(_Canvas, 0, 0);
+            win.Child = fixed_area;
+            
+            win.Present();
+            
+            _Canvas.SetDrawFunc((area, ctx, width, height) =>
+            {
+                ctx.Antialias = Antialias.None;
+                switch (_AppMode)
+                {
+                    case 1:
+                        if (_LastAppMode != _AppMode)
+                        {
+                            _AppMode = 1;
+                            _LastAppMode = 1;
+                            RenderMainMenu(ctx);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            });
+        };
+        app.RunWithSynchronizationContext(args);
+
+    }
+
+    private static double _GetRedAsDecimal(int red)
+    {
+        return ((double) red / (double) 255);
+    }
+    private static double _GetGreenAsDecimal(int green)
+    {
+        return ((double) green / (double) 255);
+    }
+    private static double _GetBlueAsDecimal(int blue)
+    {
+        return ((double) blue / (double) 255);
+    }
+
+    static void RenderMainMenu(Context ctx)
+    {
+        int[] rects = [MAIN_MENU_RECTS];
+
+        var white_alpha_red = _GetRedAsDecimal(255);
+        var white_alpha_green = _GetGreenAsDecimal(255);
+        var white_alpha_blue = _GetBlueAsDecimal(255);
+
+        var black_alpha_red = _GetRedAsDecimal(0);
+        var black_alpha_green = _GetGreenAsDecimal(0);
+        var black_alpha_blue = _GetBlueAsDecimal(0);
+
+        var use_black_background = [USE_MAIN_MENU_BLACK_BACKGROUND]
+        var stop_at = [MAIN_MENU_STOP_AT]
+
+        if (use_black_background)
+        {
+            ctx.SetSourceRgb(black_alpha_red, black_alpha_green, black_alpha_blue);
+        }
+        else
+        {
+            ctx.SetSourceRgb(white_alpha_red, white_alpha_green, white_alpha_blue);
+        }
+        ctx.Rectangle(0, 0, 318 * _XScaleFactor, 212 * _YScaleFactor);
+        ctx.Fill();
+        
+        if (use_black_background)
+        {
+            ctx.SetSourceRgb(white_alpha_red, white_alpha_green, white_alpha_blue);
+        }
+        else
+        {
+            ctx.SetSourceRgb(black_alpha_red, black_alpha_green, black_alpha_blue);
+        }
+        for (int i = 0; i < stop_at; i += 3)
+        {
+            var y_start = rects[i] * _YScaleFactor;
+            var x_start = rects[i + 1] * _XScaleFactor;
+            var x_end = rects[i + 2] * _XScaleFactor;
+            ctx.Rectangle(x_start, y_start, ((x_end - x_start) + _XScaleFactor), _YScaleFactor);
+            ctx.Fill();
+        }
+    }
+    public static int GetWinWidth()
+    {
+        var display = Gdk.Display.GetDefault();
+        if (display != null)
+        {
+            var monitorsModel = display.GetMonitors();
+            if (monitorsModel.GetNItems() > 0)
+            {
+                nint monitorPtr = monitorsModel.GetItem(0); 
+                var monitor = ((GObject.Internal.InstanceWrapper.WrapHandle<Gdk.Monitor>(monitorPtr, false) as Gdk.Monitor));
+                
+                if (monitor != null)
+                {
+                    
+                    var current_width = 0;
+                    var current_height = 0;
+                    var done = false;
+                    while (!done)
+                    {
+                        if ((current_width + 318) <= monitor.Geometry.Width && (current_height + 212) <=  monitor.Geometry.Height)
+                        {
+                            current_width += 318;
+                            current_height += 212;
+                            continue;
+                        }
+                        return current_width;
+                    }
+                }
+            }
+        }
+
+        return 318;
+    }
+    public static int GetWinHeight()
+    {
+        var display = Gdk.Display.GetDefault();
+        if (display != null)
+        {
+            var monitorsModel = display.GetMonitors();
+            if (monitorsModel.GetNItems() > 0)
+            {
+                nint monitorPtr = monitorsModel.GetItem(0); 
+                
+                var monitor = ((GObject.Internal.InstanceWrapper.WrapHandle<Gdk.Monitor>(monitorPtr, false) as Gdk.Monitor));
+                
+                if (monitor != null)
+                {
+                    
+                    var current_width = 0;
+                    var current_height = 0;
+                    var done = false;
+                    while (!done)
+                    {
+                        if ((current_width + 318) <= monitor.Geometry.Width && (current_height + 212) <=  monitor.Geometry.Height)
+                        {
+                            current_width += 318;
+                            current_height += 212;
+                            continue;
+                        }
+                        return current_height;
+                    }
+                }
+            }
+        }
+
+        return 212;
+    }
+
+    public static int GetXScaleFactor(int width)
+    {
+        return width / 318;
+    }
+
+    public static int GetYScaleFactor(int height)
+    {
+        return height / 212;
+    }
+    
+}

@@ -43,6 +43,9 @@
     <EmbeddedResource Include="v2_assets\assets.ppl">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="v2_assets\assets.ppl">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     
 </ItemGroup>
   <ItemGroup>

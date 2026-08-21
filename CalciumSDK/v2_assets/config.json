@@ -1,7 +1,8 @@
 {
     "compilation_targets":
     [
-        "prime"
+        "prime",
+        "ubuntu"
     ],
     "new_game_player_x": 23,
     "new_game_player_y": 7,
@@ -28,7 +29,7 @@
         {
             "key": "GLOBAL_FLOAT",
             "value": "3.33",
-            "data_type": "float"
+            "data_type": "decimal"
         }
     ],
     "background_forgiveness_threshold": 3,
