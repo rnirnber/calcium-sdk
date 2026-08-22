@@ -33,6 +33,7 @@
         }
     ],
     "background_forgiveness_threshold": 3,
+    "true_alpha": [255, 255, 255],
     "alpha_step_one": [255, 255, 255],
     "alpha_step_two": [240, 240, 240],
     "alpha_step_three": [230, 230, 230],    

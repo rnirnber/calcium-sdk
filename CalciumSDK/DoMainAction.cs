@@ -65,6 +65,7 @@ namespace CalciumSDK
                     }
                     break;
                 case "Z":
+                    Compilers.Ubuntu.Generate(SELECTED_PROJECT);
                     break;
                 default:
                     break;

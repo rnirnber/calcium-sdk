@@ -54,5 +54,8 @@ public class Config
     
     [JsonPropertyName("dark_mode_color")]
     public List<int> dark_mode_color { get; set; }
+
+    [JsonPropertyName("true_alpha")]
+    public List<int> true_alpha { get; set; }
     
 }
