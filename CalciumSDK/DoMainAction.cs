@@ -65,7 +65,6 @@ namespace CalciumSDK
                     }
                     break;
                 case "Z":
-                    var config = 
                     break;
                 default:
                     break;

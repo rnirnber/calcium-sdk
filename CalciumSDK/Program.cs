@@ -121,8 +121,8 @@ namespace CalciumSDK
                                 Thread.Sleep(1000);
                                 Program.RootConfig = JsonSerializer.Deserialize<Config>(
                                     File.ReadAllText(Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar +
-                                                     selectedProjectDict[idx2] + Path.DirectorySeparatorChar +
-                                                     "config.json"));
+                                                     selectedProjectDict[Convert.ToInt32(selected_project)] + Path.DirectorySeparatorChar +
+                                                     "config.json"), AppJsonContext.Default.Config);
                                 selection_is_valid = true;
                                 selected_proj = Convert.ToInt32(selected_project).ToString();
                                 MainMenu.Hydrate(selectedProjectDict[Convert.ToInt32(selected_proj)]);
@@ -154,7 +154,9 @@ namespace CalciumSDK
             var this_proj_nayme = selectedProjectDict[Convert.ToInt32(selected_proj)];
             Program.SELECTED_PROJECT = this_proj_nayme;
             var promptForRootProjectActions = true;
-
+            
+            var tst = Compilers.Preflight.VerifySceneTargets();
+            
             while(promptForRootProjectActions)
             {
                 Console.Clear();
