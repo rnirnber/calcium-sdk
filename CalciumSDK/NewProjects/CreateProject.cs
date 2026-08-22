@@ -110,6 +110,9 @@ namespace CalciumSDK
                     }
                 }
 
+                Directory.CreateDirectory(new_path + Path.DirectorySeparatorChar + "dist");
+                Directory.CreateDirectory(new_path + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "ubuntu");
+                Directory.CreateDirectory(new_path + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "prime");
                 Directory.CreateDirectory(new_path + Path.DirectorySeparatorChar + "internals" + Path.DirectorySeparatorChar + "prime");
                 Directory.CreateDirectory(new_path + Path.DirectorySeparatorChar + "internals" +
                                           Path.DirectorySeparatorChar + "ubuntu");
@@ -121,17 +124,6 @@ namespace CalciumSDK
                         byte[] resourceBytes = ms.ToArray();
 
                         File.WriteAllBytes(new_path + Path.DirectorySeparatorChar + "assets.ppl_DO_NOT_EDIT", resourceBytes);
-                    }
-                }
-
-                using (Stream stream = assembly.GetManifestResourceStream("CalciumSDK.v2_assets.ubuntu.txt"))
-                {
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        stream.CopyTo(ms);
-                        byte[] resourceBytes = ms.ToArray();
-
-                        File.WriteAllBytes(new_path + Path.DirectorySeparatorChar + "internals" + Path.DirectorySeparatorChar + "ubuntu" + "ubuntu", resourceBytes);
                     }
                 }
                 using (Stream stream = assembly.GetManifestResourceStream("CalciumSDK.v2_assets.config.json"))
