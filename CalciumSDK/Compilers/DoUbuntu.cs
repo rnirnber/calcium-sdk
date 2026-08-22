@@ -9,6 +9,9 @@ public static class Ubuntu
     {
         var assembly = Assembly.GetExecutingAssembly();
         var new_path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "ubuntu" + Path.DirectorySeparatorChar + "Program.cs";
+        var sln_path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "ubuntu" + Path.DirectorySeparatorChar + projectName + ".slnx";
+        var proj_path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "ubuntu" + Path.DirectorySeparatorChar + projectName + ".csproj";
+        var publish_path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "ubuntu" + Path.DirectorySeparatorChar + "publish.sh";
         
         var path = Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar + projectName +
                    Path.DirectorySeparatorChar + "main_menu.bmp";
@@ -64,6 +67,27 @@ public static class Ubuntu
             lines_to_use = white_lines;
             main_fill = "black";
         }
+
+        var sln_file = new StringBuilder();
+        sln_file.AppendLine("<Solution>");
+        sln_file.AppendLine("\t<Project Path=\"" + projectName + ".csproj\" />");
+        sln_file.AppendLine("</Solution>");
+
+        var cs_proj_file = new StringBuilder();
+        cs_proj_file.AppendLine("<Project Sdk=\"Microsoft.NET.Sdk\">");
+        cs_proj_file.AppendLine("\t<PropertyGroup>");
+        cs_proj_file.AppendLine("\t\t<OutputType>Exe</OutputType>");
+        cs_proj_file.AppendLine("\t\t<TargetFramework>net10.0</TargetFramework>");
+        cs_proj_file.AppendLine("\t\t<ImplicitUsings>enable</ImplicitUsings>");
+        cs_proj_file.AppendLine("\t\t<Nullable>enable</Nullable>");
+        cs_proj_file.AppendLine("\t\t<PublishAot>true</PublishAot>");
+        cs_proj_file.AppendLine("\t\t<InvariantGlobalization>true</InvariantGlobalization>");
+        cs_proj_file.AppendLine("\t</PropertyGroup>");
+        cs_proj_file.AppendLine("\t<ItemGroup>");
+        cs_proj_file.AppendLine("\t\t<PackageReference Include=\"GirCore.Gtk-4.0\" Version=\"0.8.1\" />");
+        cs_proj_file.AppendLine("\t</ItemGroup>");
+        cs_proj_file.AppendLine("</Project>");
+        
         
         
         using (Stream stream = assembly.GetManifestResourceStream("CalciumSDK.v2_assets.ubuntu.txt"))
@@ -96,6 +120,10 @@ public static class Ubuntu
                 code = code.Replace("[__MAIN_MENU_STOP_AT]", ((lines_to_use.Count - 3)).ToString());
                 
                 File.WriteAllText(new_path, code);
+                File.WriteAllText(proj_path, cs_proj_file.ToString());
+                File.WriteAllText(sln_path, sln_file.ToString());
+                
+                File.WriteAllText(publish_path, "dotnet publish -c Release -r linux-x64 -p:PublishAot=true --self-contained");
             }
         }
     }
