@@ -65,7 +65,14 @@ namespace CalciumSDK
                     }
                     break;
                 case "Z":
-                    Compilers.Ubuntu.Generate(SELECTED_PROJECT);
+                    if(RootConfig.compilation_targets.Contains("ubuntu"))
+                    {
+                        Compilers.Ubuntu.Generate(SELECTED_PROJECT);
+                    }
+                    if(RootConfig.compilation_targets.Contains("prime"))
+                    {
+                        Compilers.Prime.Generate(SELECTED_PROJECT);
+                    }
                     break;
                 default:
                     break;
