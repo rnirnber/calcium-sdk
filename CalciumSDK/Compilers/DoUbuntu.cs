@@ -118,6 +118,9 @@ public static class Ubuntu
                 code = code.Replace("[__TRUE_ALPHA_BLUE]", Program.RootConfig.true_alpha[2].ToString());
                 code = code.Replace("[__USE_MAIN_MENU_BLACK_BACKGROUND]", (black_lines.Count >= white_lines.Count).ToString().ToLower());
                 code = code.Replace("[__MAIN_MENU_STOP_AT]", ((lines_to_use.Count - 3)).ToString());
+
+                var assets_code = GetAssetsCode(projectName);
+                code = code.Replace("[__ASSETS_CODE]", assets_code);
                 
                 File.WriteAllText(new_path, code);
                 File.WriteAllText(proj_path, cs_proj_file.ToString());
@@ -126,5 +129,119 @@ public static class Ubuntu
                 File.WriteAllText(publish_path, "dotnet publish -c Release -r linux-x64 -p:PublishAot=true --self-contained");
             }
         }
+    }
+
+    private static string GetAssetsCode(string projectName)
+    {
+        var ret = new StringBuilder();
+        for (int i = 1; i <= 9999; i++)
+        {
+            var this_asset = Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "assets" + Path.DirectorySeparatorChar + "asset_" + Helpers.GetPaddedNum(i) + ".bmp";
+            if (File.Exists(this_asset))
+            {
+                var rects_path = this_asset.Replace(".bmp", ".rects");
+                if (!File.Exists(rects_path) || true)
+                {
+                    ret.AppendLine("    private static Action render_asset_" + Helpers.GetPaddedNum(i) + " = ((int starting_x, int starting_y, Context ctx, int current_alpha_red, int current_alpha_green, int current_alpha_blue) => ");
+                    ret.AppendLine("    {");
+                    ret.AppendLine("        var alpha_red = _GetRedAsDecimal(current_alpha_red);");
+                    ret.AppendLine("        var alpha_green = _GetGreenAsDecimal(current_alpha_green);");
+                    ret.AppendLine("        var alpha_blue = _GetBlueAsDecimal(current_alpha_blue);");
+                    ret.AppendLine();
+                    ret.AppendLine("        var black_red = _GetRedAsDecimal(0);");
+                    ret.AppendLine("        var black_green = _GetGreenAsDecimal(0);");
+                    ret.AppendLine("        var black_blue = _GetBlueAsDecimal(0);");
+                    ret.AppendLine();
+
+                    var asset_bmp = SkiaSharp.SKBitmap.Decode(this_asset);
+                    var black_lines = new List<int>();
+                    for (int n = 0; n < 53; n++)
+                    {
+                        var line_scan = PixelHelpers.GetBlackLines(asset_bmp, n, 0);
+                        line_scan.ForEach((ls) =>
+                        {
+                            black_lines.Add(ls.y);
+                            black_lines.Add(ls.start);
+                            black_lines.Add(ls.end);
+                        });
+                    }
+
+                    var white_lines = new List<int>();
+                    for (int n = 0; n < 53; n++)
+                    {
+                        var line_scan = PixelHelpers.GetWhiteLines(asset_bmp, n, 0);
+                        line_scan.ForEach((ls) =>
+                        {
+                            white_lines.Add(ls.y);
+                            white_lines.Add(ls.start);
+                            white_lines.Add(ls.end);
+                        });
+                    }
+
+                    var main_fill = "white";
+                    var lines_to_use = black_lines;
+                    
+                    if (black_lines.Count >= white_lines.Count)
+                    {
+                        lines_to_use = white_lines;
+                        main_fill = "black";
+                    }
+                    if (main_fill == "white")
+                    {
+                        ret.AppendLine("        ctx.SetSourceRgb(alpha_red, alpha_green, alpha_blue);");
+                    }
+                    else
+                    {
+                        ret.AppendLine("        ctx.SetSourceRgb(black_red, black_green, black_blue);");
+                    }
+                    ret.AppendLine("        ctx.Rectangle(starting_x * 53 * _XScaleFactor, starting_y * 53 * _YScaleFactor, 53 *  _XScaleFactor, 53 * _YScaleFactor);");
+                    ret.AppendLine("        ctx.Fill();");
+                    ret.AppendLine("");
+                    
+                    if (main_fill == "white")
+                    {
+                        ret.AppendLine("        ctx.SetSourceRgb(black_red, black_green, black_blue);");
+                    }
+                    else
+                    {
+                        ret.AppendLine("        ctx.SetSourceRgb(alpha_red, alpha_green, alpha_blue);");
+                    }
+                    var rects_json = new StringBuilder();
+                    rects_json.Append("[");
+                    
+                    var line_tally = 0;
+                    lines_to_use.ForEach((l) =>
+                    {
+                        rects_json.Append(l.ToString());
+                        if (line_tally != lines_to_use.Count - 1)
+                        {
+                            ret.Append(",");
+                        }
+                        line_tally++;
+                    });
+                    rects_json.Append(",");
+                    rects_json.Append("]");
+                    
+                    ret.AppendLine("        if(!_AssetsCache.ContainsKey(" + i.ToString() + ")");
+                    ret.AppendLine("        {");
+                    ret.AppendLine("            var rects_json = \"" + rects_json.ToString() + "\";");
+                    ret.AppendLine("            _AsstsCache[" + i.ToString() + "] = JsonSerializer.Deserialize<List<int>>(rects_json);");
+                    ret.AppendLine("        }");
+                    ret.AppendLine("        var data = _AssetsCache[\"" + i.ToString() + "];");
+                    ret.AppendLine("        for(int i = 0; i < data.Count - 3; i += 3) ");
+                    ret.AppendLine("        {");
+                    ret.AppendLine("            var y_start = (rects[i] * _YScaleFactor) + (starting_y * _YScaleFactor);");
+                    ret.AppendLine("            var x_start = (starting_x * 53) + (rects[i + 1] * _XScaleFactor);");
+                    ret.AppendLine("            var x_end = (starting_x * 53) + (rects[i + 2] * _XScaleFactor);");
+                    ret.AppendLine("            ctx.Rectangle(x_start, y_start, (x_end - x_start), _YScaleFactor);");
+                    ret.AppendLine("            ctx.Fill();");
+                    ret.AppendLine("        }");
+                    ret.AppendLine("    });");
+                    ret.AppendLine();
+                }
+            }
+        }
+
+        return ret.ToString();
     }
 }

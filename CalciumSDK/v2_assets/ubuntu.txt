@@ -15,6 +15,7 @@ class Program
     private static DrawingArea _Canvas;
     private static int _AppMode = 1;
     private static int _LastAppMode = -1;
+    private static Dictionary<int, List<int>> _AssetsCache = new Dictionary<int, List<int>>();
     
     [STAThread]
     static void Main(string[] args)
@@ -200,5 +201,10 @@ class Program
     {
         return height / 212;
     }
+    // START OF ASSETS CODE (DO NOT MODIFY BELOW THIS LINE)
+    [__ASSETS_CODE]
+    // END OF ASSETS CODE
+
+
     
 }
