@@ -142,7 +142,7 @@ public static class Ubuntu
                 var rects_path = this_asset.Replace(".bmp", ".rects");
                 if (!File.Exists(rects_path) || true)
                 {
-                    ret.AppendLine("    private static Action render_asset_" + Helpers.GetPaddedNum(i) + " = ((int starting_x, int starting_y, Context ctx, int current_alpha_red, int current_alpha_green, int current_alpha_blue) => ");
+                    ret.AppendLine("    private static Action<int, int, Context, int, int, int> render_asset_" + Helpers.GetPaddedNum(i) + " = ((int starting_x, int starting_y, Context ctx, int current_alpha_red, int current_alpha_green, int current_alpha_blue) => ");
                     ret.AppendLine("    {");
                     ret.AppendLine("        var alpha_red = _GetRedAsDecimal(current_alpha_red);");
                     ret.AppendLine("        var alpha_green = _GetGreenAsDecimal(current_alpha_green);");
@@ -213,27 +213,31 @@ public static class Ubuntu
                     lines_to_use.ForEach((l) =>
                     {
                         rects_json.Append(l.ToString());
-                        if (line_tally != lines_to_use.Count - 1)
+                        if ((line_tally != lines_to_use.Count - 1) && lines_to_use.Count > 0)
                         {
-                            ret.Append(",");
+                            rects_json.Append(",");
                         }
                         line_tally++;
                     });
-                    rects_json.Append(",");
                     rects_json.Append("]");
+                    if (lines_to_use.Count == 0)
+                    {
+                        rects_json.Clear();
+                        rects_json.Append("[]");
+                    }
                     
-                    ret.AppendLine("        if(!_AssetsCache.ContainsKey(" + i.ToString() + ")");
+                    ret.AppendLine("        if(!_AssetsCache.ContainsKey(" + i.ToString() + "))");
                     ret.AppendLine("        {");
                     ret.AppendLine("            var rects_json = \"" + rects_json.ToString() + "\";");
-                    ret.AppendLine("            _AsstsCache[" + i.ToString() + "] = JsonSerializer.Deserialize<List<int>>(rects_json);");
+                    ret.AppendLine("            _AssetsCache[" + i.ToString() + "] = JsonSerializer.Deserialize<List<int>>(rects_json, JSON_CTX.Default.ListInt32);");  
                     ret.AppendLine("        }");
-                    ret.AppendLine("        var data = _AssetsCache[\"" + i.ToString() + "];");
-                    ret.AppendLine("        for(int i = 0; i < data.Count - 3; i += 3) ");
+                    ret.AppendLine("        var rects = _AssetsCache[" + i.ToString() + "];");
+                    ret.AppendLine("        for(int i = 0; i <= rects.Count - 3; i += 3) ");
                     ret.AppendLine("        {");
                     ret.AppendLine("            var y_start = (rects[i] * _YScaleFactor) + (starting_y * _YScaleFactor);");
                     ret.AppendLine("            var x_start = (starting_x * 53) + (rects[i + 1] * _XScaleFactor);");
                     ret.AppendLine("            var x_end = (starting_x * 53) + (rects[i + 2] * _XScaleFactor);");
-                    ret.AppendLine("            ctx.Rectangle(x_start, y_start, (x_end - x_start), _YScaleFactor);");
+                    ret.AppendLine("            ctx.Rectangle(x_start, y_start, ((x_end - x_start) + _XScaleFactor), _YScaleFactor);");
                     ret.AppendLine("            ctx.Fill();");
                     ret.AppendLine("        }");
                     ret.AppendLine("    });");

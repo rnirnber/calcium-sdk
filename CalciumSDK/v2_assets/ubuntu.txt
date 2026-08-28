@@ -1,6 +1,9 @@
 using Cairo;
-using Gio;
+using Gio; 
 using Gtk;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata; 
 
 namespace [__PROJECT_NAME];
 
@@ -16,6 +19,12 @@ class Program
     private static int _AppMode = 1;
     private static int _LastAppMode = -1;
     private static Dictionary<int, List<int>> _AssetsCache = new Dictionary<int, List<int>>();
+    
+    [JsonSerializable(typeof(List<int>))]
+    internal partial  class JSON_CTX : JsonSerializerContext
+    {
+            
+    }
     
     [STAThread]
     static void Main(string[] args)
