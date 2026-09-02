@@ -30,12 +30,14 @@ namespace CalciumSDK.Text
                         {
                             using (SKFont f = new SKFont(SKTypeface.FromStream(stream)))
                             {
+                                f.Subpixel = true;                 // <-- This replaces SubpixelText
+                                f.Edging = SKFontEdging.SubpixelAntialias;
                                 distinct_chars.ForEach((c) =>
                                 {
                                     var i = (int)c[0];
                                     var rep = new LetterRepresentation();
                                     var font_lines = new List<Line>();
-                                    f.Size = 24;
+                                    f.Size = 11;
                                     canvas.Clear(SKColors.White);
                                     var blob = SKTextBlob.Create(c.ToString(), f);
                                     canvas.DrawText(blob, 50, 50 - f.Metrics.Ascent, paint);
