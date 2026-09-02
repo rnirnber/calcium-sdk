@@ -49,6 +49,9 @@
 	<EmbeddedResource Include="v2_assets\prime_support.txt">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+	<EmbeddedResource Include="v2_assets\font.ttf">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     
 </ItemGroup>
   <ItemGroup>

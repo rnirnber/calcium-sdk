@@ -22,7 +22,7 @@ public static class PixelHelpers
 
     });
 
-    public static Func<SKColor, bool> isBlack = ((SKColor clr) =>
+    public static Func<SKColor, bool> IsBlack = ((SKColor clr) =>
     {
         return !isWhite(clr);
     });
@@ -38,7 +38,7 @@ public static class PixelHelpers
     {
         if (current_idx == stop_at)
         {
-            if (isBlack(bmp.GetPixel(stop_at - 1, line_num)))
+            if (IsBlack(bmp.GetPixel(stop_at - 1, line_num)))
             {
                 current_line.end = stop_at - 1;
                 ret.Add(current_line);
@@ -61,7 +61,7 @@ public static class PixelHelpers
             current_line.y = line_num;
             current_line.end = current_line.start;
         }
-        if (isBlack(bmp.GetPixel(current_idx, line_num)))
+        if (IsBlack(bmp.GetPixel(current_idx, line_num)))
         {
             current_line.end++;
         }
