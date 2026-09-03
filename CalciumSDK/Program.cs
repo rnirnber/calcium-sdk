@@ -13,8 +13,7 @@ namespace CalciumSDK
         {
             Program.ShowWelcome();
 
-            var list = new List<string>() { "A", "B", "C", "D", "E", "F", "G"};
-            CalciumSDK.Text.GetPrimeCharacterRendering.Get(list);
+            var list = new List<string>() { "A", "B", "C", "D", "E", "F", "G"};            
 
             var breakMainLoop = false;
             var sel_proj_name = "";

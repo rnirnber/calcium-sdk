@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -107,6 +108,8 @@ namespace CalciumSDK.Compilers
                     rects_sb.Append("]");
                     code = code.Replace("[__RECTS]", rects_sb.ToString());
                     code = code.Replace("[__STOP_AT]", ((lines_to_use.Count - 2)).ToString());
+
+                    var character_rendering_fns = CalciumSDK.Text.GetPrimeCharacterRendering.Get(list);
 
                     var publish_path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "prime" + Path.DirectorySeparatorChar + "support.ppl";
                     File.WriteAllText(publish_path, code);

@@ -123,19 +123,18 @@ namespace CalciumSDK.Text
                                     });
 
                                     var sb = new StringBuilder();
-                                    sb.AppendLine("EXPORT RENDER_" + rep.character_int.ToString() + "(X, Y, R, G, B, G_BUFFER)");
+                                    sb.AppendLine("EXPORT ZZZ_RENDER_" + rep.character_int.ToString() + "(X, Y, R, G, B, G_BUFFER)");
                                     sb.AppendLine("BEGIN");
                                     sb.AppendLine("  LOCAL clr := RGB(R, G, B);");
                                     sb.AppendLine("  LOCAL i := 1;");
-                                    sb.AppendLine("  LOCAL stop_at := " + ((lines_array.Length / 3) - 2).ToString() + ";");
+                                    sb.AppendLine("  LOCAL stop_at := " + ((rep.Lines.Count * 3)).ToString() + ";");
                                     sb.AppendLine();
                                     sb.AppendLine("  LOCAL rects := [" + lines_array.ToString() + "];");
                                     sb.AppendLine("  FOR i FROM 1 TO stop_at STEP 3 DO");
                                     sb.AppendLine("    LOCAL x_start := rects[i];");
-                                    sb.AppendLine("    LOCAL x_end := x_start + 1;");
                                     sb.AppendLine("    LOCAL y_start := rects[i + 1];");
                                     sb.AppendLine("    LOCAL y_end := y_start + rects[i + 2];");
-                                    sb.AppendLine("    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_end, Y + y_end, clr, clr);");
+                                    sb.AppendLine("    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);");
                                     sb.AppendLine("  END;");
                                     sb.AppendLine("END;");
                                     i++;

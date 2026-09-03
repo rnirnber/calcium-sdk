@@ -27,3 +27,6 @@ BEGIN
   FREEZE();
 END;
 
+[__CHARACTER_CODE_FNs]
+
+
