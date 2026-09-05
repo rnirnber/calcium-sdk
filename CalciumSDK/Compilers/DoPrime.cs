@@ -91,6 +91,10 @@ namespace CalciumSDK.Compilers
                         code = code.Replace("[__RECT_BACKGROUND_RED]", Program.RootConfig.alpha_step_one[0].ToString());
                         code = code.Replace("[__RECT_BACKGROUND_GREEN]", Program.RootConfig.alpha_step_one[1].ToString());
                         code = code.Replace("[__RECT_BACKGROUND_BLUE]", Program.RootConfig.alpha_step_one[2].ToString());
+
+                        var distinct_chars = Program.RootConfig.characters_used.Distinct().ToList();
+
+                        code = code.Replace("[__CHARACTER_CODE_FNs]", Text.GetPrimeCharacterRendering.Get(distinct_chars));
                     }
                     var rects_sb = new StringBuilder();
 
@@ -106,10 +110,8 @@ namespace CalciumSDK.Compilers
                         idx2++;
                     });
                     rects_sb.Append("]");
-                    code = code.Replace("[__RECTS]", rects_sb.ToString());
+                    code = code.Replace("[__RECTS]", rects_sb.ToString().Trim().Replace("\r", "").Replace("\n", ""));
                     code = code.Replace("[__STOP_AT]", ((lines_to_use.Count - 2)).ToString());
-
-                    var character_rendering_fns = CalciumSDK.Text.GetPrimeCharacterRendering.Get(list);
 
                     var publish_path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "prime" + Path.DirectorySeparatorChar + "support.ppl";
                     File.WriteAllText(publish_path, code);

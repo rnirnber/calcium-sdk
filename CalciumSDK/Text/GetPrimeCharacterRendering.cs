@@ -129,7 +129,15 @@ namespace CalciumSDK.Text
                                     sb.AppendLine("  LOCAL i := 1;");
                                     sb.AppendLine("  LOCAL stop_at := " + ((rep.Lines.Count * 3)).ToString() + ";");
                                     sb.AppendLine();
-                                    sb.AppendLine("  LOCAL rects := [" + lines_array.ToString() + "];");
+                                    if(lines_array.Length == 0)
+                                    {
+                                        sb.AppendLine("  RETURN;");
+                                        sb.AppendLine("  LOCAL rects := -1;");
+                                    }
+                                    else
+                                    {
+                                        sb.AppendLine("  LOCAL rects := [" + lines_array.ToString() + "];");
+                                    }
                                     sb.AppendLine("  FOR i FROM 1 TO stop_at STEP 3 DO");
                                     sb.AppendLine("    LOCAL x_start := rects[i];");
                                     sb.AppendLine("    LOCAL y_start := rects[i + 1];");

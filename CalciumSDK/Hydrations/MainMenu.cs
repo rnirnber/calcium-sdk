@@ -81,11 +81,11 @@ public static class MainMenu
         sb.AppendLine("  RECT_P(G1, 0, 0, 317, 211, main_fill, main_fill);");
         sb.AppendLine("");
         sb.AppendLine("  // [y offset, starting x, ending x");
-        sb.Append(" LOCAL rects := [");
+        sb.Append("  LOCAL rects := [");
         var idx = 0;
         lines_to_use.ForEach((l) =>
         {
-            sb.Append(l.ToString());
+            sb.Append(l.ToString().Trim());
             if (idx != lines_to_use.Count - 1)
             {
                 sb.Append(",");

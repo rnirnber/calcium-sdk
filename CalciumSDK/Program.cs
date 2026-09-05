@@ -1,7 +1,8 @@
-﻿using System.Runtime.InteropServices;
+﻿using CalciumSDK.Models;
+using MagicFileEncoding;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
-using CalciumSDK.Models;
 
 namespace CalciumSDK
 {
@@ -122,7 +123,7 @@ namespace CalciumSDK
                                 Console.Out.Flush();
                                 Thread.Sleep(1000);
                                 Program.RootConfig = JsonSerializer.Deserialize<Config>(
-                                    File.ReadAllText(Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar +
+                                    FileEncoding.ReadAllText(Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar +
                                                      selectedProjectDict[Convert.ToInt32(selected_project)] + Path.DirectorySeparatorChar +
                                                      "config.json"), AppJsonContext.Default.Config);
                                 selection_is_valid = true;

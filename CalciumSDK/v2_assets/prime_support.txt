@@ -8,7 +8,7 @@ BEGIN
   RECT_P(G1, 0, 0, 317, 211, main_fill, main_fill);
 
   // [y offset, starting x, ending x
- LOCAL rects := [__RECTS];
+  LOCAL rects := [__RECTS];
 
 
   LOCAL i := 1;

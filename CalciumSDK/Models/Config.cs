@@ -52,10 +52,13 @@ public class Config
     [JsonPropertyName("alpha_step_five")]
     public List<int> alpha_step_five { get; set; }
     
-    [JsonPropertyName("dark_mode_color")]
-    public List<int> dark_mode_color { get; set; }
+    [JsonPropertyName("dark_mode_alpha")]
+    public List<int> dark_mode_alpha { get; set; }
 
     [JsonPropertyName("true_alpha")]
     public List<int> true_alpha { get; set; }
+
+    [JsonPropertyName("characters_used")]
+    public List<string> characters_used { get; set; }
     
 }

@@ -1,6 +1,7 @@
+using CalciumSDK.Models;
+using MagicFileEncoding;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
-using CalciumSDK.Models;
 
 namespace CalciumSDK.Compilers;
 
@@ -33,7 +34,7 @@ public static class Preflight
                     return;
                 }
                 var this_scene = JsonSerializer.Deserialize<SceneBlueprint>(
-                    File.ReadAllText(path), AppJsonContext.Default.SceneBlueprint);
+                    FileEncoding.ReadAllText(path), AppJsonContext.Default.SceneBlueprint);
 
                 if (!this_scene.on_exit_statements.ContainsKey(target))
                 {

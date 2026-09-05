@@ -55,6 +55,7 @@
     
 </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="MagicFileEncoding" Version="4.0.0" />
     <PackageReference Include="SkiaSharp" Version="4.150.0" />
     <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="4.150.0" />
   </ItemGroup>
