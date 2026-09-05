@@ -156,6 +156,27 @@ namespace CalciumSDK.Text
                     
                 }
             }
+            all_sb.AppendLine("");
+            all_sb.AppendLine("EXPORT ZZZ_GET_CHAR_WIDTH(char_code)");
+            all_sb.AppendLine("BEGIN");
+            var keys = font_size_mapping.Keys.ToList();
+            all_sb.AppendLine("  LOCAL char_ints := [" + string.Join(",", font_size_mapping.Keys.ToList()) + "];");
+            all_sb.Append("  LOCAL char_widths := [");
+            keys.ForEach((k) =>
+            {
+                all_sb.Append(font_size_mapping[k].ToString());
+                if(k.GetHashCode() != keys.Last().GetHashCode())
+                {
+                    all_sb.Append(",");
+                }
+            });
+            all_sb.Append("];");
+            all_sb.AppendLine("");
+            all_sb.AppendLine("  LOCAL idx := POS(char_ints, char_code);");
+            all_sb.AppendLine("  RETURN char_widths[idx];");
+            all_sb.AppendLine("");
+            all_sb.AppendLine("END;");
+            all_sb.AppendLine("");
             return all_sb.ToString();
         }
     }

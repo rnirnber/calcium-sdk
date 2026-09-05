@@ -93,7 +93,6 @@ namespace CalciumSDK.Compilers
                         code = code.Replace("[__RECT_BACKGROUND_BLUE]", Program.RootConfig.alpha_step_one[2].ToString());
 
                         var distinct_chars = Program.RootConfig.characters_used.Distinct().ToList();
-
                         code = code.Replace("[__CHARACTER_CODE_FNs]", Text.GetPrimeCharacterRendering.Get(distinct_chars));
                     }
                     var rects_sb = new StringBuilder();
