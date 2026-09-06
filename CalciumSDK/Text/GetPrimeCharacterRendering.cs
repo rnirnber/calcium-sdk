@@ -177,6 +177,20 @@ namespace CalciumSDK.Text
             all_sb.AppendLine("");
             all_sb.AppendLine("END;");
             all_sb.AppendLine("");
+            all_sb.AppendLine("");
+            all_sb.AppendLine("EXPORT ZZZ_RENDER_CHAR(char_code, X, Y, R, G, B, G_BUFFER)");
+            all_sb.AppendLine("BEGIN");
+
+            keys.ForEach((k) =>
+            {
+                all_sb.AppendLine("  IF char_code == " + k.ToString() + " THEN");
+                all_sb.AppendLine("    ZZZ_RENDER_" + k.ToString() + "(X, Y, R, G, B, G_BUFFER);");
+                all_sb.AppendLine("    RETURN;");
+                all_sb.AppendLine("  END;");
+            });
+
+            all_sb.AppendLine("END;");
+
             return all_sb.ToString();
         }
     }
