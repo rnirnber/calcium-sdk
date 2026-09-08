@@ -25,6 +25,8 @@ class Program
     private static int _AppMode = 1;
     private static int _LastAppMode = -1;
     private static Dictionary<int, List<int>> _AssetsCache = new Dictionary<int, List<int>>();
+    private static int _LetterSpaceSize = 4;
+    private static int _WordSpaceSize = 6;
         
     
     [STAThread]
@@ -212,5 +214,7 @@ class Program
         return height / 212;
     }
     [__ASSETS_CODE]
+    
+    [__TEXTRENDERING_CODE]
     
 }

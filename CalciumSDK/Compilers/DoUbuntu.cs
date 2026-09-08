@@ -118,6 +118,7 @@ public static class Ubuntu
                 code = code.Replace("[__TRUE_ALPHA_BLUE]", Program.RootConfig.true_alpha[2].ToString());
                 code = code.Replace("[__USE_MAIN_MENU_BLACK_BACKGROUND]", (black_lines.Count >= white_lines.Count).ToString().ToLower());
                 code = code.Replace("[__MAIN_MENU_STOP_AT]", ((lines_to_use.Count - 3)).ToString());
+                code = code.Replace("[__TEXTRENDERING_CODE]", Text.GetUbuntuCharacterRendering.Get(Program.RootConfig.characters_used.Distinct().ToList()));
 
                 var assets_code = GetAssetsCode(projectName);
                 code = code.Replace("[__ASSETS_CODE]", assets_code);
