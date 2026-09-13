@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using CalciumSDK.Text;
 
 namespace CalciumSDK.Compilers
 {
@@ -93,6 +94,15 @@ namespace CalciumSDK.Compilers
                         code = code.Replace("[__RECT_BACKGROUND_BLUE]", Program.RootConfig.alpha_step_one[2].ToString());
 
                         var distinct_chars = Program.RootConfig.characters_used.Distinct().ToList();
+                        if (!distinct_chars.Contains("\n"))
+                        {
+                            distinct_chars.Add("\n");
+                        }
+
+                        if (!distinct_chars.Contains("\r"))
+                        {
+                            distinct_chars.Add("\r");
+                        }
                         code = code.Replace("[__CHARACTER_CODE_FNs]", Text.GetPrimeCharacterRendering.Get(distinct_chars));
                     }
                     var rects_sb = new StringBuilder();
@@ -111,6 +121,8 @@ namespace CalciumSDK.Compilers
                     rects_sb.Append("]");
                     code = code.Replace("[__RECTS]", rects_sb.ToString().Trim().Replace("\r", "").Replace("\n", ""));
                     code = code.Replace("[__STOP_AT]", ((lines_to_use.Count - 2)).ToString());
+
+                    var initial_dialogs = GetUbuntuInitialDialogs.Get();
 
                     var publish_path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "prime" + Path.DirectorySeparatorChar + "support.ppl";
                     File.WriteAllText(publish_path, code);

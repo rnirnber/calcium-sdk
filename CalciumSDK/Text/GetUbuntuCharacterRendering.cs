@@ -138,10 +138,9 @@ public class GetUbuntuCharacterRendering
                                     sb.AppendLine("    for(int i = 0; i < " + (rep.Lines.Count * 3).ToString() + "; i += 3)");
                                     sb.AppendLine("    {");
                                     sb.AppendLine("        var x_start = (rects[i] + x) * _XScaleFactor;");
-                                    sb.AppendLine("        var x_end = (rects[i + 2] + y) * _XScaleFactor;");
-                                    sb.AppendLine("        var y_start = (rects[i + y]) * _YScaleFactor;");
-                                    sb.AppendLine("        var y_end  = (rects[i] + y) * _XScaleFactor;");
-                                    sb.AppendLine("        ctx.Rectangle(x_start, y_start, (x_end - x_start), _YScaleFactor);");
+                                    sb.AppendLine("        var y_start = (rects[i + 1] + y) * _YScaleFactor;");
+                                    sb.AppendLine("        var y_end = y_start + (_YScaleFactor * rects[i + 2]);");
+                                    sb.AppendLine("        ctx.Rectangle(x_start, y_start, _XScaleFactor, (y_end - y_start));");
                                     sb.AppendLine("        ctx.Fill();");
                                     sb.AppendLine("    }");
                                     sb.AppendLine("  }");
@@ -175,7 +174,7 @@ public class GetUbuntuCharacterRendering
             all_sb.AppendLine("    {");
             keys.ForEach((k) =>
             {
-                all_sb.Append("      {" + k.ToString() + ", " + font_size_mapping[k].ToString() + "}");
+                all_sb.Append("        {" + k.ToString() + ", " + font_size_mapping[k].ToString() + "}");
                 if(k.GetHashCode() != keys.Last().GetHashCode())
                 {
                     all_sb.Append(", ");
@@ -187,7 +186,7 @@ public class GetUbuntuCharacterRendering
                 all_sb.AppendLine();
             });
             all_sb.AppendLine();
-            all_sb.AppendLine("      return char_width_mapping[char_code];");
+            all_sb.AppendLine("        return char_width_mapping[char_code];");
             all_sb.AppendLine("  }");
             all_sb.AppendLine("");
 

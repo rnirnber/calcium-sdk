@@ -58,6 +58,11 @@ public class SceneBlueprint
     [JsonPropertyName("initial_dialog")]
     public string initial_dialog { get; set; }
     
+    [JsonPropertyName("alternate_initial_dialog")]
+    public string alternate_initial_dialog { get; set; }
+    
+    public Dictionary<string, List<string>> alternate_initial_dialog_conditions { get; set; }
+    
     [JsonPropertyName("dialogs")]
     public List<DialogBlueprint> dialogs { get; set; }
 

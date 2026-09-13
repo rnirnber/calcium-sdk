@@ -27,7 +27,6 @@ class Program
     private static Dictionary<int, List<int>> _AssetsCache = new Dictionary<int, List<int>>();
     private static int _LetterSpaceSize = 4;
     private static int _WordSpaceSize = 6;
-        
     
     [STAThread]
     static void Main(string[] args)
@@ -216,5 +215,13 @@ class Program
     [__ASSETS_CODE]
     
     [__TEXTRENDERING_CODE]
+    [__INITIAL_DIALOG_CODE]
+    public static List<int> GetInitialDialog(int scene_num)
+    {
+        var default_dialog = InitialDialogs[scene_num];
+        var alt_dialog = GetAlternateInitialDialogs(scene_num);
+
+        return (alt_dialog != null) ? alt_dialog : default_dialog;
+    }
     
 }

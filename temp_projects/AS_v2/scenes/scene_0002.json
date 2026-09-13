@@ -1,0 +1,208 @@
+{
+    "name": "Test",
+    "on_exit_statements":
+    {
+        "prime":
+        [
+
+        ],
+        "ubuntu":
+        [
+
+        ]
+    },
+    "inn_item_keys":
+    [
+
+    ],
+    "monster_numbers":
+    [
+        
+    ],
+    "monsters_exp_min":
+    [
+        
+    ],
+    "monsters_exp_max":
+    [
+        
+    ],
+    "monsters_gold_min":
+    [
+        
+    ],
+    "monsters_gold_max":
+    [
+        
+    ],
+    "monsters_defense_min":
+    [
+        
+    ],
+    "monsters_defense_max":
+    [
+        
+    ],
+    "monsters_attack_min":
+    [
+        
+    ],
+    "monsters_attack_max":
+    [
+        
+    ],
+    "monsters_hp_min":
+    [
+        
+    ],
+    "monsters_hp_max":
+    [
+        
+    ],
+    "monsters_appearance_frequency": 0,
+
+    "on_entrance_statements":
+    {
+        "prime":
+        [
+            
+        ],
+        "ubuntu":
+        [
+
+        ]
+    },
+    "initial_dialog": "A long time ago, Earth had four moons and people traveled freely between moons and Earth. The people exchanged in commerce and shared culture. Free trade between the terrestrial and lunar folk gave birth to a healthy economy, creating a golden age worthy of remembrance. All gilded ages eventually face danger, and now such a time was near. There was accentuated galactic shifting and spinning, orbits were unstable and instability threatened crops and even life itself. Seasons became too polarized as the moons drifted apart from each other. Rumor spoke of one who would one day restore balance when the time was needed. According to legend, there were four special gemstones, one for each of the moons. Each was hidden, and when combined, the power of balance could be restored by bringing them to a special place: The Volcano of Ignision. Many had traveled there to determine if there was indeed a special place for these elusive gemstones, but none had come back. There were few who still had faith, many thought it was simply myth, a rumour, or something to dismiss as a campfire story. Moon visitors hadn't been seen for centuries on Earth, but one day, a visitor fell from the sky...\ngoodbye world\ngoodbye worldHEYHEYHEY",
+    "alternate_initial_dialog": "Hot Pot Time\nSan Gabriel",
+    "alternate_initial_dialog_conditions":
+    {
+        "prime":
+        [
+            "3 == 4"
+        ],
+        "ubuntu":
+        [
+            "1 == 2",
+            "9 == 8 "
+        ]
+    },
+    
+    "alternative_player_activation_points":
+    [
+           
+    ],
+    "alternative_player_deactivation_points":
+    [
+           
+    ],
+    "follower_enabled_statements":
+    {
+        "prime":
+        [
+            "false"
+        ],
+        "ubuntu":
+        [
+
+        ]
+    },
+    "assets_used":
+    [
+        
+    ],
+    "forbidden_assets":
+    [
+        
+    ],
+    "dialogs":
+    [
+        {
+            "x": 5,
+            "y": 6,
+            "required_dir": "up",
+            "txt": "Hello World Dialog",
+            "on_finished_callback_statements":
+            {
+                "prime":
+                [
+        
+                ],
+                "ubuntu":
+                [
+
+                ]
+            },
+            "eligibility_failure_msg": "No dice.",
+            "eligibility_statements":
+            {
+                "prime":
+                [
+        
+                ],
+                "ubuntu":
+                [
+
+                ]
+            },
+            "on_eligibility_failed_statements":
+            {
+                "prime":
+                [
+                    
+                ],
+                "ubuntu":
+                [
+
+                ]
+            }
+        }
+    ],
+    "warps":
+    [
+        {
+            "scene_number": 2,
+            "x": 5,
+            "y": 10,
+            "after_player_x": 20,
+            "after_player_y": 15,
+            "after_screen_x": 2,
+            "after_screen_y": 3,
+            "after_player_dir": "down",
+            "allowed_conditions":
+            {
+                "prime":
+                [
+                    
+                ],
+                "ubuntu":
+                [
+
+                ]
+            },
+            "on_condition_failed_msg": "error",
+            "on_finished_statements":
+            {
+                "prime":
+                [
+                    
+                ],
+                "ubuntu":
+                [
+
+                ]             
+            },
+            "on_failed_statements":
+            {
+                "prime":
+                [
+                    
+                ],
+                "ubuntu":
+                [
+                    
+                ]
+            }
+        }
+    ],
+    "dark_mode": false
+}   

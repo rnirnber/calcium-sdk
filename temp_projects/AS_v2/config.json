@@ -1,0 +1,44 @@
+{
+    "compilation_targets":
+    [
+        "prime",
+        "ubuntu"
+    ],
+    "new_game_player_x": 23,
+    "new_game_player_y": 7,
+    "new_game_screen_x": 2,
+    "new_game_screen_y": 1,
+    "new_game_player_dir": 1,
+    "global_vars":
+    [
+        {
+            "key": "HELLO_VAR_1",
+            "value": "Hello",
+            "data_type": "string"
+        },
+        {
+            "key": "BYE_VAR_1",
+            "value": "Goodbye",
+            "data_type": "string"
+        },
+        {
+            "key": "GLOBAL_INTEGER",
+            "value": "100",
+            "data_type": "integer"
+        },
+        {
+            "key": "GLOBAL_FLOAT",
+            "value": "3.33",
+            "data_type": "decimal"
+        }
+    ],
+    "background_forgiveness_threshold": 3,
+    "alpha_step_one": [255, 255, 255],
+    "alpha_step_two": [240, 240, 240],
+    "alpha_step_three": [230, 230, 230],    
+    "alpha_step_four": [220, 220, 220],
+    "alpha_step_five": [210, 210, 210],
+    "true_alpha": [255, 255, 255],
+    "dark_mode_color": [30, 30, 30],
+    "characters_used": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", " ", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+", "<", ">", ",", ".", "?", "/", "\\", "[", "]", "{", "}", "|", "\"", ":", ";", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+}
