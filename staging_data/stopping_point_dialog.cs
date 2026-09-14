@@ -50,9 +50,14 @@ class Program
     }
     public class TextDialog()
     {
-        public int PageCount = 0;
+        private int CurrentPage = 0;
         public System.Action OnFinished = (() => { });
         public List<TextDialogPage> Pages = new List<TextDialogPage>();
+
+        public void Render()
+        {
+            
+        }
     }
 
     public static TextDialog MakeDialog(List<int> data, System.Action on_finished = null)
@@ -159,8 +164,6 @@ class Program
                 }
             }
         }
-
-        ret.PageCount = ret.Pages.Count;
         return ret;
     }
     
