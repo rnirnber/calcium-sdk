@@ -27,6 +27,10 @@ class Program
     private static Dictionary<int, List<int>> _AssetsCache = new Dictionary<int, List<int>>();
     private static int _LetterSpaceSize = 4;
     private static int _WordSpaceSize = 6;
+
+    private static int _TRUE_ALPHA_RED = 255;
+    private static int _TRUE_ALPHA_GREEN = 255;
+    private static int _TRUE_ALPHA_BLUE = 255;
     
     public class TextDialogLine()
     {
@@ -50,13 +54,26 @@ class Program
     }
     public class TextDialog()
     {
-        private int CurrentPage = 0;
+        private int _CurrentPage = 0;
         public System.Action OnFinished = (() => { });
         public List<TextDialogPage> Pages = new List<TextDialogPage>();
 
-        public void Render()
+        public void Render(Context ctx)
         {
+            var x_offset = 10;
+            var y_offset = 10;
+            var max_x = 318 - 10;
+            var max_y = 212 - 10;
+            ctx.SetSourceRgb(0, 0, 0);
+            ctx.Rectangle(0, 0, 318 * _XScaleFactor, 212 * _YScaleFactor);
+            ctx.Fill();
             
+            
+            Pages[_CurrentPage].Lines.ForEach((l) =>
+            {
+                ctx.Rectangle(0, 0, 318 * _XScaleFactor, 212 * _YScaleFactor);
+                ctx.Fill();
+            });
         }
     }
 
@@ -71,8 +88,8 @@ class Program
         var x_offset = 10;
         var y_offset = 10;
 
-        var max_x = 310;
-        var max_y = 230;
+        var max_x = 318 - 10;
+        var max_y = 212 - 10;
 
         var wordspace_size = 5;
         var letterspace_size = 2;
