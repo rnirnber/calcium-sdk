@@ -27,10 +27,6 @@ class Program
     private static Dictionary<int, List<int>> _AssetsCache = new Dictionary<int, List<int>>();
     private static int _LetterSpaceSize = 4;
     private static int _WordSpaceSize = 6;
-
-    private static int _TRUE_ALPHA_RED = 255;
-    private static int _TRUE_ALPHA_GREEN = 255;
-    private static int _TRUE_ALPHA_BLUE = 255;
     
     public class TextDialogLine()
     {
@@ -64,15 +60,31 @@ class Program
             var y_offset = 10;
             var max_x = 318 - 10;
             var max_y = 212 - 10;
+            var wordspace_size = 5;
+            var letterspace_size = 2;
+            var line_height = 18;
+            
             ctx.SetSourceRgb(0, 0, 0);
             ctx.Rectangle(0, 0, 318 * _XScaleFactor, 212 * _YScaleFactor);
             ctx.Fill();
+            ctx.SetSourceRgb(1, 1, 1);
             
             
             Pages[_CurrentPage].Lines.ForEach((l) =>
             {
-                ctx.Rectangle(0, 0, 318 * _XScaleFactor, 212 * _YScaleFactor);
+                l.Words.ForEach((w) =>
+                {
+                    w.ForEach((c) =>
+                    {
+                        RenderChar(c, x_offset, y_offset, 255, 255, 255 ,ctx);
+                        x_offset += GetCharacterWidth(c);
+                        x_offset += letterspace_size;     
+                    });
+                    x_offset += wordspace_size;
+                });
+                x_offset = 10;
                 ctx.Fill();
+                y_offset += line_height;
             });
         }
     }
@@ -223,14 +235,8 @@ class Program
                         {
                             _AppMode = 1;
                             _LastAppMode = 1;
-                            RenderMainMenu(ctx);
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            });
-            var test = MakeDialog(new List<int>()
+                            
+                                        var test = MakeDialog(new List<int>()
             {
                 65, 32, 108, 111, 110, 103, 32, 116, 105, 109, 101, 32, 97, 103, 111, 44, 32, 69, 97, 114, 116, 104, 32,
                 104, 97, 100, 32, 102, 111, 117, 114, 32, 109, 111, 111, 110, 115, 32, 97, 110, 100, 32, 112, 101, 111,
@@ -289,7 +295,14 @@ class Program
                 103, 111, 111, 100, 98, 121, 101, 32, 119, 111, 114, 108, 100, 103, 111, 111, 100, 98, 121, 101, 32,
                 119, 111, 114, 108, 100
             });
-            var y = 5;
+            test.Render(ctx);
+                            //RenderMainMenu(ctx);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            });
         };
         app.RunWithSynchronizationContext(args);
 
@@ -2777,6 +2790,484 @@ int[] rects = [];
         {13, 5}};
 
         return char_width_mapping[char_code];
+  }
+  public static void RenderChar(int char_code, int x, int y, int r, int g, int b, Context ctx)
+  {
+    if(char_code == 97)
+    {
+        Render97(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 98)
+    {
+        Render98(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 99)
+    {
+        Render99(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 100)
+    {
+        Render100(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 101)
+    {
+        Render101(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 102)
+    {
+        Render102(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 103)
+    {
+        Render103(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 104)
+    {
+        Render104(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 105)
+    {
+        Render105(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 106)
+    {
+        Render106(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 107)
+    {
+        Render107(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 108)
+    {
+        Render108(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 109)
+    {
+        Render109(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 110)
+    {
+        Render110(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 111)
+    {
+        Render111(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 112)
+    {
+        Render112(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 113)
+    {
+        Render113(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 114)
+    {
+        Render114(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 115)
+    {
+        Render115(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 116)
+    {
+        Render116(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 117)
+    {
+        Render117(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 118)
+    {
+        Render118(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 119)
+    {
+        Render119(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 120)
+    {
+        Render120(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 121)
+    {
+        Render121(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 122)
+    {
+        Render122(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 65)
+    {
+        Render65(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 66)
+    {
+        Render66(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 67)
+    {
+        Render67(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 68)
+    {
+        Render68(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 69)
+    {
+        Render69(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 70)
+    {
+        Render70(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 71)
+    {
+        Render71(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 72)
+    {
+        Render72(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 73)
+    {
+        Render73(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 74)
+    {
+        Render74(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 75)
+    {
+        Render75(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 76)
+    {
+        Render76(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 77)
+    {
+        Render77(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 78)
+    {
+        Render78(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 79)
+    {
+        Render79(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 80)
+    {
+        Render80(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 81)
+    {
+        Render81(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 82)
+    {
+        Render82(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 83)
+    {
+        Render83(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 84)
+    {
+        Render84(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 85)
+    {
+        Render85(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 86)
+    {
+        Render86(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 87)
+    {
+        Render87(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 88)
+    {
+        Render88(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 89)
+    {
+        Render89(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 90)
+    {
+        Render90(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 32)
+    {
+        Render32(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 33)
+    {
+        Render33(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 64)
+    {
+        Render64(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 35)
+    {
+        Render35(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 36)
+    {
+        Render36(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 37)
+    {
+        Render37(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 94)
+    {
+        Render94(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 38)
+    {
+        Render38(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 42)
+    {
+        Render42(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 40)
+    {
+        Render40(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 41)
+    {
+        Render41(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 45)
+    {
+        Render45(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 95)
+    {
+        Render95(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 61)
+    {
+        Render61(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 43)
+    {
+        Render43(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 60)
+    {
+        Render60(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 62)
+    {
+        Render62(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 44)
+    {
+        Render44(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 46)
+    {
+        Render46(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 63)
+    {
+        Render63(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 47)
+    {
+        Render47(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 92)
+    {
+        Render92(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 91)
+    {
+        Render91(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 93)
+    {
+        Render93(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 123)
+    {
+        Render123(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 125)
+    {
+        Render125(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 124)
+    {
+        Render124(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 34)
+    {
+        Render34(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 39)
+    {
+        Render39(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 58)
+    {
+        Render58(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 59)
+    {
+        Render59(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 48)
+    {
+        Render48(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 49)
+    {
+        Render49(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 50)
+    {
+        Render50(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 51)
+    {
+        Render51(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 52)
+    {
+        Render52(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 53)
+    {
+        Render53(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 54)
+    {
+        Render54(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 55)
+    {
+        Render55(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 56)
+    {
+        Render56(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 57)
+    {
+        Render57(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 10)
+    {
+        Render10(x, y, r, g, b, ctx);
+        return;
+    }
+    if(char_code == 13)
+    {
+        Render13(x, y, r, g, b, ctx);
+        return;
+    }
   }
 
 

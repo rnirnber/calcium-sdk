@@ -188,6 +188,19 @@ public class GetUbuntuCharacterRendering
             all_sb.AppendLine();
             all_sb.AppendLine("        return char_width_mapping[char_code];");
             all_sb.AppendLine("  }");
+
+            all_sb.AppendLine("  public static void RenderChar(int char_code, int x, int y, int r, int g, int b, Context ctx)");
+            all_sb.AppendLine("  {");
+            distinct_chars.ForEach((dc) =>
+            {
+                all_sb.AppendLine("    if(char_code == " + ((int)dc[0]).ToString() + ")");
+                all_sb.AppendLine("    {");
+                all_sb.AppendLine("        Render" +  ((int) dc[0]).ToString() + "(x, y, r, g, b, ctx);");
+                all_sb.AppendLine("        return;");
+                all_sb.AppendLine("    }");
+            });
+            all_sb.AppendLine("  }");
+            
             all_sb.AppendLine("");
 
             return all_sb.ToString();
