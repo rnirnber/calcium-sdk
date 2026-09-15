@@ -72,6 +72,15 @@ class Program
             
             Pages[_CurrentPage].Lines.ForEach((l) =>
             {
+                var chars = new List<char>();
+                l.Words.ForEach((w) =>
+                {
+                    w.ForEach((w2) =>
+                    {
+                        chars.Add((char) w2);
+                    });
+                });
+                var test = l.Words.Select((w) => w.Select((i) => ((char)i))).ToList();
                 l.Words.ForEach((w) =>
                 {
                     w.ForEach((c) =>
@@ -148,6 +157,7 @@ class Program
                         y_offset += line_height;
                         x_offset = 10;
                         i -= curr_cnt;
+                        i--;
                         continue;
                     }
                     else
