@@ -62,7 +62,7 @@ class Program
             var max_y = 212 - 10;
             var wordspace_size = 5;
             var letterspace_size = 2;
-            var line_height = 18;
+            var line_height = 14;
             
             ctx.SetSourceRgb(0, 0, 0);
             ctx.Rectangle(0, 0, 318 * _XScaleFactor, 212 * _YScaleFactor);
@@ -114,7 +114,7 @@ class Program
 
         var wordspace_size = 5;
         var letterspace_size = 2;
-        var line_height = 18;
+        var line_height = 14;
 
         var current_page = new TextDialogPage();
         var current_line = new TextDialogLine();
