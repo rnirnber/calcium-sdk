@@ -188,26 +188,33 @@ class Program
                     current_page.Lines.Add(TextDialogLine.CreateDupe(d_line));
                     y_offset += line_height;
                     x_offset = 10;
-                    i -= curr_cnt;
-                    i--;
-                    continue;
-                }
-                else if (i == data.Count - 1)
-                {
-                    ret.Pages.Add(TextDialogPage.MakeDupe(current_page));
+                    
                 }
                 else
                 {
                     ret.Pages.Add(TextDialogPage.MakeDupe(current_page));
                     x_offset = 10;
                     y_offset = 10;
-                    i -= current_word.Count;
                     current_word = new List<int>();
                     current_words = new List<List<int>>();
                     current_page = new TextDialogPage();
                 }
             }
+            if (i == data.Count - 1)
+            {
+                var d_line = new TextDialogLine();
+                d_line.Words = current_words.ToList();
+                var curr_cnt = current_word.Count;
+                current_word = new List<int>();
+                current_words = new List<List<int>>();
+                current_page.Lines.Add(TextDialogLine.CreateDupe(d_line));
+                
+                ret.Pages.Add(TextDialogPage.MakeDupe(current_page));
+            }
+            
+            
         }
+        
         return ret;
     }
     
