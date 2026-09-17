@@ -50,7 +50,7 @@ class Program
     }
     public class TextDialog()
     {
-        private int _CurrentPage = 0;
+        private int _CurrentPage = 2;
         public System.Action OnFinished = (() => { });
         public List<TextDialogPage> Pages = new List<TextDialogPage>();
 
@@ -162,10 +162,14 @@ class Program
                     }
                     else
                     {
+                        var d_line = new TextDialogLine();
+                        d_line.Words = current_words.ToList();
+                        current_page.Lines.Add(TextDialogLine.CreateDupe(d_line));
                         ret.Pages.Add(TextDialogPage.MakeDupe(current_page));
                         y_offset = 10;
                         x_offset = 10;
                         i -= current_word.Count;
+                        i--;
                         current_word = new List<int>();
                         current_words = new List<List<int>>();
                         current_page = new TextDialogPage();
@@ -185,6 +189,7 @@ class Program
                     y_offset += line_height;
                     x_offset = 10;
                     i -= curr_cnt;
+                    i--;
                     continue;
                 }
                 else if (i == data.Count - 1)
