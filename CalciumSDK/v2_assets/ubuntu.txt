@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Cairo;
 using Gio; 
 using Gtk;
@@ -21,8 +22,20 @@ class Program
     private static int _WinHeight = 212;
     private static int _XScaleFactor = 1;
     private static int _YScaleFactor = 1;
-    private static DrawingArea _Canvas;
+    public static DrawingArea AppCanvas;
+    
+    /*
+     * App Modes
+     * 1) Main Menu
+     * 2) Create initial Initial Dialog
+     * 3) Showing Initial Dialog
+     */
+     
     private static int _AppMode = 1;
+    
+    private static TextDialog _CurrentDialog;
+    private static int _CurrentScene = 1;
+    
     private static int _LastAppMode = -1;
     private static Dictionary<int, List<int>> _AssetsCache = new Dictionary<int, List<int>>();
     private static int _LetterSpaceSize = 4;
@@ -46,19 +59,41 @@ class Program
             _Window.Fullscreen();
             win.Title = "[__PROJECT_NAME]";
             
-            _Canvas = Gtk.DrawingArea.New();
-            _Canvas.SetSizeRequest(_WinWidth, _WinHeight);
+            AppCanvas = Gtk.DrawingArea.New();
+            AppCanvas.SetSizeRequest(_WinWidth, _WinHeight);
             
             win.SetDefaultSize(_WinWidth, _WinHeight);
             win.Resizable = false;
 
             var fixed_area = new Fixed();
-            fixed_area.Put(_Canvas, 0, 0);
+            fixed_area.Put(AppCanvas, 0, 0);
             win.Child = fixed_area;
+            
+            var keyController = EventControllerKey.New();
+
+            keyController.OnKeyReleased += ((s, e) =>
+            {
+                var key = e.Keyval;
+                if (_AppMode == 3)
+                {
+                    if (key == 65363 && _AppMode == 3)
+                    {
+                        _CurrentDialog.Next();
+                    }
+
+                    if (key == 65361 && _AppMode == 3)
+                    {
+                        _CurrentDialog.Prev();
+                    }
+                    AppCanvas.QueueDraw();
+                }
+            });
+        
+            _Window.AddController(keyController);
             
             win.Present();
             
-            _Canvas.SetDrawFunc((area, ctx, width, height) =>
+            AppCanvas.SetDrawFunc((area, ctx, width, height) =>
             {
                 ctx.Antialias = Antialias.None;
                 switch (_AppMode)
@@ -70,6 +105,24 @@ class Program
                             _LastAppMode = 1;
                             RenderMainMenu(ctx);
                         }
+                        break;
+
+                    case 2:
+                        if (_CurrentDialog == null)
+                        {
+                            _CurrentDialog = MakeDialog(GetInitialDialog(_CurrentScene), (() =>
+                            {
+                                _AppMode = 1;
+                                AppCanvas.QueueDraw();
+                            }));
+                            _CurrentDialog.Render(ctx);
+                            AppCanvas.QueueDraw();
+                            _AppMode = 3;
+                        }
+                        break;
+                    case 3:
+                        _CurrentDialog.Render(ctx);
+                        AppCanvas.QueueDraw();
                         break;
                     default:
                         break;
@@ -226,9 +279,10 @@ class Program
     }
     public class TextDialog()
     {
-        private int _CurrentPage = 2;
+        public int CurrentPage = 0;
         public System.Action OnFinished = (() => { });
         public List<TextDialogPage> Pages = new List<TextDialogPage>();
+        private Context _ctx;
 
         public void Render(Context ctx)
         {
@@ -239,6 +293,7 @@ class Program
             var wordspace_size = 5;
             var letterspace_size = 2;
             var line_height = 14;
+            _ctx = ctx;
             
             ctx.SetSourceRgb(0, 0, 0);
             ctx.Rectangle(0, 0, 318 * _XScaleFactor, 212 * _YScaleFactor);
@@ -246,7 +301,7 @@ class Program
             ctx.SetSourceRgb(1, 1, 1);
             
             
-            Pages[_CurrentPage].Lines.ForEach((l) =>
+            Pages[CurrentPage].Lines.ForEach((l) =>
             {
                 var chars = new List<char>();
                 l.Words.ForEach((w) =>
@@ -272,6 +327,27 @@ class Program
                 y_offset += line_height;
             });
         }
+
+        public void Next()
+        {
+            if (this.CurrentPage == this.Pages.Count - 1)
+            {
+                this.OnFinished();
+                return;
+            }
+
+            this.CurrentPage++;
+            Render(_ctx);
+        }
+
+        public void Prev()
+        {
+            if (this.CurrentPage > 0)
+            {
+                this.CurrentPage--;
+                Render(_ctx);
+            }
+        }
     }
 
     public static TextDialog MakeDialog(List<int> data, System.Action on_finished = null)
@@ -281,6 +357,7 @@ class Program
             on_finished = (() => { });
         }
         var ret = new TextDialog();
+        ret.OnFinished = on_finished;
         var page_cnt = 1;
         var x_offset = 10;
         var y_offset = 10;

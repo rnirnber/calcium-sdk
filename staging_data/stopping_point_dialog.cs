@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Cairo;
 using Gio; 
 using Gtk;
@@ -21,203 +22,23 @@ class Program
     private static int _WinHeight = 212;
     private static int _XScaleFactor = 1;
     private static int _YScaleFactor = 1;
-    private static DrawingArea _Canvas;
-    private static int _AppMode = 1;
+    public static DrawingArea AppCanvas;
+    
+    /*
+     * App Modes
+     * 1) Main Menu
+     * 2) Create initial Initial Dialog
+     * 3) Showing Initial Dialog
+     */
+    private static int _AppMode = 2;
+    
+    private static TextDialog _CurrentDialog;
+    private static int _CurrentScene = 1;
+    
     private static int _LastAppMode = -1;
     private static Dictionary<int, List<int>> _AssetsCache = new Dictionary<int, List<int>>();
     private static int _LetterSpaceSize = 4;
     private static int _WordSpaceSize = 6;
-    
-    public class TextDialogLine()
-    {
-        public List<List<int>> Words = new List<List<int>>();
-
-        public static TextDialogLine CreateDupe(TextDialogLine d)
-        {
-            return new TextDialogLine() { Words = d.Words.ToList() };
-        }
-    }
-    public class TextDialogPage
-    {
-        public List<TextDialogLine> Lines = new List<TextDialogLine>();
-
-        public static TextDialogPage MakeDupe(TextDialogPage pg)
-        {
-            pg.Lines = pg.Lines.ToList();
-            return new TextDialogPage() { Lines = pg.Lines.ToList() };
-        }
-        
-    }
-    public class TextDialog()
-    {
-        private int _CurrentPage = 2;
-        public System.Action OnFinished = (() => { });
-        public List<TextDialogPage> Pages = new List<TextDialogPage>();
-
-        public void Render(Context ctx)
-        {
-            var x_offset = 10;
-            var y_offset = 10;
-            var max_x = 318 - 10;
-            var max_y = 212 - 10;
-            var wordspace_size = 5;
-            var letterspace_size = 2;
-            var line_height = 14;
-            
-            ctx.SetSourceRgb(0, 0, 0);
-            ctx.Rectangle(0, 0, 318 * _XScaleFactor, 212 * _YScaleFactor);
-            ctx.Fill();
-            ctx.SetSourceRgb(1, 1, 1);
-            
-            
-            Pages[_CurrentPage].Lines.ForEach((l) =>
-            {
-                var chars = new List<char>();
-                l.Words.ForEach((w) =>
-                {
-                    w.ForEach((w2) =>
-                    {
-                        chars.Add((char) w2);
-                    });
-                });
-                var test = l.Words.Select((w) => w.Select((i) => ((char)i))).ToList();
-                l.Words.ForEach((w) =>
-                {
-                    w.ForEach((c) =>
-                    {
-                        RenderChar(c, x_offset, y_offset, 255, 255, 255 ,ctx);
-                        x_offset += GetCharacterWidth(c);
-                        x_offset += letterspace_size;     
-                    });
-                    x_offset += wordspace_size;
-                });
-                x_offset = 10;
-                ctx.Fill();
-                y_offset += line_height;
-            });
-        }
-    }
-
-    public static TextDialog MakeDialog(List<int> data, System.Action on_finished = null)
-    {
-        if (on_finished == null)
-        {
-            on_finished = (() => { });
-        }
-        var ret = new TextDialog();
-        var page_cnt = 1;
-        var x_offset = 10;
-        var y_offset = 10;
-
-        var max_x = 318 - 10;
-        var max_y = 212 - 10;
-
-        var wordspace_size = 5;
-        var letterspace_size = 2;
-        var line_height = 14;
-
-        var current_page = new TextDialogPage();
-        var current_line = new TextDialogLine();
-        var current_words = new List<List<int>>();
-        var current_word = new List<int>();
-        
-        current_page.Lines = new List<TextDialogLine>();
-
-        for (int i = 0; i < data.Count; i++)
-        {
-            var d = data[i];
-            
-            if (d == 32)
-            {
-                current_words.Add(current_word.ToList());
-                current_word = new List<int>();
-                x_offset += wordspace_size;
-                continue;
-            }
-            if (d != -1)
-            {
-                var this_width = GetCharacterWidth(d);
-                var this_letterspace_size = letterspace_size + 0;
-                var new_x = x_offset + this_width;
-                if (new_x <= max_x)
-                {
-                    current_word.Add(d);
-                    x_offset += this_width + this_letterspace_size;
-                }
-                else
-                {
-                    if (y_offset + line_height <= max_y)
-                    {
-                        var d_line = new TextDialogLine();
-                        d_line.Words = current_words.ToList();
-                        var curr_cnt = current_word.Count;
-                        current_word = new List<int>();
-                        current_words = new List<List<int>>();
-                        current_page.Lines.Add(TextDialogLine.CreateDupe(d_line));
-                        y_offset += line_height;
-                        x_offset = 10;
-                        i -= curr_cnt;
-                        i--;
-                        continue;
-                    }
-                    else
-                    {
-                        var d_line = new TextDialogLine();
-                        d_line.Words = current_words.ToList();
-                        current_page.Lines.Add(TextDialogLine.CreateDupe(d_line));
-                        ret.Pages.Add(TextDialogPage.MakeDupe(current_page));
-                        y_offset = 10;
-                        x_offset = 10;
-                        i -= current_word.Count;
-                        i--;
-                        current_word = new List<int>();
-                        current_words = new List<List<int>>();
-                        current_page = new TextDialogPage();
-                    }
-                }
-            }
-            else
-            {
-                if (y_offset + line_height <= max_y)
-                {
-                    var d_line = new TextDialogLine();
-                    current_words.Add(current_word);
-                    d_line.Words = current_words.ToList();
-                    var curr_cnt = current_word.Count;
-                    current_word = new List<int>();
-                    current_words = new List<List<int>>();
-                    current_page.Lines.Add(TextDialogLine.CreateDupe(d_line));
-                    y_offset += line_height;
-                    x_offset = 10;
-                    
-                }
-                else
-                {
-                    ret.Pages.Add(TextDialogPage.MakeDupe(current_page));
-                    x_offset = 10;
-                    y_offset = 10;
-                    current_word = new List<int>();
-                    current_words = new List<List<int>>();
-                    current_page = new TextDialogPage();
-                }
-            }
-            if (i == data.Count - 1)
-            {
-                var d_line = new TextDialogLine();
-                d_line.Words = current_words.ToList();
-                var curr_cnt = current_word.Count;
-                current_word = new List<int>();
-                current_words = new List<List<int>>();
-                current_page.Lines.Add(TextDialogLine.CreateDupe(d_line));
-                
-                ret.Pages.Add(TextDialogPage.MakeDupe(current_page));
-            }
-            
-            
-        }
-        
-        return ret;
-    }
     
     [STAThread]
     static void Main(string[] args)
@@ -234,21 +55,44 @@ class Program
             
             var win = Gtk.ApplicationWindow.New((Gtk.Application)sender!);
             _Window = win;
+            _Window.Fullscreen();
             win.Title = "AS";
             
-            _Canvas = Gtk.DrawingArea.New();
-            _Canvas.SetSizeRequest(_WinWidth, _WinHeight);
+            AppCanvas = Gtk.DrawingArea.New();
+            AppCanvas.SetSizeRequest(_WinWidth, _WinHeight);
             
             win.SetDefaultSize(_WinWidth, _WinHeight);
             win.Resizable = false;
 
             var fixed_area = new Fixed();
-            fixed_area.Put(_Canvas, 0, 0);
+            fixed_area.Put(AppCanvas, 0, 0);
             win.Child = fixed_area;
+            
+            var keyController = EventControllerKey.New();
+
+            keyController.OnKeyReleased += ((s, e) =>
+            {
+                var key = e.Keyval;
+                if (_AppMode == 3)
+                {
+                    if (key == 65363 && _AppMode == 3)
+                    {
+                        _CurrentDialog.Next();
+                    }
+
+                    if (key == 65361 && _AppMode == 3)
+                    {
+                        _CurrentDialog.Prev();
+                    }
+                    AppCanvas.QueueDraw();
+                }
+            });
+        
+            _Window.AddController(keyController);
             
             win.Present();
             
-            _Canvas.SetDrawFunc((area, ctx, width, height) =>
+            AppCanvas.SetDrawFunc((area, ctx, width, height) =>
             {
                 ctx.Antialias = Antialias.None;
                 switch (_AppMode)
@@ -257,9 +101,26 @@ class Program
                         if (_LastAppMode != _AppMode)
                         {
                             _AppMode = 1;
-                            _LastAppMode = 1;                                        
-                            //RenderMainMenu(ctx);
+                            _LastAppMode = 1;
+                            RenderMainMenu(ctx);
                         }
+                        break;
+                    case 2:
+                        if (_CurrentDialog == null)
+                        {
+                            _CurrentDialog = MakeDialog(GetInitialDialog(_CurrentScene), (() =>
+                            {
+                                _AppMode = 1;
+                                AppCanvas.QueueDraw();
+                            }));
+                            _CurrentDialog.Render(ctx);
+                            AppCanvas.QueueDraw();
+                            _AppMode = 3;
+                        }
+                        break;
+                    case 3:
+                        _CurrentDialog.Render(ctx);
+                        AppCanvas.QueueDraw();
                         break;
                     default:
                         break;
@@ -267,7 +128,6 @@ class Program
             });
         };
         app.RunWithSynchronizationContext(args);
-
     }
 
     private static double _GetRedAsDecimal(int red)
@@ -393,6 +253,223 @@ class Program
 
         return 212;
     }
+
+    public class TextDialogLine()
+    {
+        public List<List<int>> Words = new List<List<int>>();
+
+        public static TextDialogLine CreateDupe(TextDialogLine d)
+        {
+            return new TextDialogLine() { Words = d.Words.ToList() };
+        }
+    }
+    public class TextDialogPage
+    {
+        public List<TextDialogLine> Lines = new List<TextDialogLine>();
+
+        public static TextDialogPage MakeDupe(TextDialogPage pg)
+        {
+            pg.Lines = pg.Lines.ToList();
+            return new TextDialogPage() { Lines = pg.Lines.ToList() };
+        }
+        
+    }
+    public class TextDialog()
+    {
+        public int CurrentPage = 0;
+        public System.Action OnFinished = (() => { });
+        public List<TextDialogPage> Pages = new List<TextDialogPage>();
+        private Context _ctx;
+
+        public void Render(Context ctx)
+        {
+            var x_offset = 10;
+            var y_offset = 10;
+            var max_x = 318 - 10;
+            var max_y = 212 - 10;
+            var wordspace_size = 5;
+            var letterspace_size = 2;
+            var line_height = 14;
+            _ctx = ctx;
+            
+            ctx.SetSourceRgb(0, 0, 0);
+            ctx.Rectangle(0, 0, 318 * _XScaleFactor, 212 * _YScaleFactor);
+            ctx.Fill();
+            ctx.SetSourceRgb(1, 1, 1);
+            
+            
+            Pages[CurrentPage].Lines.ForEach((l) =>
+            {
+                var chars = new List<char>();
+                l.Words.ForEach((w) =>
+                {
+                    w.ForEach((w2) =>
+                    {
+                        chars.Add((char) w2);
+                    });
+                });
+                var test = l.Words.Select((w) => w.Select((i) => ((char)i))).ToList();
+                l.Words.ForEach((w) =>
+                {
+                    w.ForEach((c) =>
+                    {
+                        RenderChar(c, x_offset, y_offset, 255, 255, 255 ,ctx);
+                        x_offset += GetCharacterWidth(c);
+                        x_offset += letterspace_size;     
+                    });
+                    x_offset += wordspace_size;
+                });
+                x_offset = 10;
+                ctx.Fill();
+                y_offset += line_height;
+            });
+        }
+
+        public void Next()
+        {
+            if (this.CurrentPage == this.Pages.Count - 1)
+            {
+                this.OnFinished();
+                return;
+            }
+
+            this.CurrentPage++;
+            Render(_ctx);
+        }
+
+        public void Prev()
+        {
+            if (this.CurrentPage > 0)
+            {
+                this.CurrentPage--;
+                Render(_ctx);
+            }
+        }
+    }
+
+    public static TextDialog MakeDialog(List<int> data, System.Action on_finished = null)
+    {
+        if (on_finished == null)
+        {
+            on_finished = (() => { });
+        }
+        
+        var ret = new TextDialog();
+        ret.OnFinished = on_finished;
+        var page_cnt = 1;
+        var x_offset = 10;
+        var y_offset = 10;
+
+        var max_x = 318 - 10;
+        var max_y = 212 - 10;
+
+        var wordspace_size = 5;
+        var letterspace_size = 2;
+        var line_height = 14;
+
+        var current_page = new TextDialogPage();
+        var current_line = new TextDialogLine();
+        var current_words = new List<List<int>>();
+        var current_word = new List<int>();
+        
+        current_page.Lines = new List<TextDialogLine>();
+
+        for (int i = 0; i < data.Count; i++)
+        {
+            var d = data[i];
+            
+            if (d == 32)
+            {
+                current_words.Add(current_word.ToList());
+                current_word = new List<int>();
+                x_offset += wordspace_size;
+                continue;
+            }
+            if (d != -1)
+            {
+                var this_width = GetCharacterWidth(d);
+                var this_letterspace_size = letterspace_size + 0;
+                var new_x = x_offset + this_width;
+                if (new_x <= max_x)
+                {
+                    current_word.Add(d);
+                    x_offset += this_width + this_letterspace_size;
+                }
+                else
+                {
+                    if (y_offset + line_height <= max_y)
+                    {
+                        var d_line = new TextDialogLine();
+                        d_line.Words = current_words.ToList();
+                        var curr_cnt = current_word.Count;
+                        current_word = new List<int>();
+                        current_words = new List<List<int>>();
+                        current_page.Lines.Add(TextDialogLine.CreateDupe(d_line));
+                        y_offset += line_height;
+                        x_offset = 10;
+                        i -= curr_cnt;
+                        i--;
+                        continue;
+                    }
+                    else
+                    {
+                        var d_line = new TextDialogLine();
+                        d_line.Words = current_words.ToList();
+                        current_page.Lines.Add(TextDialogLine.CreateDupe(d_line));
+                        ret.Pages.Add(TextDialogPage.MakeDupe(current_page));
+                        y_offset = 10;
+                        x_offset = 10;
+                        i -= current_word.Count;
+                        i--;
+                        current_word = new List<int>();
+                        current_words = new List<List<int>>();
+                        current_page = new TextDialogPage();
+                    }
+                }
+            }
+            else
+            {
+                if (y_offset + line_height <= max_y)
+                {
+                    var d_line = new TextDialogLine();
+                    current_words.Add(current_word);
+                    d_line.Words = current_words.ToList();
+                    var curr_cnt = current_word.Count;
+                    current_word = new List<int>();
+                    current_words = new List<List<int>>();
+                    current_page.Lines.Add(TextDialogLine.CreateDupe(d_line));
+                    y_offset += line_height;
+                    x_offset = 10;
+                    
+                }
+                else
+                {
+                    ret.Pages.Add(TextDialogPage.MakeDupe(current_page));
+                    x_offset = 10;
+                    y_offset = 10;
+                    current_word = new List<int>();
+                    current_words = new List<List<int>>();
+                    current_page = new TextDialogPage();
+                }
+            }
+            if (i == data.Count - 1)
+            {
+                var d_line = new TextDialogLine();
+                d_line.Words = current_words.ToList();
+                var curr_cnt = current_word.Count;
+                current_word = new List<int>();
+                current_words = new List<List<int>>();
+                current_page.Lines.Add(TextDialogLine.CreateDupe(d_line));
+                
+                ret.Pages.Add(TextDialogPage.MakeDupe(current_page));
+            }
+            
+            
+        }
+        
+        return ret;
+    }
+
 
     public static int GetXScaleFactor(int width)
     {
@@ -3272,4 +3349,3 @@ int[] rects = [];
     }
     
 }
-
