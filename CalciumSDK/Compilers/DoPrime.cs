@@ -119,8 +119,11 @@ namespace CalciumSDK.Compilers
                         idx2++;
                     });
                     rects_sb.Append("]");
+                    var initial_ds = GetPrimeInitialDialogs.Get();
+
                     code = code.Replace("[__RECTS]", rects_sb.ToString().Trim().Replace("\r", "").Replace("\n", ""));
                     code = code.Replace("[__STOP_AT]", ((lines_to_use.Count - 2)).ToString());
+                    code = code.Replace("[__INITIAL_DIALOGS_CODE]", initial_ds);
 
                     var initial_dialogs = GetUbuntuInitialDialogs.Get();
 
