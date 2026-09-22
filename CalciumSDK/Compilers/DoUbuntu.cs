@@ -8,10 +8,10 @@ public static class Ubuntu
     public static void Generate(string projectName)
     {
         var assembly = Assembly.GetExecutingAssembly();
-        var new_path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "ubuntu" + Path.DirectorySeparatorChar + "Program.cs";
-        var sln_path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "ubuntu" + Path.DirectorySeparatorChar + projectName + ".slnx";
-        var proj_path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "ubuntu" + Path.DirectorySeparatorChar + projectName + ".csproj";
-        var publish_path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "ubuntu" + Path.DirectorySeparatorChar + "publish.sh";
+        var new_path = Helpers.GetDocsFolder() + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "ubuntu" + Path.DirectorySeparatorChar + "Program.cs";
+        var sln_path = Helpers.GetDocsFolder() + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "ubuntu" + Path.DirectorySeparatorChar + projectName + ".slnx";
+        var proj_path = Helpers.GetDocsFolder() + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "ubuntu" + Path.DirectorySeparatorChar + projectName + ".csproj";
+        var publish_path = Helpers.GetDocsFolder() + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "ubuntu" + Path.DirectorySeparatorChar + "publish.sh";
         
         var path = Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar + projectName +
                    Path.DirectorySeparatorChar + "main_menu.bmp";

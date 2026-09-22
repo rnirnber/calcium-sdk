@@ -15,11 +15,11 @@ namespace CalciumSDK
             try
             {
                 Console.WriteLine($"Creating project: {projectName}");
-                if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "CalciumProjects"))
+                if (!Directory.Exists(Helpers.GetDocsFolder() + Path.DirectorySeparatorChar + "CalciumProjects"))
                 {
-                    Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "CalciumProjects");
+                    Directory.CreateDirectory(Helpers.GetDocsFolder() + Path.DirectorySeparatorChar + "CalciumProjects");
                 }
-                if (Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName))
+                if (Directory.Exists(Helpers.GetDocsFolder() + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName))
                 {
                     Console.Clear();
                     Console.WriteLine($"Project {projectName} already exists. Please choose a different name.");
@@ -27,7 +27,7 @@ namespace CalciumSDK
                     Thread.Sleep(2000);
                     return false;
                 }
-                var new_path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName;
+                var new_path = Helpers.GetDocsFolder() + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName;
 
                 Directory.CreateDirectory(new_path);
                 Directory.CreateDirectory(new_path + Path.DirectorySeparatorChar + "assets");

@@ -6,9 +6,9 @@ namespace CalciumSDK
 {
     public static partial class Helpers
     {
-        public static string GET_ROOT_SDK_PATH()
+        public static string GetDocsFolder()
         {
-            return Helpers.GetDocsFolder() + Path.DirectorySeparatorChar + "CalciumProjects";
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Documents");
         }
     }
 }
