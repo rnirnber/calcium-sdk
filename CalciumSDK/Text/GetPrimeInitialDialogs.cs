@@ -112,6 +112,24 @@ namespace CalciumSDK.Text
 
             }
             sb.AppendLine("END;");
+
+            sb.AppendLine("");
+            sb.AppendLine("EXPORT RENDER_DIALOG(data, idx)");
+            sb.AppendLine("BEGIN");
+            sb.AppendLine("");
+            sb.AppendLine("  LOCAL STOP_AT := 0;");
+            sb.AppendLine("  LOCAL X_OFFSET := 10;");
+            sb.AppendLine("  LOCAL Y_OFFSET := 10;");
+            sb.AppendLine("  LOCAL MAX_X := 318 - 10;");
+            sb.AppendLine("  LOCAL MAX_Y := 212 - 10;");
+            sb.AppendLine("  LOCAL WORDSPACE_SIZE := 5;");
+            sb.AppendLine("  LOCAL LETTERSPACE_SIZE := 2;");
+            sb.AppendLine("  LOCAL LINE_HEIGHT := 14;");
+            sb.AppendLine("");
+            sb.AppendLine("  LOCAL STOP_AT := GET_MATRIX_TALLY(data);");
+
+
+            sb.AppendLine("END;");
             return sb.ToString();
         }
     }
