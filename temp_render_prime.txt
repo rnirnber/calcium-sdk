@@ -164,16 +164,48 @@ BEGIN
 	
 	LOCAL x_offset := 10;
 	LOCAL y_offset := 10;
+	LOCAL fnName := "";
+	Local fnArgs := "";
+	LOCAL evalStr := "";
+	LOCAL arr1 := "";
+	LOCAL arr2 := "";
+	LOCAL arr3 := "";
+	LOCAL arr4 := "";
 	
 	LOCAL idx1 := 1;
+	LOCAL idx2 := 1;
+	LOCAL idx3 := 1;
+	LOCAL idx4 := 1;
 	LOCAL syze1 := GET_LIST_SIZE(lines_data);
 	LOCAL syze2 := 1;
-	LOCAL idx2 := 1;
+	LOCAL syze3 := 1;
+	LOCAL syze4 := 1;
+	
 	FOR idx1 FROM 1 TO syze1 DO
 		syze2 := GET_LIST_SIZE(lines_data[idx1]);
+		arr1 := lines_data[idx1];
 		
 		FOR idx2 FROM 1 TO syze2 DO
-			MSGBOX(STRING(deb1));
+			arr2 := arr1[idx2];
+			syze3 := GET_LIST_SIZE(arr2);
+			FOR idx3 FROM 1 TO syze3 DO				
+				arr3 := arr2[idx3];
+				syze4 := GET_LIST_SIZE(arr3);
+				MSGBOX("here");
+				FOR idx4 FROM 1 to syze4 DO					
+					MSGBOX("here2");
+					MSGBOX(arr3);
+					fnName := "ZZZ_RENDER_" + STRING(arr3);			
+					MSGBOX("here3");
+					fnArgs := "(" + STRING(x_offset) + "," + STRING(y_offset) + ",255, 255, 255, G1)";
+					MSGBOX("here4");
+					evalStr := fnName + fnArgs;
+					MSGBOX("here5");
+					MSGBOX(evalStr);			
+					EXPR(evalStr);	
+				END;
+				
+			END;			
 		END;
 	END;
 END;
