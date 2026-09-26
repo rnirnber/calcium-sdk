@@ -114,7 +114,7 @@ namespace CalciumSDK.Text
             sb.AppendLine("END;");
 
             sb.AppendLine("");
-            sb.AppendLine("EXPORT RENDER_DIALOG(data, idx)");
+            sb.AppendLine("EXPORT RENDER_DIALOG(data, page_idx)");
             sb.AppendLine("BEGIN");
             sb.AppendLine("");
             sb.AppendLine("  LOCAL STOP_AT := 0;");
