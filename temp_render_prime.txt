@@ -149,6 +149,11 @@ BEGIN
 END;
 EXPORT RENDER_TEXT_PAGE(lines_data)
 BEGIN
+	LOCAL main_fill := RGB(0, 0,0);
+	LOCAL rect_fill := RGB(255, 255,255);
+	DIMGROB_P(G1, 318, 212);
+	RECT_P(G1, 0, 0, 317, 211, main_fill, main_fill);
+	
 	LOCAL max_x := 318 - 10;
     LOCAL max_y := 212 - 10;
     LOCAL wordspace_size := 5;
@@ -168,8 +173,6 @@ BEGIN
 		syze2 := GET_LIST_SIZE(lines_data[idx1]);
 		
 		FOR idx2 FROM 1 TO syze2 DO
-			deb1 := lines_data[idx1];
-			deb2 := deb1[idx2];
 			MSGBOX(STRING(deb1));
 		END;
 	END;
