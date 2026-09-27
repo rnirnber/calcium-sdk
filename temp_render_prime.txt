@@ -1653,8 +1653,8 @@ BEGIN
 	LOCAL this_line := {};
 	LOCAL max_x := 318 - 10;
     LOCAL max_y := 212 - 10;
-    LOCAL wordspace_size := 5;
-    LOCAL letterspace_size := 2;
+    LOCAL wordspace_size := 7;
+    LOCAL letterspace_size := 4;
     LOCAL line_height := 14;
 	LOCAL current_idx := 1;
 	LOCAL STOP_AT := GET_MATRIX_TALLY(data);
@@ -1751,11 +1751,12 @@ BEGIN
 	LOCAL rect_fill := RGB(255, 255,255);
 	DIMGROB_P(G1, 318, 212);
 	RECT_P(G1, 0, 0, 317, 211, main_fill, main_fill);
+	RECT_P(G0, 0, 0, 320, 240, RGB(0, 0, 0), RGB(0, 0, 0));
 	
 	LOCAL max_x := 318 - 10;
     LOCAL max_y := 212 - 10;
-    LOCAL wordspace_size := 5;
-    LOCAL letterspace_size := 2;
+    LOCAL wordspace_size := 7;
+    LOCAL letterspace_size := 4;
     LOCAL line_height := 14;
 	LOCAL deb1 := 1;
 	LOCAL deb2 := 1;
@@ -1779,6 +1780,7 @@ BEGIN
 	LOCAL syze3 := 1;
 	LOCAL syze4 := 1;
 	
+	
 	FOR idx1 FROM 1 TO syze1 DO
 		syze2 := GET_LIST_SIZE(lines_data[idx1]);
 		arr1 := lines_data[idx1];
@@ -1788,23 +1790,20 @@ BEGIN
 			syze3 := GET_LIST_SIZE(arr2);
 			FOR idx3 FROM 1 TO syze3 DO				
 				arr3 := arr2[idx3];
-				syze4 := GET_LIST_SIZE(arr3);
-				MSGBOX("here");
+				syze4 := GET_LIST_SIZE(arr3);		
 				FOR idx4 FROM 1 to syze4 DO					
-					MSGBOX("here2");
-					MSGBOX(arr3);
 					fnName := "ZZZ_RENDER_" + STRING(arr3);			
-					MSGBOX("here3");
-					fnArgs := "(" + STRING(x_offset) + "," + STRING(y_offset) + ",255, 255, 255, G1)";
-					MSGBOX("here4");
+					fnArgs := "(" + STRING(x_offset) + "," + STRING(y_offset) + ",255, 255, 255, G0)";
 					evalStr := fnName + fnArgs;
-					MSGBOX("here5");
-					MSGBOX(evalStr);			
 					EXPR(evalStr);	
+					x_offset := x_offset + letterspace_size;
+					x_offset := x_offset + ZZZ_GET_CHAR_WIDTH(arr3);
 				END;
-				
+				x_offset := x_offset + wordspace_size;
 			END;			
 		END;
+		y_offset := y_offset + line_height;
+		x_offset := 10;
 	END;
 END;
 
@@ -1814,4 +1813,6 @@ BEGIN
   LOCAL data2 := GET_TEXT_PAGE(data, 1);
   LOCAL s := GET_LIST_SIZE(data2);
   RENDER_TEXT_PAGE(data2);
+  FREEZE();
+  WAIT(5);
 END;
