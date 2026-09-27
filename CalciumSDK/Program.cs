@@ -122,10 +122,11 @@ namespace CalciumSDK
                                 Console.WriteLine("Selected Project Valid, Proceeding...");
                                 Console.Out.Flush();
                                 Thread.Sleep(1000);
-                                Program.RootConfig = JsonSerializer.Deserialize<Config>(
-                                    FileEncoding.ReadAllText(Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar +
+                                var config_path = Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar +
                                                      selectedProjectDict[Convert.ToInt32(selected_project)] + Path.DirectorySeparatorChar +
-                                                     "config.json"), AppJsonContext.Default.Config);
+                                                     "config.json";
+                                Program.RootConfig = JsonSerializer.Deserialize<Config>(
+                                    FileEncoding.ReadAllText(config_path), AppJsonContext.Default.Config);
                                 selection_is_valid = true;
                                 selected_proj = Convert.ToInt32(selected_project).ToString();
                                 MainMenu.Hydrate(selectedProjectDict[Convert.ToInt32(selected_proj)]);
