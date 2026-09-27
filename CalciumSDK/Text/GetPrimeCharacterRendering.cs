@@ -142,7 +142,7 @@ namespace CalciumSDK.Text
                                     sb.AppendLine("    LOCAL x_start := rects[i];");
                                     sb.AppendLine("    LOCAL y_start := rects[i + 1];");
                                     sb.AppendLine("    LOCAL y_end := y_start + rects[i + 2];");
-                                    sb.AppendLine("    y_end :- y_end - 1;");
+                                    sb.AppendLine("    y_end := y_end - 1;");
                                     sb.AppendLine("    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);");
                                     sb.AppendLine("  END;");
                                     sb.AppendLine("END;");
