@@ -42,6 +42,1604 @@ BEGIN
 	RETURN ret;
 END;
 
+EXPORT ZZZ_RENDER_97(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 66;
+
+  LOCAL rects := [1,5,2,1,6,1,1,8,3,1,9,2,1,10,1,2,5,1,2,8,1,2,10,1,3,5,1,3,8,1,3,10,1,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,6,5,5,7,4,5,8,3,5,9,2,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_98(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 69;
+
+  LOCAL rects := [1,3,8,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,5,2,2,6,1,2,10,1,3,5,1,3,10,1,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,6,4,5,7,3,5,8,2,5,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_99(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 42;
+
+  LOCAL rects := [1,6,4,1,7,3,1,8,2,1,9,1,2,5,2,2,6,1,2,9,2,2,10,1,3,5,1,3,10,1,4,5,1,4,10,1,5,6,1,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_100(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 84;
+
+  LOCAL rects := [0,7,2,0,8,1,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,5,1,2,10,1,3,5,1,3,10,1,4,3,8,4,4,7,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,3,8,5,4,7,5,5,6,5,6,5,5,7,4,5,8,3,5,9,2,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_101(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 60;
+
+  LOCAL rects := [0,8,1,1,6,4,1,7,3,1,8,2,1,9,1,2,5,1,2,7,1,2,9,2,2,10,1,3,5,1,3,7,1,3,10,1,4,5,3,4,6,2,4,7,1,4,10,1,5,6,2,5,7,1,5,9,2,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_102(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 69;
+
+  LOCAL rects := [1,5,1,1,10,1,2,4,7,2,5,6,2,6,5,2,7,4,2,8,3,2,9,2,2,10,1,3,3,8,3,4,7,3,5,6,3,6,5,3,7,4,3,8,3,3,9,2,3,10,1,4,3,1,4,5,1,4,10,1,5,3,1,5,5,1,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_103(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 93;
+
+  LOCAL rects := [0,11,1,1,5,8,1,6,7,1,7,6,1,8,5,1,9,4,1,10,3,1,11,2,1,12,1,2,5,1,2,8,1,2,10,1,2,12,1,3,5,1,3,8,1,3,10,1,3,12,1,4,4,5,4,5,4,4,6,3,4,7,2,4,8,1,4,10,1,4,12,1,5,4,1,5,6,2,5,7,1,5,10,3,5,11,2,5,12,1,6,11,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_104(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 66;
+
+  LOCAL rects := [1,3,8,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,5,2,2,6,1,3,5,1,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,6,5,5,7,4,5,8,3,5,9,2,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_105(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 63;
+
+  LOCAL rects := [1,5,1,1,10,1,2,5,1,2,10,1,3,2,2,3,3,1,3,5,6,3,6,5,3,7,4,3,8,3,3,9,2,3,10,1,4,2,2,4,3,1,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_106(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 72;
+
+  LOCAL rects := [1,5,1,1,12,1,2,5,1,2,12,1,3,2,2,3,3,1,3,5,8,3,6,7,3,7,6,3,8,5,3,9,4,3,10,3,3,11,2,3,12,1,4,2,2,4,3,1,4,5,8,4,6,7,4,7,6,4,8,5,4,9,4,4,10,3,4,11,2,4,12,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_107(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 66;
+
+  LOCAL rects := [1,3,8,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,7,2,2,8,1,3,6,3,3,7,2,3,8,1,4,5,2,4,6,1,4,8,3,4,9,2,4,10,1,5,5,1,5,9,2,5,10,1,6,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_108(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 60;
+
+  LOCAL rects := [1,3,1,1,10,1,2,3,8,2,4,7,2,5,6,2,6,5,2,7,4,2,8,3,2,9,2,2,10,1,3,3,8,3,4,7,3,5,6,3,6,5,3,7,4,3,8,3,3,9,2,3,10,1,4,10,1,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_109(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 78;
+
+  LOCAL rects := [0,5,6,0,6,5,0,7,4,0,8,3,0,9,2,0,10,1,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,5,1,3,5,6,3,6,5,3,7,4,3,8,3,3,9,2,3,10,1,4,5,1,5,5,6,5,6,5,5,7,4,5,8,3,5,9,2,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_110(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 60;
+
+  LOCAL rects := [1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,5,2,2,6,1,3,5,1,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,6,5,5,7,4,5,8,3,5,9,2,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_111(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 66;
+
+  LOCAL rects := [0,7,2,0,8,1,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,5,1,2,10,1,3,5,1,3,10,1,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,6,4,5,7,3,5,8,2,5,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_112(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 69;
+
+  LOCAL rects := [1,5,8,1,6,7,1,7,6,1,8,5,1,9,4,1,10,3,1,11,2,1,12,1,2,5,2,2,6,1,2,10,1,3,5,1,3,10,1,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,6,4,5,7,3,5,8,2,5,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_113(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 84;
+
+  LOCAL rects := [0,7,2,0,8,1,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,5,1,2,10,1,3,5,1,3,10,1,4,5,8,4,6,7,4,7,6,4,8,5,4,9,4,4,10,3,4,11,2,4,12,1,5,5,8,5,6,7,5,7,6,5,8,5,5,9,4,5,10,3,5,11,2,5,12,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_114(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 57;
+
+  LOCAL rects := [1,5,1,1,10,1,2,5,6,2,6,5,2,7,4,2,8,3,2,9,2,2,10,1,3,5,6,3,6,5,3,7,4,3,8,3,3,9,2,3,10,1,4,5,2,4,6,1,4,10,1,5,5,1,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_115(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 66;
+
+  LOCAL rects := [1,5,3,1,6,2,1,7,1,1,9,2,1,10,1,2,5,4,2,6,3,2,7,2,2,8,1,2,10,1,3,5,1,3,7,2,3,8,1,3,10,1,4,5,1,4,7,4,4,8,3,4,9,2,4,10,1,5,5,1,5,8,2,5,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_116(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 66;
+
+  LOCAL rects := [0,5,1,1,5,1,2,3,8,2,4,7,2,5,6,2,6,5,2,7,4,2,8,3,2,9,2,2,10,1,3,3,8,3,4,7,3,5,6,3,6,5,3,7,4,3,8,3,3,9,2,3,10,1,4,5,1,4,10,1,5,5,1,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_117(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 63;
+
+  LOCAL rects := [1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,9,2,2,10,1,3,10,1,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,5,6,5,6,5,5,7,4,5,8,3,5,9,2,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_118(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 63;
+
+  LOCAL rects := [0,5,1,1,5,4,1,6,3,1,7,2,1,8,1,2,6,5,2,7,4,2,8,3,2,9,2,2,10,1,3,9,2,3,10,1,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,5,3,5,6,2,5,7,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_119(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 90;
+
+  LOCAL rects := [0,5,5,0,6,4,0,7,3,0,8,2,0,9,1,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,5,6,2,6,5,2,7,4,2,8,3,2,9,2,2,10,1,3,5,3,3,6,2,3,7,1,4,8,3,4,9,2,4,10,1,5,5,6,5,6,5,5,7,4,5,8,3,5,9,2,5,10,1,6,5,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_120(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 69;
+
+  LOCAL rects := [0,5,1,0,10,1,1,5,2,1,6,1,1,9,2,1,10,1,2,5,5,2,6,4,2,7,3,2,8,2,2,9,1,3,6,4,3,7,3,3,8,2,3,9,1,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,5,1,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_121(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 69;
+
+  LOCAL rects := [0,5,1,1,5,3,1,6,2,1,7,1,1,12,1,2,6,7,2,7,6,2,8,5,2,9,4,2,10,3,2,11,2,2,12,1,3,8,4,3,9,3,3,10,2,3,11,1,4,5,5,4,6,4,4,7,3,4,8,2,4,9,1,5,5,2,5,6,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_122(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 57;
+
+  LOCAL rects := [1,5,1,1,9,2,1,10,1,2,5,1,2,8,3,2,9,2,2,10,1,3,5,4,3,6,3,3,7,2,3,8,1,3,10,1,4,5,3,4,6,2,4,7,1,4,10,1,5,5,2,5,6,1,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_65(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 90;
+
+  LOCAL rects := [0,9,2,0,10,1,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,3,6,2,4,5,2,5,4,2,6,3,2,7,2,2,8,1,3,3,3,3,4,2,3,5,1,3,8,1,4,3,7,4,4,6,4,5,5,4,6,4,4,7,3,4,8,2,4,9,1,5,7,4,5,8,3,5,9,2,5,10,1,6,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_66(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 96;
+
+  LOCAL rects := [1,3,8,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,3,8,2,4,7,2,5,6,2,6,5,2,7,4,2,8,3,2,9,2,2,10,1,3,3,1,3,6,1,3,10,1,4,3,8,4,4,7,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,4,2,5,5,1,5,7,3,5,8,2,5,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_67(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 60;
+
+  LOCAL rects := [0,6,2,0,7,1,1,4,6,1,5,5,1,6,4,1,7,3,1,8,2,1,9,1,2,3,2,2,4,1,2,9,2,2,10,1,3,3,1,3,10,1,4,3,2,4,4,1,4,9,2,4,10,1,5,4,1,5,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_68(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 78;
+
+  LOCAL rects := [1,3,8,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,3,1,2,10,1,3,3,1,3,10,1,4,3,8,4,4,7,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,4,6,5,5,5,5,6,4,5,7,3,5,8,2,5,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_69(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 75;
+
+  LOCAL rects := [1,3,8,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,3,8,2,4,7,2,5,6,2,6,5,2,7,4,2,8,3,2,9,2,2,10,1,3,3,1,3,6,1,3,10,1,4,3,1,4,6,1,4,10,1,5,3,1,5,6,1,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_70(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 66;
+
+  LOCAL rects := [1,3,8,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,3,8,2,4,7,2,5,6,2,6,5,2,7,4,2,8,3,2,9,2,2,10,1,3,3,1,3,6,1,4,3,1,4,6,1,5,3,1,5,6,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_71(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 87;
+
+  LOCAL rects := [0,5,4,0,6,3,0,7,2,0,8,1,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,3,2,2,4,1,2,9,2,2,10,1,3,3,1,3,7,1,3,10,1,4,3,2,4,4,1,4,7,4,4,8,3,4,9,2,4,10,1,5,4,1,5,7,4,5,8,3,5,9,2,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_72(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 78;
+
+  LOCAL rects := [1,3,8,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,6,1,3,6,1,4,3,8,4,4,7,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,3,8,5,4,7,5,5,6,5,6,5,5,7,4,5,8,3,5,9,2,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_73(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 66;
+
+  LOCAL rects := [1,3,1,1,10,1,2,3,8,2,4,7,2,5,6,2,6,5,2,7,4,2,8,3,2,9,2,2,10,1,3,3,8,3,4,7,3,5,6,3,6,5,3,7,4,3,8,3,3,9,2,3,10,1,4,3,1,4,10,1,5,3,1,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_74(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 69;
+
+  LOCAL rects := [0,9,1,1,3,1,1,9,2,1,10,1,2,3,1,2,10,1,3,3,1,3,10,1,4,3,8,4,4,7,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,3,7,5,4,6,5,5,5,5,6,4,5,7,3,5,8,2,5,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_75(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 84;
+
+  LOCAL rects := [1,3,8,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,6,3,2,7,2,2,8,1,3,5,4,3,6,3,3,7,2,3,8,1,4,3,3,4,4,2,4,5,1,4,7,4,4,8,3,4,9,2,4,10,1,5,3,2,5,4,1,5,9,2,5,10,1,6,3,1,6,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_76(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 57;
+
+  LOCAL rects := [1,3,8,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,3,8,2,4,7,2,5,6,2,6,5,2,7,4,2,8,3,2,9,2,2,10,1,3,10,1,4,10,1,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_77(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 102;
+
+  LOCAL rects := [0,3,8,0,4,7,0,5,6,0,6,5,0,7,4,0,8,3,0,9,2,0,10,1,1,3,8,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,3,4,2,4,3,2,5,2,2,6,1,3,5,3,3,6,2,3,7,1,4,3,3,4,4,2,4,5,1,5,3,8,5,4,7,5,5,6,5,6,5,5,7,4,5,8,3,5,9,2,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_78(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 99;
+
+  LOCAL rects := [1,3,8,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,3,4,2,4,3,2,5,2,2,6,1,3,5,5,3,6,4,3,7,3,3,8,2,3,9,1,4,3,8,4,4,7,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,3,8,5,4,7,5,5,6,5,6,5,5,7,4,5,8,3,5,9,2,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_79(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 87;
+
+  LOCAL rects := [0,5,4,0,6,3,0,7,2,0,8,1,1,3,7,1,4,6,1,5,5,1,6,4,1,7,3,1,8,2,1,9,1,2,3,1,2,10,1,3,3,1,3,10,1,4,3,8,4,4,7,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,4,6,5,5,5,5,6,4,5,7,3,5,8,2,5,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_80(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 78;
+
+  LOCAL rects := [1,3,8,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,3,8,2,4,7,2,5,6,2,6,5,2,7,4,2,8,3,2,9,2,2,10,1,3,3,1,3,7,1,4,3,5,4,4,4,4,5,3,4,6,2,4,7,1,5,4,3,5,5,2,5,6,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_81(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 99;
+
+  LOCAL rects := [0,5,4,0,6,3,0,7,2,0,8,1,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,3,1,2,10,1,3,3,1,3,10,3,3,11,2,3,12,1,4,3,8,4,4,7,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,4,12,1,5,4,6,5,5,5,5,6,4,5,7,3,5,8,2,5,9,1,5,12,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_82(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 99;
+
+  LOCAL rects := [1,3,8,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,3,8,2,4,7,2,5,6,2,6,5,2,7,4,2,8,3,2,9,2,2,10,1,3,3,1,3,7,2,3,8,1,4,3,8,4,4,7,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,4,4,5,5,3,5,6,2,5,7,1,5,9,2,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_83(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 75;
+
+  LOCAL rects := [0,10,1,1,3,4,1,4,3,1,5,2,1,6,1,1,9,2,1,10,1,2,3,2,2,4,1,2,6,1,2,10,1,3,3,1,3,6,2,3,7,1,3,10,1,4,3,1,4,7,4,4,8,3,4,9,2,4,10,1,5,3,2,5,4,1,5,7,3,5,8,2,5,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_84(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 60;
+
+  LOCAL rects := [0,3,1,1,3,1,2,3,8,2,4,7,2,5,6,2,6,5,2,7,4,2,8,3,2,9,2,2,10,1,3,3,8,3,4,7,3,5,6,3,6,5,3,7,4,3,8,3,3,9,2,3,10,1,4,3,1,5,3,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_85(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 78;
+
+  LOCAL rects := [1,3,8,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,9,2,2,10,1,3,10,1,4,3,8,4,4,7,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,3,7,5,4,6,5,5,5,5,6,4,5,7,3,5,8,2,5,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_86(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 87;
+
+  LOCAL rects := [0,3,2,0,4,1,1,3,6,1,4,5,1,5,4,1,6,3,1,7,2,1,8,1,2,5,6,2,6,5,2,7,4,2,8,3,2,9,2,2,10,1,3,8,3,3,9,2,3,10,1,4,4,7,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,3,4,5,4,3,5,5,2,5,6,1,6,3,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_87(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 114;
+
+  LOCAL rects := [0,3,8,0,4,7,0,5,6,0,6,5,0,7,4,0,8,3,0,9,2,0,10,1,1,3,8,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,5,6,2,6,5,2,7,4,2,8,3,2,9,2,2,10,1,3,5,3,3,6,2,3,7,1,4,7,4,4,8,3,4,9,2,4,10,1,5,3,8,5,4,7,5,5,6,5,6,5,5,7,4,5,8,3,5,9,2,5,10,1,6,3,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_88(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 93;
+
+  LOCAL rects := [0,3,1,0,10,1,1,3,3,1,4,2,1,5,1,1,8,3,1,9,2,1,10,1,2,4,6,2,5,5,2,6,4,2,7,3,2,8,2,2,9,1,3,5,4,3,6,3,3,7,2,3,8,1,4,3,8,4,4,7,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,3,2,5,4,1,5,9,2,5,10,1,6,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_89(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 69;
+
+  LOCAL rects := [0,3,1,1,3,3,1,4,2,1,5,1,2,4,7,2,5,6,2,6,5,2,7,4,2,8,3,2,9,2,2,10,1,3,6,5,3,7,4,3,8,3,3,9,2,3,10,1,4,3,4,4,4,3,4,5,2,4,6,1,5,3,2,5,4,1,6,3,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_90(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 69;
+
+  LOCAL rects := [0,10,1,1,3,1,1,8,3,1,9,2,1,10,1,2,3,1,2,7,4,2,8,3,2,9,2,2,10,1,3,3,1,3,5,3,3,6,2,3,7,1,3,10,1,4,3,4,4,4,3,4,5,2,4,6,1,4,10,1,5,3,2,5,4,1,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_32(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 0;
+
+  RETURN;
+  LOCAL rects := -1;
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_33(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 36;
+
+  LOCAL rects := [2,3,3,2,4,2,2,5,1,2,9,2,2,10,1,3,3,5,3,4,4,3,5,3,3,6,2,3,7,1,3,9,2,3,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_64(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 96;
+
+  LOCAL rects := [0,6,3,0,7,2,0,8,1,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,3,1,2,6,3,2,7,2,2,8,1,2,11,1,3,3,1,3,5,5,3,6,4,3,7,3,3,8,2,3,9,1,3,11,1,4,3,1,4,5,1,4,9,1,4,11,1,5,4,6,5,5,5,5,6,4,5,7,3,5,8,2,5,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_35(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 93;
+
+  LOCAL rects := [0,5,1,0,8,1,1,5,1,1,7,4,1,8,3,1,9,2,1,10,1,2,3,7,2,4,6,2,5,5,2,6,4,2,7,3,2,8,2,2,9,1,3,3,1,3,8,3,3,9,2,3,10,1,4,3,8,4,4,7,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,3,3,5,4,2,5,5,1,5,8,1,6,5,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_36(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 90;
+
+  LOCAL rects := [0,10,1,1,3,4,1,4,3,1,5,2,1,6,1,1,9,2,1,10,1,2,3,2,2,4,1,2,6,1,2,10,1,3,2,10,3,3,9,3,4,8,3,5,7,3,6,6,3,7,5,3,8,4,3,9,3,3,10,2,3,11,1,4,3,1,4,7,1,4,9,2,4,10,1,5,3,2,5,4,1,5,7,3,5,8,2,5,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_37(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 102;
+
+  LOCAL rects := [0,3,4,0,4,3,0,5,2,0,6,1,0,10,1,1,3,1,1,6,1,1,8,3,1,9,2,1,10,1,2,3,4,2,4,3,2,5,2,2,6,1,2,8,1,3,4,2,3,5,1,3,7,4,3,8,3,3,9,2,3,10,1,4,4,2,4,5,1,4,7,1,4,10,1,5,3,2,5,4,1,5,7,4,5,8,3,5,9,2,5,10,1,6,3,1,6,8,2,6,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_94(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 45;
+
+  LOCAL rects := [0,7,1,1,5,3,1,6,2,1,7,1,2,3,3,2,4,2,2,5,1,3,3,2,3,4,1,4,3,4,4,4,3,4,5,2,4,6,1,5,6,2,5,7,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_38(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 90;
+
+  LOCAL rects := [0,8,2,0,9,1,1,3,8,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,3,1,2,6,2,2,7,1,2,10,1,3,3,1,3,7,4,3,8,3,3,9,2,3,10,1,4,3,2,4,4,1,4,7,4,4,8,3,4,9,2,4,10,1,5,7,4,5,8,3,5,9,2,5,10,1,6,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_42(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 45;
+
+  LOCAL rects := [0,7,1,1,7,1,1,9,1,2,7,3,2,8,2,2,9,1,3,5,4,3,6,3,3,7,2,3,8,1,4,7,3,4,8,2,4,9,1,5,6,2,5,7,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_40(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 42;
+
+  LOCAL rects := [2,5,6,2,6,5,2,7,4,2,8,3,2,9,2,2,10,1,3,4,2,3,5,1,3,10,2,3,11,1,4,3,1,4,12,1,5,3,1,5,12,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_41(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 54;
+
+  LOCAL rects := [1,3,1,1,12,1,2,3,2,2,4,1,2,11,2,2,12,1,3,4,8,3,5,7,3,6,6,3,7,5,3,8,4,3,9,3,3,10,2,3,11,1,4,6,4,4,7,3,4,8,2,4,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_45(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 12;
+
+  LOCAL rects := [1,7,1,2,7,1,3,7,1,4,7,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_95(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 15;
+
+  LOCAL rects := [1,12,1,2,12,1,3,12,1,4,12,1,5,12,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_61(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 30;
+
+  LOCAL rects := [1,6,1,1,8,1,2,6,1,2,8,1,3,6,1,3,8,1,4,6,1,4,8,1,5,6,1,5,8,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_43(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 27;
+
+  LOCAL rects := [1,7,1,2,7,1,3,5,5,3,6,4,3,7,3,3,8,2,3,9,1,4,7,1,5,7,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_60(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 45;
+
+  LOCAL rects := [1,6,3,1,7,2,1,8,1,2,6,1,2,8,1,3,5,2,3,6,1,3,8,2,3,9,1,4,5,1,4,9,1,5,4,2,5,5,1,5,9,2,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_62(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 48;
+
+  LOCAL rects := [1,4,2,1,5,1,1,9,2,1,10,1,2,5,2,2,6,1,2,8,2,2,9,1,3,5,2,3,6,1,3,8,2,3,9,1,4,6,3,4,7,2,4,8,1,5,7,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_44(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 24;
+
+  LOCAL rects := [2,9,4,2,10,3,2,11,2,2,12,1,3,9,3,3,10,2,3,11,1,4,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_46(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 15;
+
+  LOCAL rects := [2,9,2,2,10,1,3,9,2,3,10,1,4,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_63(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 54;
+
+  LOCAL rects := [1,3,2,1,4,1,2,3,1,2,6,2,2,7,1,2,9,2,2,10,1,3,3,1,3,6,2,3,7,1,3,9,2,3,10,1,4,3,4,4,4,3,4,5,2,4,6,1,5,4,2,5,5,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_47(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 51;
+
+  LOCAL rects := [1,11,2,1,12,1,2,8,5,2,9,4,2,10,3,2,11,2,2,12,1,3,5,5,3,6,4,3,7,3,3,8,2,3,9,1,4,3,4,4,4,3,4,5,2,4,6,1,5,3,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_92(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 51;
+
+  LOCAL rects := [1,3,2,1,4,1,2,3,5,2,4,4,2,5,3,2,6,2,2,7,1,3,6,5,3,7,4,3,8,3,3,9,2,3,10,1,4,9,4,4,10,3,4,11,2,4,12,1,5,12,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_91(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 48;
+
+  LOCAL rects := [2,3,10,2,4,9,2,5,8,2,6,7,2,7,6,2,8,5,2,9,4,2,10,3,2,11,2,2,12,1,3,3,1,3,12,1,4,3,1,4,12,1,5,3,1,5,12,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_93(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 72;
+
+  LOCAL rects := [1,3,1,1,12,1,2,3,1,2,12,1,3,3,10,3,4,9,3,5,8,3,6,7,3,7,6,3,8,5,3,9,4,3,10,3,3,11,2,3,12,1,4,3,10,4,4,9,4,5,8,4,6,7,4,7,6,4,8,5,4,9,4,4,10,3,4,11,2,4,12,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_123(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 66;
+
+  LOCAL rects := [1,7,1,2,3,2,2,4,1,2,7,1,2,10,3,2,11,2,2,12,1,3,3,4,3,4,3,3,5,2,3,6,1,3,8,5,3,9,4,3,10,3,3,11,2,3,12,1,4,3,1,4,6,1,4,8,1,4,12,1,5,3,1,5,12,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_125(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 57;
+
+  LOCAL rects := [1,3,1,1,12,1,2,3,1,2,6,1,2,8,2,2,9,1,2,12,1,3,3,10,3,4,9,3,5,8,3,6,7,3,7,6,3,8,5,3,9,4,3,10,3,3,11,2,3,12,1,4,7,1,5,7,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_124(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 30;
+
+  LOCAL rects := [3,3,10,3,4,9,3,5,8,3,6,7,3,7,6,3,8,5,3,9,4,3,10,3,3,11,2,3,12,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_34(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 36;
+
+  LOCAL rects := [1,3,4,1,4,3,1,5,2,1,6,1,2,3,4,2,4,3,2,5,2,2,6,1,4,3,4,4,4,3,4,5,2,4,6,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_58(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 30;
+
+  LOCAL rects := [2,5,2,2,6,1,2,9,2,2,10,1,3,5,2,3,6,1,3,9,2,3,10,1,4,6,1,4,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_59(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 39;
+
+  LOCAL rects := [2,5,2,2,6,1,2,9,4,2,10,3,2,11,2,2,12,1,3,5,2,3,6,1,3,9,3,3,10,2,3,11,1,4,6,1,4,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_48(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 81;
+
+  LOCAL rects := [0,5,4,0,6,3,0,7,2,0,8,1,1,3,7,1,4,6,1,5,5,1,6,4,1,7,3,1,8,2,1,9,1,2,3,1,2,10,1,3,3,1,3,6,2,3,7,1,3,10,1,4,3,2,4,4,1,4,9,2,4,10,1,5,4,6,5,5,5,5,6,4,5,7,3,5,8,2,5,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_49(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 72;
+
+  LOCAL rects := [0,5,1,1,4,2,1,5,1,1,10,1,2,3,2,2,4,1,2,10,1,3,3,8,3,4,7,3,5,6,3,6,5,3,7,4,3,8,3,3,9,2,3,10,1,4,3,8,4,4,7,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_50(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 69;
+
+  LOCAL rects := [0,4,1,1,3,2,1,4,1,1,9,2,1,10,1,2,3,1,2,8,3,2,9,2,2,10,1,3,3,1,3,7,2,3,8,1,3,10,1,4,3,5,4,4,4,4,5,3,4,6,2,4,7,1,4,10,1,5,4,3,5,5,2,5,6,1,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_51(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 72;
+
+  LOCAL rects := [0,4,1,1,3,2,1,4,1,1,9,2,1,10,1,2,3,1,2,6,1,2,10,1,3,3,1,3,6,1,3,10,1,4,3,8,4,4,7,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,4,2,5,5,1,5,7,3,5,8,2,5,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_52(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 66;
+
+  LOCAL rects := [0,7,2,0,8,1,1,6,3,1,7,2,1,8,1,2,4,3,2,5,2,2,6,1,2,8,1,3,3,3,3,4,2,3,5,1,3,8,1,4,3,8,4,4,7,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,8,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_53(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 69;
+
+  LOCAL rects := [1,3,4,1,4,3,1,5,2,1,6,1,1,9,2,1,10,1,2,3,1,2,6,2,2,7,1,2,10,1,3,3,1,3,6,1,3,10,1,4,3,1,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,3,1,5,7,3,5,8,2,5,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_54(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 81;
+
+  LOCAL rects := [0,7,2,0,8,1,1,5,5,1,6,4,1,7,3,1,8,2,1,9,1,2,4,4,2,5,3,2,6,2,2,7,1,2,10,1,3,3,2,3,4,1,3,6,1,3,10,1,4,3,1,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,3,1,5,6,4,5,7,3,5,8,2,5,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_55(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 72;
+
+  LOCAL rects := [0,3,3,0,4,2,0,5,1,1,3,3,1,4,2,1,5,1,2,3,1,2,9,2,2,10,1,3,3,1,3,6,5,3,7,4,3,8,3,3,9,2,3,10,1,4,3,6,4,4,5,4,5,4,4,6,3,4,7,2,4,8,1,5,3,3,5,4,2,5,5,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_56(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 81;
+
+  LOCAL rects := [0,8,1,1,3,3,1,4,2,1,5,1,1,7,4,1,8,3,1,9,2,1,10,1,2,3,1,2,6,1,2,10,1,3,3,1,3,6,1,3,10,1,4,3,8,4,4,7,4,5,6,4,6,5,4,7,4,4,8,3,4,9,2,4,10,1,5,4,2,5,5,1,5,7,3,5,8,2,5,9,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_57(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 81;
+
+  LOCAL rects := [0,5,2,0,6,1,1,3,5,1,4,4,1,5,3,1,6,2,1,7,1,1,10,1,2,3,1,2,7,1,2,10,1,3,3,1,3,7,1,3,9,2,3,10,1,4,3,7,4,4,6,4,5,5,4,6,4,4,7,3,4,8,2,4,9,1,5,4,5,5,5,4,5,6,3,5,7,2,5,8,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_10(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 99;
+
+  LOCAL rects := [0,2,9,0,3,8,0,4,7,0,5,6,0,6,5,0,7,4,0,8,3,0,9,2,0,10,1,1,2,9,1,3,8,1,4,7,1,5,6,1,6,5,1,7,4,1,8,3,1,9,2,1,10,1,2,2,1,2,10,1,3,2,1,3,10,1,4,2,1,4,10,1,5,2,9,5,3,8,5,4,7,5,5,6,5,6,5,5,7,4,5,8,3,5,9,2,5,10,1];
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
+
+
+EXPORT ZZZ_RENDER_13(X, Y, R, G, B, G_BUFFER)
+BEGIN
+  LOCAL clr := RGB(R, G, B);
+  LOCAL i := 1;
+  LOCAL stop_at := 0;
+
+  RETURN;
+  LOCAL rects := -1;
+  FOR i FROM 1 TO stop_at STEP 3 DO
+    LOCAL x_start := rects[i];
+    LOCAL y_start := rects[i + 1];
+    LOCAL y_end := y_start + rects[i + 2];
+    RECT_P(G_BUFFER, X + x_start, Y + y_start, X + x_start, Y + y_end, clr, clr);
+  END;
+END;
+
 EXPORT GET_TEXT_PAGE(data, page_idx)
 BEGIN
 	LOCAL x_offset := 10;
