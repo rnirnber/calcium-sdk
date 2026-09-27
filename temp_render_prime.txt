@@ -1784,13 +1784,13 @@ BEGIN
 	FOR idx1 FROM 1 TO syze1 DO
 		syze2 := GET_LIST_SIZE(lines_data[idx1]);
 		arr1 := lines_data[idx1];
-		
+		x_offset := 10;
 		FOR idx2 FROM 1 TO syze2 DO
 			arr2 := arr1[idx2];
 			syze3 := GET_LIST_SIZE(arr2);
 			FOR idx3 FROM 1 TO syze3 DO				
 				arr3 := arr2[idx3];
-				syze4 := GET_LIST_SIZE(arr3);		
+				syze4 := GET_LIST_SIZE(arr3);
 				FOR idx4 FROM 1 to syze4 DO					
 					fnName := "ZZZ_RENDER_" + STRING(arr3);			
 					fnArgs := "(" + STRING(x_offset) + "," + STRING(y_offset) + ",255, 255, 255, G0)";
@@ -1799,8 +1799,8 @@ BEGIN
 					x_offset := x_offset + letterspace_size;
 					x_offset := x_offset + ZZZ_GET_CHAR_WIDTH(arr3);
 				END;
-				x_offset := x_offset + wordspace_size;
 			END;			
+			x_offset := x_offset + wordspace_size;
 		END;
 		y_offset := y_offset + line_height;
 		x_offset := 10;
