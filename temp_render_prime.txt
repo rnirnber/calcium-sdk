@@ -1752,205 +1752,203 @@ BEGIN
   END;
 END;
 
-	EXPORT GET_TEXT_PAGE(data, page_idx)
-	BEGIN
-		LOCAL x_offset := 10;
-		LOCAL y_offset := 10;
-		LOCAL current_page := {};
-		LOCAL current_lines := {};
-		LOCAL current_line := {};
-		LOCAL current_words := {};
-		LOCAL current_word := {};
-		LOCAL all_pages := {};
-		LOCAL this_line := {};
-		LOCAL max_x := 318 - 10;
-		LOCAL max_y := 212 - 10;
-		LOCAL wordspace_size := 7;
-		LOCAL letterspace_size := 4;
-		LOCAL line_height := 14;
-		LOCAL current_idx := 1;
-		LOCAL STOP_AT := GET_MATRIX_TALLY(data);
-		LOCAL cnt := 1;
-		LOCAL cnt2 := 1;
-		LOCAL curr_cnt := 0;
-		LOCAL subtract_num := 0;
-		LOCAL size1 := 1;
-		LOCAL these_words := {};
-		LOCAL these_lines := {};
-		LOCAL new_words := {};
-		LOCAL this_width := 1;
-		LOCAL stop_work1 := FALSE;
-		LOCAL stop_work2 := FALSE;
-		LOCAL root_idx := 1;
-		LOCAL d := 65;
-		LOCAL this_letterspace_size := 1;
-		LOCAL new_x := 1;
+EXPORT GET_TEXT_PAGE(data, page_idx)
+BEGIN
+	LOCAL x_offset := 10;
+	LOCAL y_offset := 10;
+	LOCAL current_page := {};
+	LOCAL current_lines := {};
+	LOCAL current_line := {};
+	LOCAL current_words := {};
+	LOCAL current_word := {};
+	LOCAL all_pages := {};
+	LOCAL this_line := {};
+	LOCAL max_x := 318 - 10;
+	LOCAL max_y := 212 - 10;
+	LOCAL wordspace_size := 7;
+	LOCAL letterspace_size := 4;
+	LOCAL line_height := 14;
+	LOCAL current_idx := 1;
+	LOCAL STOP_AT := GET_MATRIX_TALLY(data);
+	LOCAL cnt := 1;
+	LOCAL cnt2 := 1;
+	LOCAL curr_cnt := 0;
+	LOCAL subtract_num := 0;
+	LOCAL size1 := 1;
+	LOCAL these_words := {};
+	LOCAL these_lines := {};
+	LOCAL new_words := {};
+	LOCAL this_width := 1;
+	LOCAL stop_work1 := FALSE;
+	LOCAL stop_work2 := FALSE;
+	LOCAL root_idx := 1;
+	LOCAL d := 65;
+	LOCAL this_letterspace_size := 1;
+	LOCAL new_x := 1;
+	
+	WHILE root_idx <= STOP_AT DO
+		root_idx := root_idx - (subtract_num);
+		d := data[root_idx];
+		subtract_num := 0;
 		
-		WHILE root_idx <= STOP_AT DO
-			root_idx := root_idx - (subtract_num);
-			d := data[root_idx];
-			subtract_num := 0;
-			
-			LOCAL p_cnt := GET_LIST_SIZE(all_pages);
-			IF(p_cnt == page_idx) THEN
-				return all_pages[page_idx];
-			END;
-			
-			stop_work1 := FALSE;
-			
-			IF d == 32 THEN
-				x_offset := x_offset + wordspace_size; 
-				current_words[0] := DUPE_LIST(current_word);
-				current_word := DUPE_LIST({});
-				stop_work1 := TRUE;
-			END;
-			IF stop_work1 <> TRUE THEN			
-				IF d <> -1 THEN													
-					LOCAL this_width := ZZZ_GET_CHAR_WIDTH(d);
-					LOCAL do_new_line := TRUE;
-					this_letterspace_size := letterspace_size + 0;
-					new_x := x_offset + this_width + this_letterspace_size;
-
-
-					IF (new_x <= max_x) THEN
-						current_word[0] := d;
-						x_offset := x_offset + this_width + this_letterspace_size;					
-						do_new_line := FALSE;
-					END;
-					IF do_new_line THEN	
-						LOCAL orig_y := y_offset + 0;
-						IF ((orig_y + line_height) <= max_y) THEN
-							these_lines[0] := DUPE_LIST(current_words);
-							subtract_num := GET_LIST_SIZE(current_word) + 1;
-							current_words := DUPE_LIST({});
-							current_word := DUPE_LIST({});
-							y_offset := y_offset + line_height;
-							x_offset := 10;
-						END;
-						IF (((orig_y + line_height) <= max_y) <> TRUE) THEN
-							all_pages[0] := DUPE_LIST(these_lines);
-							these_lines := DUPE_LIST({DUPE_LIST(current_words)});
-							current_words := DUPE_LIST({});
-							
-							subtract_num := GET_LIST_SIZE(current_word) + 1;
-							current_word := DUPE_LIST({});
-							
-							x_offset := 10;
-							y_offset := 10 + line_height;                        
-						END;
-					END;
-				END;
-				IF d == -1 THEN
-					IF GET_LIST_SIZE(current_word) > 0 THEN
-						current_words[0] := DUPE_LIST(current_word);
-						current_word := DUPE_LIST({});
-					END;
-					
-					IF GET_LIST_SIZE(current_words) > 0 THEN
-						these_lines[0] := DUPE_LIST(current_words);
-						current_words := DUPE_LIST({});
-					END;
-
-					y_offset := y_offset + line_height;
-					x_offset := 10;				
-					
-					IF y_offset <= max_y THEN
-						// do nothing
-					END;
-					IF y_offset > max_y THEN
-						all_pages[0] := DUPE_LIST(these_lines);
-						these_lines := DUPE_LIST({});					
-						current_words := DUPE_LIST({});					
-						current_word := DUPE_LIST({});
-						y_offset := 10 + line_height;
-					END;
-				END;
-			END;
-			root_idx := root_idx + 1;
-		END;	
-		IF GET_LIST_SIZE(current_word) > 0 THEN
+		LOCAL p_cnt := GET_LIST_SIZE(all_pages);
+		IF(p_cnt == page_idx) THEN
+			return all_pages[page_idx];
+		END;
+		
+		stop_work1 := FALSE;
+		
+		IF d == 32 THEN
+			x_offset := x_offset + wordspace_size; 
 			current_words[0] := DUPE_LIST(current_word);
+			current_word := DUPE_LIST({});
+			stop_work1 := TRUE;
 		END;
-		IF GET_LIST_SIZE(current_words) > 0 THEN
-			these_lines[0] := DUPE_LIST(current_words);
-		END;
-		IF GET_LIST_SIZE(these_lines) > 0 THEN
-			all_pages[0] := DUPE_LIST(these_lines);
-		END;
+		IF stop_work1 <> TRUE THEN			
+			IF d <> -1 THEN													
+				LOCAL this_width := ZZZ_GET_CHAR_WIDTH(d);
+				LOCAL do_new_line := TRUE;
+				this_letterspace_size := letterspace_size + 0;
+				new_x := x_offset + this_width + this_letterspace_size;
 
-		LOCAL p_cnt2 := GET_LIST_SIZE(all_pages);
-		IF page_idx >= 1 AND page_idx <= p_cnt2 THEN
-			LOCAL target_page := all_pages[page_idx];
-			IF GET_LIST_SIZE(target_page) == 0 THEN
-				RETURN -1;
-			END;
-			RETURN target_page;
-		END;  	
-		RETURN -1;
-	END;
-	EXPORT RENDER_TEXT_PAGE(lines_data)
-	BEGIN
-	IFERR
-		LOCAL main_fill := RGB(0, 0,0);
-		LOCAL rect_fill := RGB(255, 255,255);
-		DIMGROB_P(G1, 318, 212);
-		RECT_P(G1, 0, 0, 317, 211, main_fill, main_fill);
-		RECT_P(G0, 0, 0, 320, 240, RGB(0, 0, 0), RGB(0, 0, 0));
-		
-		LOCAL max_x := 318 - 10;
-		LOCAL max_y := 212 - 10;
-		LOCAL wordspace_size := 7;
-		LOCAL letterspace_size := 4;
-		LOCAL line_height := 14;
-		LOCAL deb1 := 1;
-		LOCAL deb2 := 1;
-		
-		LOCAL x_offset := 10;
-		LOCAL y_offset := 10;
-		LOCAL fnName := "";
-		Local fnArgs := "";
-		LOCAL evalStr := "";
-		LOCAL arr1 := "";
-		LOCAL arr2 := "";
-		LOCAL arr3 := "";
-		LOCAL arr4 := "";
-		
-		LOCAL idx1 := 1;
-		LOCAL idx2 := 1;
-		LOCAL idx3 := 1;
-		LOCAL idx4 := 1;
-		LOCAL syze1 := GET_LIST_SIZE(lines_data);
-		LOCAL syze2 := 1;
-		LOCAL syze3 := 1;
-		LOCAL syze4 := 1;
-		
-		FOR idx1 FROM 1 TO syze1 DO
-			syze2 := GET_LIST_SIZE(lines_data[idx1]);
-			arr1 := lines_data[idx1];
-			x_offset := 10;
-			FOR idx2 FROM 1 TO syze2 DO
-				arr2 := arr1[idx2];
-				syze3 := GET_LIST_SIZE(arr2);
-				FOR idx3 FROM 1 TO syze3 DO				
-					arr3 := arr2[idx3];
-					syze4 := GET_LIST_SIZE(arr3);
-					FOR idx4 FROM 1 to syze4 DO					
-						fnName := "ZZZ_RENDER_" + STRING(arr3);			
-						fnArgs := "(" + STRING(x_offset) + "," + STRING(y_offset) + ",255, 255, 255, G0)";
-						evalStr := fnName + fnArgs;
-						EXPR(evalStr);	
-						x_offset := x_offset + letterspace_size;
-						x_offset := x_offset + ZZZ_GET_CHAR_WIDTH(arr3);
+
+				IF (new_x <= max_x) THEN
+					current_word[0] := d;
+					x_offset := x_offset + this_width + this_letterspace_size;					
+					do_new_line := FALSE;
+				END;
+				IF do_new_line THEN	
+					LOCAL orig_y := y_offset + 0;
+					IF ((orig_y + line_height) <= max_y) THEN
+						these_lines[0] := DUPE_LIST(current_words);
+						subtract_num := GET_LIST_SIZE(current_word) + 1;
+						current_words := DUPE_LIST({});
+						current_word := DUPE_LIST({});
+						y_offset := y_offset + line_height;
+						x_offset := 10;
 					END;
-				END;			
-				x_offset := x_offset + wordspace_size;
+					IF (((orig_y + line_height) <= max_y) <> TRUE) THEN
+						all_pages[0] := DUPE_LIST(these_lines);
+						these_lines := DUPE_LIST({DUPE_LIST(current_words)});
+						current_words := DUPE_LIST({});
+						
+						subtract_num := GET_LIST_SIZE(current_word) + 1;
+						current_word := DUPE_LIST({});
+						
+						x_offset := 10;
+						y_offset := 10 + line_height;                        
+					END;
+				END;
 			END;
-			y_offset := y_offset + line_height;
-			x_offset := 10;
+			IF d == -1 THEN
+				IF GET_LIST_SIZE(current_word) > 0 THEN
+					current_words[0] := DUPE_LIST(current_word);
+					current_word := DUPE_LIST({});
+				END;
+				
+				IF GET_LIST_SIZE(current_words) > 0 THEN
+					these_lines[0] := DUPE_LIST(current_words);
+					current_words := DUPE_LIST({});
+				END;
+
+				y_offset := y_offset + line_height;
+				x_offset := 10;				
+				
+				IF y_offset <= max_y THEN
+					// do nothing
+				END;
+				IF y_offset > max_y THEN
+					all_pages[0] := DUPE_LIST(these_lines);
+					these_lines := DUPE_LIST({});					
+					current_words := DUPE_LIST({});					
+					current_word := DUPE_LIST({});
+					y_offset := 10 + line_height;
+				END;
+			END;
 		END;
-	THEN
+		root_idx := root_idx + 1;
+	END;	
+	IF GET_LIST_SIZE(current_word) > 0 THEN
+		current_words[0] := DUPE_LIST(current_word);
 	END;
+	IF GET_LIST_SIZE(current_words) > 0 THEN
+		these_lines[0] := DUPE_LIST(current_words);
 	END;
+	IF GET_LIST_SIZE(these_lines) > 0 THEN
+		all_pages[0] := DUPE_LIST(these_lines);
+	END;
+
+	LOCAL p_cnt2 := GET_LIST_SIZE(all_pages);
+	IF page_idx >= 1 AND page_idx <= p_cnt2 THEN
+		LOCAL target_page := all_pages[page_idx];
+		IF GET_LIST_SIZE(target_page) == 0 THEN
+			RETURN -1;
+		END;
+		RETURN target_page;
+	END;  	
+	RETURN -1;
+END;
+EXPORT RENDER_TEXT_PAGE(lines_data)
+BEGIN
+IFERR
+	LOCAL main_fill := RGB(0, 0,0);
+	LOCAL rect_fill := RGB(255, 255,255);
+	DIMGROB_P(G1, 318, 212);
+	RECT_P(G1, 0, 0, 317, 211, main_fill, main_fill);
+	RECT_P(G0, 0, 0, 320, 240, RGB(0, 0, 0), RGB(0, 0, 0));
+	
+	LOCAL max_x := 318 - 10;
+	LOCAL max_y := 212 - 10;
+	LOCAL wordspace_size := 7;
+	LOCAL letterspace_size := 4;
+	LOCAL line_height := 14;
+	LOCAL deb1 := 1;
+	LOCAL deb2 := 1;
+	
+	LOCAL x_offset := 10;
+	LOCAL y_offset := 10;
+	LOCAL fnName := "";
+	Local fnArgs := "";
+	LOCAL evalStr := "";
+	LOCAL arr1 := "";
+	LOCAL arr2 := "";
+	LOCAL arr3 := "";
+	LOCAL arr4 := "";
+	
+	LOCAL idx1 := 1;
+	LOCAL idx2 := 1;
+	LOCAL idx3 := 1;
+	LOCAL idx4 := 1;
+	LOCAL syze1 := GET_LIST_SIZE(lines_data);
+	LOCAL syze2 := 1;
+	LOCAL syze3 := 1;
+	LOCAL syze4 := 1;
+	
+	FOR idx1 FROM 1 TO syze1 DO
+		syze2 := GET_LIST_SIZE(lines_data[idx1]);
+		arr1 := lines_data[idx1];
+		x_offset := 10;
+		FOR idx2 FROM 1 TO syze2 DO
+			arr2 := arr1[idx2];
+			syze3 := GET_LIST_SIZE(arr2);
+			FOR idx3 FROM 1 TO syze3 DO				
+				arr3 := arr2[idx3];
+				syze4 := GET_LIST_SIZE(arr3);
+				FOR idx4 FROM 1 to syze4 DO					
+					fnName := "ZZZ_RENDER_" + STRING(arr3);			
+					fnArgs := "(" + STRING(x_offset) + "," + STRING(y_offset) + ",255, 255, 255, G0)";
+					evalStr := fnName + fnArgs;
+					EXPR(evalStr);	
+					x_offset := x_offset + letterspace_size;
+					x_offset := x_offset + ZZZ_GET_CHAR_WIDTH(arr3);
+				END;
+			END;			
+			x_offset := x_offset + wordspace_size;
+		END;
+		y_offset := y_offset + line_height;
+		x_offset := 10;
+	END;
+END;
 
 	EXPORT FOO()
 	BEGIN
