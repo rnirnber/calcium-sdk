@@ -125,7 +125,7 @@ namespace CalciumSDK.Compilers
                     code = code.Replace("[__STOP_AT]", ((lines_to_use.Count - 2)).ToString());
                     code = code.Replace("[__INITIAL_DIALOGS_CODE]", initial_ds);
 
-                    var initial_dialogs = GetUbuntuInitialDialogs.Get();
+                    var ts2 = Scenes.ParseSceneDataPrime.GetTileData();
 
                     var publish_path = Helpers.GetDocsFolder() + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "prime" + Path.DirectorySeparatorChar + "support.ppl";
                     File.WriteAllText(publish_path, code);

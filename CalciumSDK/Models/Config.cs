@@ -34,8 +34,6 @@ public class Config
     [JsonPropertyName("global_vars")]
     public List<GlobalVar> global_vars { get; set; }
     
-    [JsonPropertyName("background_forgiveness_threshold")]
-    public int background_forgiveness_threshold { get; set; }
     
     [JsonPropertyName("alpha_step_one")]
     public List<int> alpha_step_one { get; set; }
@@ -60,5 +58,9 @@ public class Config
 
     [JsonPropertyName("characters_used")]
     public List<string> characters_used { get; set; }
-    
+
+    [JsonPropertyName("pixel_matching_forgiveness_threshold")]
+    public int pixel_matching_forgiveness_threshold { get; set; }
+
+
 }
