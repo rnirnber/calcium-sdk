@@ -45,7 +45,6 @@ namespace CalciumSDK.Scenes
             });
             files.ForEach((f) =>
             {
-                
                 tsks.Add(Task.Run(async() =>
                 {
                     await Task.Delay(1);
@@ -56,14 +55,15 @@ namespace CalciumSDK.Scenes
                     {
                         var this_scene_num = scene_name_scene_num_map[f];
 
-                        var s_n = f.Split(Path.DirectorySeparatorChar).ToList().Last().Replace("scene_", "").Replace(".bmp", ")");
+                        var s_n = f.Split(Path.DirectorySeparatorChar).ToList().Last().Replace("scene_", "").Replace(".bmp", "");
                         while (s_n[0] == '0')
                         {
                             s_n = s_n.Substring(1);
                         }
                         var ret = new StringBuilder();
-                        ret.AppendLine("EXPORT GET_SCENE_TILE_DATA_" + s_n);
+                        ret.AppendLine("EXPORT GET_SCENE_TILE_DATA_" + this_scene_num + "()");
                         ret.AppendLine("BEGIN");
+                        ret.Append("  LOCAL tile_data := [");
 
                         var this_width = bitmap.Width;
                         var this_height = bitmap.Height;
@@ -130,21 +130,26 @@ namespace CalciumSDK.Scenes
                                             var y_off = Convert.ToInt32(k / 53);
 
                                             MapAssetMapping[x_off.ToString() + "_" + y_off.ToString()] = au;
+                                            ret.Append(((x_off * 10000) + y_off).ToString());
+
+                                            ret.Append(",");
                                         }
                                     }
                                 }
                             }
                         });
-
+                        var new_ret = ret.ToString().Substring(0, ret.Length - 1);
+                        new_ret += "];";
+                        new_ret += "\n  RETURN ret;";
+                        new_ret += "\nEND;";
+                        return new_ret;
                     }
-                    return "";
                 }));
             });
 
             Task.WaitAll(tsks);
-
-                return _SB.ToString();
-            _SB = new StringBuilder();
+            var x = 5;
+            return _SB.ToString();
         }
     }
 }
