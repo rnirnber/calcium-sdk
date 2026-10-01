@@ -11,21 +11,8 @@ namespace CalciumSDK.Scenes
 {
     public static class ParseSceneDataPrime
     {
-        private static StringBuilder _SB;
-        
-        private static void AppendToSB(string msg)
+        public static async Task<string> GetTileData()
         {
-            // 2. Wrap all modifications/reads inside the lock block
-            lock (_SBLock)
-            {
-                _SB.AppendLine(msg);
-            }
-        }
-
-        private static readonly object _SBLock = new();
-        public static string GetTileData()
-        {
-            _SB = new StringBuilder();
 
             string scenesPath = Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar + Program.SELECTED_PROJECT +
                             Path.DirectorySeparatorChar + "scenes";
@@ -61,19 +48,18 @@ namespace CalciumSDK.Scenes
                             s_n = s_n.Substring(1);
                         }
                         var ret = new StringBuilder();
-                        ret.AppendLine("EXPORT GET_SCENE_TILE_DATA_" + this_scene_num + "()");
-                        ret.AppendLine("BEGIN");
-                        ret.Append("  LOCAL tile_data := [");
-
                         var this_width = bitmap.Width;
                         var this_height = bitmap.Height;
 
                         var scene_assets_path = f.Replace(".bmp", ".json");
                         var deserialized = JsonSerializer.Deserialize<SceneBlueprint>(MagicFileEncoding.FileEncoding.ReadAllText(path), AppJsonContext.Default.SceneBlueprint);
 
-                        Dictionary<string, int> MapAssetMapping = new Dictionary<string, int>();
+                        Dictionary<int, List<string>> MapData = new Dictionary<int, List<string>>();
+                        Dictionary<int, int> AssetNumOccurenceTally = new Dictionary<int, int>();
                         deserialized.assets_used.ForEach((au) =>
                         {
+                            AssetNumOccurenceTally[au] = 0;
+                            MapData[au] = new List<string>();
                             string asset_path = Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar + Program.SELECTED_PROJECT +
                             Path.DirectorySeparatorChar + "assets" + Path.DirectorySeparatorChar + "asset_" + Helpers.GetPaddedNum(au) + ".bmp";
 
@@ -126,18 +112,55 @@ namespace CalciumSDK.Scenes
 
                                         if (same_pixel_tally >= target_value)
                                         {
+                                            AssetNumOccurenceTally[au]++;
                                             var x_off = Convert.ToInt32(i / 53);
                                             var y_off = Convert.ToInt32(k / 53);
 
-                                            MapAssetMapping[x_off.ToString() + "_" + y_off.ToString()] = au;
-                                            ret.Append(((x_off * 10000) + y_off).ToString());
-
-                                            ret.Append(",");
+                                            MapData[au].Add(x_off.ToString() + "_" + y_off.ToString());                                            
                                         }
                                     }
                                 }
                             }
                         });
+
+                        var max_key = -1;
+                        var max_num = Int32.MinValue;
+                        var a_keys = MapData.Keys.ToList();
+                        a_keys.ForEach((ak) =>
+                        {
+                            if (MapData[ak].Count > max_num)
+                            {
+                                max_num = MapData[ak].Count;
+                                max_key = ak;
+                            }
+                        });
+                        ret.AppendLine("EXPORT GET_DEFAULT_TILE_FOR_SCENE()");
+                        ret.AppendLine("BEGIN");
+                        ret.AppendLine("  RETURN " + max_key.ToString() + ";");
+                        ret.AppendLine("END;");
+                        ret.AppendLine("");
+                        ret.AppendLine("EXPORT GET_SCENE_TILE_DATA_" + this_scene_num + "()");
+                        ret.AppendLine("BEGIN");
+
+                        ret.Append("  LOCAL tile_data := [");
+
+                        a_keys.ForEach((ak) =>
+                        {
+                            if(ak != max_key)
+                            {
+                                MapData[ak].ForEach((m) =>
+                                {
+                                    var x_off = Convert.ToInt32(m.Split("_").ToList().First());
+                                    var y_off = Convert.ToInt32(m.Split("_").ToList().Last());
+
+                                    ret.Append(((x_off * 10000) + y_off).ToString());
+                                    ret.Append(",");
+                                    ret.Append(ak.ToString());
+                                    ret.Append(",");
+                                });
+                            }
+                        });
+
                         var new_ret = ret.ToString().Substring(0, ret.Length - 1);
                         new_ret += "];";
                         new_ret += "\n  RETURN ret;";
@@ -148,8 +171,12 @@ namespace CalciumSDK.Scenes
             });
 
             Task.WaitAll(tsks);
-            var x = 5;
-            return _SB.ToString();
+            var ret = new StringBuilder();
+            tsks.ForEach((t) =>
+            {
+                ret.AppendLine(t.Result);
+            });
+            return ret.ToString();
         }
     }
 }

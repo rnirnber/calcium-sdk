@@ -73,7 +73,7 @@ namespace CalciumSDK.Compilers
                     stream.CopyTo(ms);
                     byte[] resourceBytes = ms.ToArray();
                     var code = Encoding.UTF8.GetString(resourceBytes);
-                    if(main_fill == "white")
+                    if (main_fill == "white")
                     {
                         code = code.Replace("[__MAIN_BACKGROUND_RED]", Program.RootConfig.alpha_step_one[0].ToString());
                         code = code.Replace("[__MAIN_BACKGROUND_GREEN]", Program.RootConfig.alpha_step_one[1].ToString());
@@ -127,11 +127,27 @@ namespace CalciumSDK.Compilers
 
                     var ts2 = Scenes.ParseSceneDataPrime.GetTileData();
 
-                    var publish_path = Helpers.GetDocsFolder() + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "prime" + Path.DirectorySeparatorChar + "support.ppl";
+                    var publish_path = Helpers.GetDocsFolder() + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "prime" + Path.DirectorySeparatorChar + "support.ppl";                    
+
                     File.WriteAllText(publish_path, code);
                 }
             }
+            using (Stream stream = assembly.GetManifestResourceStream("CalciumSDK.v2_assets.prime_scenes.txt"))
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    stream.CopyTo(ms);
+                    byte[] resourceBytes = ms.ToArray();
+                    var code = Encoding.UTF8.GetString(resourceBytes);
+                    var tile_data_code = Scenes.ParseSceneDataPrime.GetTileData();
+                    tile_data_code.Wait();
+                    code = code.Replace("[__TILE_DATA_FNs]", tile_data_code.Result);
 
+                    var publish_path2 = Helpers.GetDocsFolder() + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "prime" + Path.DirectorySeparatorChar + "scenes.ppl";
+                    File.WriteAllText(publish_path2, code);
+
+                }
+            }
         }
     }
 }
