@@ -132,6 +132,8 @@ namespace CalciumSDK.Compilers
                     File.WriteAllText(publish_path, code);
                 }
             }
+            Assets.DoPrime.Do();
+
             using (Stream stream = assembly.GetManifestResourceStream("CalciumSDK.v2_assets.prime_scenes.txt"))
             {
                 using (MemoryStream ms = new MemoryStream())

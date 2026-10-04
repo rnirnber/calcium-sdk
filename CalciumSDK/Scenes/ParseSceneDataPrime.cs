@@ -134,12 +134,12 @@ namespace CalciumSDK.Scenes
                                 max_key = ak;
                             }
                         });
-                        ret.AppendLine("EXPORT GET_DEFAULT_TILE_FOR_SCENE()");
+                        ret.AppendLine("EXPORT ZZZ_GET_DEFAULT_TILE_FOR_SCENE_" + this_scene_num.ToString() + "()");
                         ret.AppendLine("BEGIN");
                         ret.AppendLine("  RETURN " + max_key.ToString() + ";");
                         ret.AppendLine("END;");
                         ret.AppendLine("");
-                        ret.AppendLine("EXPORT GET_SCENE_TILE_DATA_" + this_scene_num + "()");
+                        ret.AppendLine("EXPORT ZZZ_GET_SCENE_TILE_DATA_" + this_scene_num + "()");
                         ret.AppendLine("BEGIN");
 
                         ret.Append("  LOCAL tile_data := [");
@@ -163,7 +163,7 @@ namespace CalciumSDK.Scenes
 
                         var new_ret = ret.ToString().Substring(0, ret.Length - 1);
                         new_ret += "];";
-                        new_ret += "\n  RETURN ret;";
+                        new_ret += "\n  RETURN tile_data;";
                         new_ret += "\nEND;";
                         return new_ret;
                     }

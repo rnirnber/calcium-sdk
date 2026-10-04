@@ -3,7 +3,7 @@ using SkiaSharp;
 
 namespace CalciumSDK;
 
-public static partial class Assets
+public static partial class AssetFNs
 {
     public static StringBuilder GenerateAssetPPL(string path)
     {
@@ -42,8 +42,13 @@ public static partial class Assets
         }
 
         var asset_name = path.Split(Path.DirectorySeparatorChar).ToList().Last().Replace(".bmp", "");
+        asset_name = asset_name.Replace("asset_", "");
+        while (asset_name[0] == '0')
+        {
+            asset_name = asset_name.Substring(1);
+        }
         ret.AppendLine();
-        ret.AppendLine("EXPORT ZZZ_render_" + asset_name + "()");  
+        ret.AppendLine("EXPORT ZZZ_render_asset_" + asset_name + "(starting_x, starting_y)");  
         ret.AppendLine("BEGIN");
         if (main_fill == "white")
         {
@@ -61,34 +66,43 @@ public static partial class Assets
         ret.AppendLine("  RECT_P(G1, 0, 0, 52, 52, main_fill, main_fill);");
         ret.AppendLine("");
         ret.AppendLine("  // [y offset, starting x, ending x");
-        ret.Append(" LOCAL rects := [");
-        var idx = 0;
-        lines_to_use.ForEach((l) =>
+        
+        if(lines_to_use.Count > 0)
         {
-            ret.Append(l.ToString());
-            if (idx != lines_to_use.Count - 1)
+            ret.Append(" LOCAL rects := [");
+            var idx = 0;
+            lines_to_use.ForEach((l) =>
             {
-                ret.Append(",");
-            }
-            idx++;
-        });
-        ret.Append("];");
-        ret.AppendLine();
-        ret.AppendLine();
-        ret.AppendLine("  LOCAL i := 1;");
-        ret.AppendLine("  LOCAL x_start := 0;");
-        ret.AppendLine("  LOCAL x_end := 0;");
-        ret.AppendLine("  LOCAL y := 0;");
-        ret.AppendLine("  LOCAL stop_at := " + ((lines_to_use.Count + 3) - 3).ToString() + ";");
-        ret.AppendLine("  FOR i FROM 1 TO stop_at STEP 3 DO");
-        ret.AppendLine("    y := rects[i];");
-        ret.AppendLine("    x_start := rects[i + 1];");
-        ret.AppendLine("    x_end := rects[i + 2];");
-        ret.AppendLine("    RECT_P(G1, x_start, y, x_end, y, rect_fill, rect_fill);");
-        ret.AppendLine("  END;");
-        ret.AppendLine("  // FREEZE();");
-        ret.AppendLine("END;");
-        ret.AppendLine();
+                ret.Append(l.ToString());
+                if (idx != lines_to_use.Count - 1)
+                {
+                    ret.Append(",");
+                }
+                idx++;
+            });
+            ret.Append("];");
+            ret.AppendLine();
+            ret.AppendLine();
+            ret.AppendLine("");
+            ret.AppendLine("  LOCAL i := 1;");
+            ret.AppendLine("  LOCAL x_start := 0;");
+            ret.AppendLine("  LOCAL x_end := 0;");
+            ret.AppendLine("  LOCAL y := 0;");
+            ret.AppendLine("  LOCAL stop_at := " + ((lines_to_use.Count + 3) - 3).ToString() + ";");
+            ret.AppendLine("  FOR i FROM 1 TO stop_at STEP 3 DO");
+            ret.AppendLine("    y := rects[i];");
+            ret.AppendLine("    x_start := rects[i + 1];");
+            ret.AppendLine("    x_end := rects[i + 2];");
+            ret.AppendLine("    RECT_P(G1, x_start + (starting_x * 53), y + (starting_y * 53), x_end + (starting_x * 53), y + (starting_y * 53), rect_fill, rect_fill);");
+            ret.AppendLine("  END;");
+            ret.AppendLine("END;");
+            ret.AppendLine();
+        }
+        else
+        {
+            ret.AppendLine("  RETURN;");
+            ret.AppendLine("END;");
+        }
         return ret;
     }
 }

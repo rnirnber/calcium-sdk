@@ -52,7 +52,7 @@ namespace CalciumSDK
                         
                         if (File.Exists(bmp_path))
                         {
-                            all_assets.Append(Assets.GenerateAssetPPL(bmp_path));
+                            //all_assets.Append(Assets.GenerateAssetPPL(bmp_path));
                         }
                     }
                     File.WriteAllText(Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar + SELECTED_PROJECT + Path.DirectorySeparatorChar + "assets.ppl_DO_NOT_EDIT", all_assets.ToString());

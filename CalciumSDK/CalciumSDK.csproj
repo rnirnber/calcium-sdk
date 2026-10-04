@@ -55,6 +55,12 @@
 	<EmbeddedResource Include="v2_assets\font.ttf">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+	<EmbeddedResource Include="v2_assets\game.ppl">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+	<EmbeddedResource Include="v2_assets\vars.ppl">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     
 </ItemGroup>
   <ItemGroup>
