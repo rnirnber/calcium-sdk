@@ -268,8 +268,8 @@ BEGIN
 	
 	LOCAL i3 := 1;
 	
-	FOR i1 FROM 1 TO stop_at_1 DO
-		FOR i2 FROM 1 TO stop_at_2 DO
+	FOR i1 FROM 0 TO stop_at_1 DO
+		FOR i2 FROM 0 TO stop_at_2 DO
 			tile := ZZZ_GET_TILE_FOR_SCENE(i1, i2);
 			EXPR("ZZZ_render_asset_" + STRING(tile) + "(" + STRING(map_x + i1) + "," + STRING(map_y + i2) + ")");
 		END;
@@ -294,7 +294,7 @@ END;
 EXPORT ZZZ_ENTER_SCENE(num)
 BEGIN
 	ZZZ_CURRENT_SCENE_TILES := EXPR("ZZZ_GET_S_TILE_DAT_" + STRING(num) + "()");
-	ZZZ_CURRENT_SCENE_DEFAULT_TILE = EXPR("ZZZ_GET_S_TILE_DAT_" + STRING(num) + "()");
+	ZZZ_CURRENT_SCENE_DEFAULT_TILE = EXPR("ZZZ_G_DEF_T_FOR_SC_" + STRING(num) + "()");
 END;
 
 EXPORT ZZZ_RENDER_WORLD()
@@ -307,6 +307,7 @@ END;
 
 EXPORT ZZZ_MAIN()
 BEGIN
+    ZZZ_ENTER_SCENE(1);
 	FREEZE();
 	WAIT(0);
 END;
