@@ -93,7 +93,7 @@ BEGIN
 		
 		LOCAL p_cnt := GET_LIST_SIZE(all_pages);
 		IF(p_cnt == page_idx) THEN
-			return all_pages[page_idx];
+			RETURN all_pages[page_idx];
 		END;
 		
 		stop_work1 := FALSE;
@@ -255,12 +255,15 @@ END;
 EXPORT ZZZ_RENDER_MAP()
 BEGIN
 	LOCAL map_x := ZZZ_CURRENT_PLAYER_X - ZZZ_CURRENT_SCREEN_X;
-	LOCAL map_y := ZZZ+CURRENT_PLAYER_Y - ZZZ_CURENT_SCREEN_Y;
+	LOCAL map_y := ZZZ_CURRENT_PLAYER_Y - ZZZ_CURRENT_SCREEN_Y;
 	
-	LOCAL stop_at_1 := 6;
-	LOCAL i1 := 1;
-	LOCAL stop_at_2 := 4;
-	LOCAL i2 := 1;
+	map_x := 0;
+	map_y := 0;
+	
+	LOCAL stop_at_1 := 5;
+	LOCAL i1 := 0;
+	LOCAL stop_at_2 := 3;
+	LOCAL i2 := 0;
 	LOCAL tile := 0;
 	
 	LOCAL i3 := 1;
@@ -268,16 +271,19 @@ BEGIN
 	FOR i1 FROM 1 TO stop_at_1 DO
 		FOR i2 FROM 1 TO stop_at_2 DO
 			tile := ZZZ_GET_TILE_FOR_SCENE(i1, i2);
-			EXPR("ZZZ_render_asset_" + STRING(t) + "(i1, i2);
+			EXPR("ZZZ_render_asset_" + STRING(tile) + "(" + STRING(map_x + i1) + "," + STRING(map_y + i2) + ")");
 		END;
 	END;
+	BLIT_P(G0, G1);
+	FREEZE();
+	WAIT(0);
 END;
 
 EXPORT ZZZ_GET_TILE_FOR_SCENE(X, Y)
 BEGIN
 	LOCAL idx := 1;
 	LOCAL stop_at := GET_MATRIX_TALLY(ZZZ_CURRENT_SCENE_TILES);
-	FOR idx := 1 TO stop_at DO
+	FOR idx FROM 1 TO stop_at DO
 		IF ZZZ_CURRENT_SCENE_TILES[idx] == (X * 1000 * 10) + Y THEN
 			RETURN ZZZ_CURRENT_SCENE_DEFAULT_TILE[idx + 1];
 		END;
@@ -287,13 +293,29 @@ END;
 
 EXPORT ZZZ_ENTER_SCENE(num)
 BEGIN
-	ZZZ_CURRENT_SCENE_TILES := EXPR("ZZZ_GET_SCENE_TILE_DATA_" + STRING(num) + "()");
-	ZZZ_CURRENT_SCENE_DEFAULT_TILE = EXPR("ZZZ_GET_DEFAULT_TILE_FOR_SCENE_" + STRING(num) + "()");
+	ZZZ_CURRENT_SCENE_TILES := EXPR("ZZZ_GET_S_TILE_DAT_" + STRING(num) + "()");
+	ZZZ_CURRENT_SCENE_DEFAULT_TILE = EXPR("ZZZ_GET_S_TILE_DAT_" + STRING(num) + "()");
 END;
 
 EXPORT ZZZ_RENDER_WORLD()
 BEGIN
+	DIMGROB_P(G1, 320, 240);
+	RECT_P(G1, 0, 0, 317, 211, RGB(0, 0, 0), RGB(0, 0, 0));
 	ZZZ_RENDER_MAP();
+	BLIT_P(G0, G1);
+END;
+
+EXPORT ZZZ_MAIN()
+BEGIN
+	FREEZE();
+	WAIT(0);
+END;
+
+EXPORT PLAY()
+BEGIN
+	WHILE(TRUE) DO
+		ZZZ_MAIN();
+	END;
 END;
 
 

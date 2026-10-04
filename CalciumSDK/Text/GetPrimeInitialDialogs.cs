@@ -46,7 +46,7 @@ namespace CalciumSDK.Text
                         chars.ForEach((c) =>
                         {
                             mini_sb.Append(((int)c).ToString());
-                            if(this_idx != tally - 1)
+                            if(true)
                             {
                                 mini_sb.Append(",");
                             }
@@ -106,7 +106,7 @@ namespace CalciumSDK.Text
                     new_conditions += "];";
                     mini_sb.AppendLine(new_conditions);
                     mini_sb.AppendLine("  END;");
-                    mini_sb.AppendLine("  return ret;");
+                    mini_sb.AppendLine("  RETURN ret;");
                     sb.AppendLine(mini_sb.ToString());
                 }
 

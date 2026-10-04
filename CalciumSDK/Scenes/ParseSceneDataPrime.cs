@@ -134,12 +134,12 @@ namespace CalciumSDK.Scenes
                                 max_key = ak;
                             }
                         });
-                        ret.AppendLine("EXPORT ZZZ_GET_DEFAULT_TILE_FOR_SCENE_" + this_scene_num.ToString() + "()");
+                        ret.AppendLine("EXPORT ZZZ_G_DEF_T_FOR_SC_" + this_scene_num.ToString() + "()");
                         ret.AppendLine("BEGIN");
                         ret.AppendLine("  RETURN " + max_key.ToString() + ";");
                         ret.AppendLine("END;");
                         ret.AppendLine("");
-                        ret.AppendLine("EXPORT ZZZ_GET_SCENE_TILE_DATA_" + this_scene_num + "()");
+                        ret.AppendLine("EXPORT ZZZ_GET_S_TILE_DAT_" + this_scene_num + "()");
                         ret.AppendLine("BEGIN");
 
                         ret.Append("  LOCAL tile_data := [");
