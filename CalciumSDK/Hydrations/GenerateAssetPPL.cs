@@ -62,7 +62,7 @@ public static partial class AssetFNs
         }
 
         ret.AppendLine("");
-        ret.AppendLine("  RECT_P(G1, 0, 0, 52, 52, main_fill, main_fill);");
+        ret.AppendLine("  RECT_P(G1, starting_x * 53, starting_y * 53, 52 + (starting_x * 53), 52 + (starting_y * 53), main_fill, main_fill);");
         ret.AppendLine("");
         ret.AppendLine("  // [y offset, starting x, ending x");
         
