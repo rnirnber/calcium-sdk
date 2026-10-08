@@ -112,7 +112,7 @@ class Program
             
             AppCanvas.SetDrawFunc((area, ctx, width, height) =>
             {
-                ctx.Antialias = Antialias.None;
+                ctx.Antialias = Antialias.Best;
                 switch (_AppMode)
                 {
                     case 1:
