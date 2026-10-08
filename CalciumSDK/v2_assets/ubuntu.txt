@@ -41,6 +41,22 @@ class Program
     private static int _LetterSpaceSize = 4;
     private static int _WordSpaceSize = 6;
     
+    private static List<int> CurrentSceneTiles = new List<int>();
+        private static int CurrentPlayerX = 8;
+        private static int CurrentPlayerY = 8;
+        private static int CurrentScreenX = 0;
+        private static int CurrentScreenY = 0;
+    
+        private static int GetMapX()
+        {
+            return CurrentPlayerX - CurrentScreenX;
+        }
+    
+        private static int GetMapY()
+        {
+            return CurrentPlayerY - CurrentScreenY;
+        }
+    
     [STAThread]
     static void Main(string[] args)
     {
