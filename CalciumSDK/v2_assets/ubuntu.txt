@@ -29,9 +29,10 @@ class Program
      * 1) Main Menu
      * 2) Create initial Initial Dialog
      * 3) Showing Initial Dialog
+     * 4) Render Main Scene
      */
      
-    private static int _AppMode = 1;
+    private static int _AppMode = 4;
     
     private static TextDialog _CurrentDialog;
     private static int _CurrentScene = 1;
@@ -140,6 +141,10 @@ class Program
                         _CurrentDialog.Render(ctx);
                         AppCanvas.QueueDraw();
                         break;
+                    case 4:
+                        RenderMap(ctx);
+                        AppCanvas.QueueDraw();
+                        break;
                     default:
                         break;
                 }
@@ -160,6 +165,16 @@ class Program
     private static double _GetBlueAsDecimal(int blue)
     {
         return ((double) blue / (double) 255);
+    }
+    private static void RenderMap(Context ctx)
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            for (int k = 0; k < 4; k++)
+            {
+                render_asset_0001(i, k, ctx, 255, 255, 255);
+            }
+        }
     }
 
     static void RenderMainMenu(Context ctx)

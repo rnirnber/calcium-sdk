@@ -210,6 +210,8 @@ public static class Ubuntu
                     {
                         ret.AppendLine("        ctx.SetSourceRgb(black_red, black_green, black_blue);");
                     }
+
+                    ret.AppendLine("        ctx.NewPath();");
                     ret.AppendLine("        ctx.Rectangle(starting_x * 53 * _XScaleFactor, starting_y * 53 * _YScaleFactor, 53 *  _XScaleFactor, 53 * _YScaleFactor);");
                     ret.AppendLine("        ctx.Fill();");
                     ret.AppendLine("");
@@ -250,10 +252,12 @@ public static class Ubuntu
                     ret.AppendLine("        var rects = _AssetsCache[" + i.ToString() + "];");
                     ret.AppendLine("        for(int i = 0; i <= rects.Count - 3; i += 3) ");
                     ret.AppendLine("        {");
-                    ret.AppendLine("            var y_start = (rects[i] * _YScaleFactor) + (starting_y * _YScaleFactor);");
-                    ret.AppendLine("            var x_start = (starting_x * 53) + (rects[i + 1] * _XScaleFactor);");
-                    ret.AppendLine("            var x_end = (starting_x * 53) + (rects[i + 2] * _XScaleFactor);");
-                    ret.AppendLine("            ctx.Rectangle(x_start, y_start, ((x_end - x_start) + _XScaleFactor), _YScaleFactor);");
+                    ret.AppendLine("            var y_start = (starting_y * 53 + rects[i]) * _YScaleFactor;");
+                    ret.AppendLine("            var y_end = y_start + _YScaleFactor;");
+                    ret.AppendLine("            var x_start = (starting_x * 53 + rects[i + 1]) * _XScaleFactor;");
+                    ret.AppendLine("            var x_end = (starting_x * 53 + rects[i + 2]) * _XScaleFactor;");
+                    ret.AppendLine("            ctx.NewPath();");
+                    ret.AppendLine("            ctx.Rectangle(x_start, y_start, (x_end - x_start + _XScaleFactor), (y_end - y_start + 1));");
                     ret.AppendLine("            ctx.Fill();");
                     ret.AppendLine("        }");
                     ret.AppendLine("    });");
