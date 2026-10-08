@@ -132,18 +132,15 @@ class Program
                                 _AppMode = 1;
                                 AppCanvas.QueueDraw();
                             }));
-                            _CurrentDialog.Render(ctx);
-                            AppCanvas.QueueDraw();
+                            _CurrentDialog.Render(ctx);                            
                             _AppMode = 3;
                         }
                         break;
                     case 3:
                         _CurrentDialog.Render(ctx);
-                        AppCanvas.QueueDraw();
                         break;
                     case 4:
                         RenderMap(ctx);
-                        AppCanvas.QueueDraw();
                         break;
                     default:
                         break;
