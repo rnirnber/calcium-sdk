@@ -147,6 +147,84 @@ public static class Ubuntu
         }
     }
 
+    private static string GetPlayerAndFollowerCode()
+    {
+        var ret = new StringBuilder();
+        new List<string>(){"up", "down", "left", "right"}.ForEach((dir) =>
+        {
+            ret.AppendLine("    private static void RenderPlayerUp(int x, int y)");
+            ret.AppendLine("    {");
+            ret.AppendLine("        var alpha_red = _GetRedAsDecimal(255);");
+            ret.AppendLine("        var alphga_green = _GetGreenAsDecimal(255);");
+            ret.AppendLine("        var alpha_blue = _GetBlueAsDecimal(255);");
+            ret.AppendLine("");
+            ret.AppendLine("        var black_red = _GetRedAsDecimal(0);");
+            ret.AppendLine("        var black_green = _GetGreenAsDecimal(0);");
+            ret.AppendLine("        var black_blue = _GetBlueAsDecimal(0);");
+            ret.AppendLine();
+            ret.AppendLine("        ctx.SetSourceRgb(alpha_red, alpha_green, alpha_blue);");
+            ret.AppendLine("        ctx.NewPath();");
+            ret.AppendLine("        ctx.Rectangle(x * 53 * _XScaleFactor, y * 53 * _YScaleFactor, 53 *  _XScaleFactor, 53 * _YScaleFactor);");
+            ret.AppendLine("        ctx.Fill();");
+            
+            ret.AppendLine("        ctx.SetSourceRgb(black_red, black_green, black_blue);");
+            
+            var this_asset = Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar + Program.SELECTED_PROJECT + Path.DirectorySeparatorChar + "player" + Path.DirectorySeparatorChar + "player_" + Helpers.GetPaddedNum(dir) + ".bmp";
+            var asset_bmp = SkiaSharp.SKBitmap.Decode(this_asset);
+            var black_lines = new List<int>();
+            for (int n = 0; n < 53; n++)
+            {
+                var line_scan = PixelHelpers.GetBlackLines(asset_bmp, n, 0);
+                line_scan.ForEach((ls) =>
+                {
+                    black_lines.Add(ls.y);
+                    black_lines.Add(ls.start);
+                    black_lines.Add(ls.end);
+                });
+            }
+
+            var main_fill = "white";
+            var lines_to_use = black_lines;
+            
+            var rects_json = new StringBuilder();
+            rects_json.Append("{");
+            
+            var line_tally = 0;
+            lines_to_use.ForEach((l) =>
+            {
+                rects_json.Append(l.ToString());
+                if ((line_tally != lines_to_use.Count - 1) && lines_to_use.Count > 0)
+                {
+                    rects_json.Append(",");
+                }
+                line_tally++;
+            });
+            rects_json.Append("}");
+            if (lines_to_use.Count == 0)
+            {
+                rects_json.Clear();
+                rects_json.Append("{}");
+            }
+
+
+            ret.AppendLine("        var rects = new List<int>()" + rects_json.ToString() + ";");
+            ret.AppendLine("        for(int i = 0; i <= rects.Count - 3; i += 3) ");
+            ret.AppendLine("        {");
+            ret.AppendLine("            var y_start = (starting_y * 53 + rects[i]) * _YScaleFactor;");
+            ret.AppendLine("            var y_end = y_start + _YScaleFactor;");
+            ret.AppendLine("            var x_start = (x * 53 + rects[i + 1]) * _XScaleFactor;");
+            ret.AppendLine("            var x_end = (x * 53 + rects[i + 2]) * _XScaleFactor;");
+            ret.AppendLine("            ctx.NewPath();");
+            ret.AppendLine("            ctx.Rectangle(x_start, y_start, (x_end - x_start + _XScaleFactor), (y_end - y_start + 1));");
+            ret.AppendLine("            ctx.Fill();");
+            ret.AppendLine("        }");
+            ret.AppendLine("    }");
+            ret.AppendLine();
+        });
+        
+        return ret.ToString();
+    }
+
     private static string GetAssetsCode(string projectName)
     {
         var ret = new StringBuilder();
