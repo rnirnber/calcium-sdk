@@ -73,12 +73,27 @@
     <EmbeddedResource Include="v2_assets\player_up.bmp">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="v2_assets\follower_right.bmp">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="v2_assets\follower_left.bmp">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="v2_assets\follower_down.bmp">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="v2_assets\follower_up.bmp">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     
 </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MagicFileEncoding" Version="4.0.0" />
     <PackageReference Include="SkiaSharp" Version="4.150.0" />
     <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="4.150.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="PlayerFNs\" />
   </ItemGroup>
 
 </Project>

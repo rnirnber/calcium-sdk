@@ -155,6 +155,19 @@ namespace CalciumSDK
                             }
                         }
                     }
+                    using (Stream stream = assembly.GetManifestResourceStream("CalciumSDK.v2_assets.follower_" + s + ".bmp"))
+                    {
+                        if (stream != null)
+                        {
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                stream.CopyTo(ms);
+                                byte[] resourceBytes = ms.ToArray();
+
+                                File.WriteAllBytes(new_path + Path.DirectorySeparatorChar + "player"  + Path.DirectorySeparatorChar + "follower_" + s + ".bmp", resourceBytes);
+                            }
+                        }
+                    }
                 });
                 Console.WriteLine("Project created successfully!");
                 Console.Out.Flush();
