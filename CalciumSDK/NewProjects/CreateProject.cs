@@ -139,7 +139,23 @@ namespace CalciumSDK
                         }
                     }
                 }
+                Directory.CreateDirectory(new_path + Path.DirectorySeparatorChar + "player");
+                new List<string>() { "up", "down", "left", "right" }.ForEach((s) =>
+                {
+                    using (Stream stream = assembly.GetManifestResourceStream("CalciumSDK.v2_assets.player_" + s + ".bmp"))
+                    {
+                        if (stream != null)
+                        {
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                stream.CopyTo(ms);
+                                byte[] resourceBytes = ms.ToArray();
 
+                                File.WriteAllBytes(new_path + Path.DirectorySeparatorChar + "player"  + Path.DirectorySeparatorChar + "player_" + s + ".bmp", resourceBytes);
+                            }
+                        }
+                    }
+                });
                 Console.WriteLine("Project created successfully!");
                 Console.Out.Flush();
                 Thread.Sleep(1000);

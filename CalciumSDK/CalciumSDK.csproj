@@ -61,6 +61,18 @@
 	<EmbeddedResource Include="v2_assets\vars.ppl">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="v2_assets\player_right.bmp">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="v2_assets\player_left.bmp">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="v2_assets\player_down.bmp">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="v2_assets\player_up.bmp">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     
 </ItemGroup>
   <ItemGroup>
