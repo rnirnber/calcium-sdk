@@ -86,4 +86,16 @@ public class SceneBlueprint
     
     [JsonPropertyName("dark_mode")]
     public bool dark_mode { get; set; }
+    
+    [JsonPropertyName("first_scene_player_x")]
+    public int first_scene_player_x { get; set; }
+    
+    [JsonPropertyName("first_scene_player_y")]
+    public int first_scene_player_y { get; set; }
+    
+    [JsonPropertyName("first_scene_screen_x")]
+    public int first_scene_screen_x { get; set; }
+    
+    [JsonPropertyName("first_scene_screen_y")]
+    public int first_scene_screen_y { get; set; }
 }

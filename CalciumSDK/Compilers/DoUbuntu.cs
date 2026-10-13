@@ -231,6 +231,7 @@ public static class Ubuntu
 
     private static string GetAssetsCode(string projectName)
     {
+        var all_asset_nums = new List<int>();
         var ret = new StringBuilder();
         for (int i = 1; i <= 9999; i++)
         {
@@ -240,6 +241,7 @@ public static class Ubuntu
                 var rects_path = this_asset.Replace(".bmp", ".rects");
                 if (!File.Exists(rects_path) || true)
                 {
+                    all_asset_nums.Add(i);
                     ret.AppendLine("    private static Action<int, int, Context, int, int, int> render_asset_" + Helpers.GetPaddedNum(i) + " = ((int starting_x, int starting_y, Context ctx, int current_alpha_red, int current_alpha_green, int current_alpha_blue) => ");
                     ret.AppendLine("    {");
                     ret.AppendLine("        var alpha_red = _GetRedAsDecimal(current_alpha_red);");
@@ -347,6 +349,18 @@ public static class Ubuntu
                 }
             }
         }
+
+        ret.AppendLine("    static void RenderAsset(int scene_num, int starting_x, int starting_y, Context ctx, int current_alpha_red, int current_alpha_green, int current_alpha_blue)");
+        ret.AppendLine("    {");
+        all_asset_nums.ForEach((n) =>
+        {
+            ret.AppendLine("        if(scene_num == " + n.ToString() + ")");
+            ret.AppendLine("        {");
+            ret.AppendLine("            render_asset_" + Helpers.GetPaddedNum(n) + "(starting_x, starting_y, ctx, current_alpha_red, current_alpha_green, current_alpha_blue);");
+            ret.AppendLine("            return;");
+            ret.AppendLine("        }");
+        });
+        ret.AppendLine("    }");
 
         return ret.ToString();
     }
