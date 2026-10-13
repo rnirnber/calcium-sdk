@@ -350,11 +350,11 @@ public static class Ubuntu
             }
         }
 
-        ret.AppendLine("    static void RenderAsset(int scene_num, int starting_x, int starting_y, Context ctx, int current_alpha_red, int current_alpha_green, int current_alpha_blue)");
+        ret.AppendLine("    static void RenderAsset(int asset_num, int starting_x, int starting_y, Context ctx, int current_alpha_red, int current_alpha_green, int current_alpha_blue)");
         ret.AppendLine("    {");
         all_asset_nums.ForEach((n) =>
         {
-            ret.AppendLine("        if(scene_num == " + n.ToString() + ")");
+            ret.AppendLine("        if(asset_num == " + n.ToString() + ")");
             ret.AppendLine("        {");
             ret.AppendLine("            render_asset_" + Helpers.GetPaddedNum(n) + "(starting_x, starting_y, ctx, current_alpha_red, current_alpha_green, current_alpha_blue);");
             ret.AppendLine("            return;");

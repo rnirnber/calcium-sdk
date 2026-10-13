@@ -151,6 +151,16 @@ class Program
 
     }
 
+    private static void EnterScene1()
+    {
+        CurrentPlayerX = 17;
+        CurrentPlayerY = 6;
+        CurrentScreenX = 1;
+        CurrentScreenY = 2;
+
+        CurrentSceneTiles = GetSceneDataForTile_1();
+    }
+
     private static double _GetRedAsDecimal(int red)
     {
         return ((double) red / (double) 255);
@@ -165,12 +175,31 @@ class Program
     }
     private static void RenderMap(Context ctx)
     {
+        EnterScene1();
+        var x_off = 0;
+        var y_off = 0;
+        var map_x = CurrentPlayerX - CurrentScreenX;
+        var map_y = CurrentPlayerY - CurrentScreenY;
+        
+        // ISSUE IS THAT MAP_X needs to change from 16 + 17 + 18
         for (int i = 0; i < 6; i++)
         {
             for (int k = 0; k < 4; k++)
             {
-                render_asset_0001(i, k, ctx, 255, 255, 255);
+                var tile_idx = CurrentSceneTiles.FindIndex((t) => t == ((map_x + i) * 1000 * 10) + map_y + k);
+                var tile_num = -1;
+                if (tile_idx == -1)
+                {
+                    tile_num = GetDefaultTileForScene(_CurrentScene);
+                }
+                else
+                {
+                    tile_num = CurrentSceneTiles[tile_idx + 1];
+                }
+                RenderAsset(tile_num, i, k, ctx, 255, 255, 255);
+                y_off++;
             }
+            x_off++;
         }
     }
 

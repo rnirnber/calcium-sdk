@@ -41,7 +41,7 @@
   "pixel_matching_forgiveness_threshold": 3,
   "first_scene_player_x": 17,
   "first_scene_player_y": 6,
-  "first_scene_x": 1,
+  "first_screen_x": 1,
   "first_screen_y": 2,
   "first_scene_dir": 1
 }
