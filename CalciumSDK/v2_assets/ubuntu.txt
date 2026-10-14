@@ -43,10 +43,12 @@ class Program
     private static int _WordSpaceSize = 6;
     
     private static List<int> CurrentSceneTiles = new List<int>();
-        private static int CurrentPlayerX = 8;
-        private static int CurrentPlayerY = 8;
+        private static int CurrentPlayerX = -1;
+        private static int CurrentPlayerY = -1;
         private static int CurrentScreenX = 0;
         private static int CurrentScreenY = 0;
+        // up = 1, down = 2, left = 3, right = 4
+        private static int CurrentPlayerDir = 1;
     
         private static int GetMapX()
         {
@@ -104,7 +106,72 @@ class Program
                     }
                     AppCanvas.QueueDraw();
                 }
-            });
+                if (_AppMode == 4 && key == 65362)
+                {
+                    if (CurrentScreenY > 0)
+                    {
+                        CurrentScreenY--;
+                    
+                        CurrentPlayerY--;
+                        CurrentPlayerDir = 1;
+                        AppCanvas.QueueDraw();   
+                    }
+                    else
+                    {
+                        CurrentPlayerY--;
+                        CurrentPlayerDir = 1;
+                        AppCanvas.QueueDraw();
+                    }
+                }
+                if (_AppMode == 4 && key == 65364)
+                {
+                    if (CurrentScreenY < 3)
+                    {
+                        CurrentScreenY++;
+                        CurrentPlayerY++;
+                        CurrentPlayerDir = 2;
+                    }
+                    else
+                    {
+                        CurrentPlayerY++;
+                        CurrentPlayerDir = 2;
+                        
+                    }
+                    AppCanvas.QueueDraw();
+                    
+                }
+                if (_AppMode == 4 && key == 65361)
+                {
+                    if (CurrentScreenX > 0)
+                    {
+                        CurrentScreenX--;
+                        CurrentPlayerX--;
+                        CurrentPlayerDir = 3;   
+                    }
+                    else
+                    {
+                        CurrentPlayerX--;
+                        CurrentPlayerDir = 3;   
+                    }
+                    AppCanvas.QueueDraw();
+                }
+
+                if (_AppMode == 4 && key == 65363)
+                {
+                    if (CurrentScreenX < 5)
+                    {
+                        CurrentPlayerDir = 4;
+                        CurrentScreenX++;
+                        CurrentPlayerX++;   
+                    }
+                    else
+                    {
+                        CurrentPlayerDir = 4;
+                        CurrentPlayerX++;
+                    }
+                    AppCanvas.QueueDraw();
+                }
+             });
         
             _Window.AddController(keyController);
             
@@ -140,7 +207,12 @@ class Program
                         _CurrentDialog.Render(ctx);
                         break;
                     case 4:
+                        if (CurrentPlayerX == -1)
+                        {
+                            EnterScene1();
+                        }
                         RenderMap(ctx);
+                        RenderPlayer(ctx);
                         break;
                     default:
                         break;
@@ -173,9 +245,33 @@ class Program
     {
         return ((double) blue / (double) 255);
     }
+
+    private static void RenderPlayer(Context ctx)
+    {
+        if (CurrentPlayerDir == 1)
+        {
+            Renderplayerup(ctx, CurrentScreenX, CurrentScreenY);
+            return;
+        }
+
+        if (CurrentPlayerDir == 2)
+        {
+            Renderplayerdown(ctx, CurrentScreenX, CurrentScreenY);
+            return;
+        }
+        if (CurrentPlayerDir == 3)
+        {
+            Renderplayerleft(ctx, CurrentScreenX, CurrentScreenY);
+            return;
+        }
+        if (CurrentPlayerDir == 4)
+        {
+            Renderplayerright(ctx, CurrentScreenX, CurrentScreenY);
+            return;
+        }
+    }
     private static void RenderMap(Context ctx)
     {
-        EnterScene1();
         var x_off = 0;
         var y_off = 0;
         var map_x = CurrentPlayerX - CurrentScreenX;

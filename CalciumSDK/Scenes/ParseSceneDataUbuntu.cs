@@ -220,6 +220,16 @@ public class ParseSceneDataUbuntu
             });
             mapping_sb.AppendLine("        return new List<int>();");
             mapping_sb.AppendLine("    }");
+            
+            mapping_sb.AppendLine("    public static void EnterScene(int scene_num)");
+            mapping_sb.AppendLine("    {");
+            mapping_sb.AppendLine("        _CurrentScene = scene_num;");
+            mapping_sb.AppendLine("        CurrentSceneTiles = GetSceneData(scene_num);");
+            mapping_sb.AppendLine("    }");
+            all_scene_nums.ForEach((sn) =>
+            {
+
+            });
             ret.AppendLine(mapping_sb.ToString());
             return ret.ToString();
         }
