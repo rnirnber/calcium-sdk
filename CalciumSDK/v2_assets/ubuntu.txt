@@ -647,5 +647,6 @@ class Program
         return (alt_dialog != null) ? alt_dialog : default_dialog;
     }
     [__SCENE_DATA_CODE]
-    [__PLAYER_RENDER_AND_FOLLOWER_FN]
+    [__FORBIDDEN_ALLOWED_CODE1]
+    [__PLAYER_RENDER_AND_FOLLOWER_FN]    
 }

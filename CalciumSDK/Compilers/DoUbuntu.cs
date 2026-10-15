@@ -138,6 +138,8 @@ public static class Ubuntu
 
                 code = code.Replace("[__INITIAL_DIALOG_CODE]", Text.GetUbuntuInitialDialogs.Get());
                 code = code.Replace("[__PLAYER_RENDER_AND_FOLLOWER_FN]", GetPlayerAndFollowerCode());
+                var f_a = Scenes.ForbiddenAllowedUbuntu.Do();
+                code = code.Replace("[__FORBIDDEN_ALLOWED_CODE1]", f_a);
                 
                 File.WriteAllText(new_path, code);
                 File.WriteAllText(proj_path, cs_proj_file.ToString());
