@@ -24,7 +24,7 @@ public static class ForbiddenAllowedUbuntu
                             Path.DirectorySeparatorChar + "scenes";
 
         var files = Directory.GetFiles(scenesPath).ToList().Where((s) => s.EndsWith(".bmp")).ToList();
-        var tsks = new List<Task<string>>();
+        var tsks = new List<Task<List<int>>>();
 
         List<string> default_tile_sb_snippets = new List<string>();
 
@@ -43,7 +43,7 @@ public static class ForbiddenAllowedUbuntu
         });
         files.ForEach((f) =>
         {
-            var this_tsk = Task.Run(async () =>
+            var this_tsk = Task<List<int>>.Run(async () =>
             {
                 await Task.Delay(1);
 
@@ -153,8 +153,8 @@ public static class ForbiddenAllowedUbuntu
                             {
                                 var idx = keys.FindIndex((fc) => fc == (i.ToString() + "_" + k.ToString()));
                                 if (idx == -1)
-                                {
-                                       ret_list.Add(-1 * ((i * 10000) + k));
+                                { 
+                                    ret_list.Add(-1 * ((i * 10000) + k));
                                 }
                             }
                         }
@@ -173,30 +173,38 @@ public static class ForbiddenAllowedUbuntu
                             }
                         }
                     }
-                    ret.AppendLine("        if(scene_num == " + s_n + ")");
-                    ret.AppendLine("        {");
-                    ret.Append("                return new List<int>(){");
-                    ret.Append(String.Join(',', ret_list.ToArray()));
-                    ret.Append("};");
-                    ret.AppendLine();
-                    ret.AppendLine("        }");
-                    return ret.ToString();
+                    ret_list.Add(this_scene_num);
+                    return ret_list;
                 }
             });
             tsks.Add(this_tsk);
         });
         Task.WaitAll(tsks);
         all_ret_sb.AppendLine("    public static List<int> GetForbiddenAllowedTilesForScene(int scene_num)");
-        all_ret_sb.AppendLine("    {");
-        all_ret_sb.AppendLine("        // if it's negative, assume mostly forbidden. if it's positive, assume mostly allowed.");
+        all_ret_sb.AppendLine("        {");
+        all_ret_sb.AppendLine("            // if it's negative, assume mostly forbidden. it means it's allowed. if it's positive, assume mostly forbidden. it's not allowed");
+        var tsk_list_mapping = new Dictionary<int, List<int>>();
+        var s_num = -5;
         tsks.ForEach((t) =>
         {
-            all_ret_sb.AppendLine(t.Result);
-            all_ret_sb.AppendLine();
+            var s_num = t.Result.Last();
+            if (!tsk_list_mapping.ContainsKey(s_num))
+            {
+                tsk_list_mapping[s_num] = new List<int>();
+            }
+            t.Result.RemoveAt(t.Result.Count - 1);
+            tsk_list_mapping[s_num].AddRange(t.Result);
         });
-        all_ret_sb.AppendLine("        return new List<int>();");
+        tsk_list_mapping.Keys.ToList().ForEach((k) =>
+        {
+            all_ret_sb.AppendLine("            if(scene_num == " + k + ")");
+            all_ret_sb.AppendLine("            {");
+            all_ret_sb.AppendLine("                return new List<int>(){" + String.Join(',', tsk_list_mapping[k].ToArray()) + "};");
+            all_ret_sb.AppendLine("            }");
+            all_ret_sb.AppendLine("");
+        });
+        all_ret_sb.AppendLine("            return new List<int>();");
         all_ret_sb.AppendLine("    }");
-
         return all_ret_sb.ToString();
     }
 }

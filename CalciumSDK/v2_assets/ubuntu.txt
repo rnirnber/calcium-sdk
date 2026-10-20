@@ -41,7 +41,8 @@ class Program
     private static Dictionary<int, List<int>> _AssetsCache = new Dictionary<int, List<int>>();
     private static int _LetterSpaceSize = 4;
     private static int _WordSpaceSize = 6;
-    
+
+    private static List<int> CurrentForbiddenAllowed = new List<int>();
     private static List<int> CurrentSceneTiles = new List<int>();
         private static int CurrentPlayerX = -1;
         private static int CurrentPlayerY = -1;
@@ -108,69 +109,109 @@ class Program
                 }
                 if (_AppMode == 4 && key == 65362)
                 {
-                    if (CurrentScreenY > 0)
+                    var orig_player_dir = CurrentPlayerDir;
+                    CurrentPlayerDir = 1;
+                    if (orig_player_dir != CurrentPlayerDir)
                     {
-                        CurrentScreenY--;
-                    
+                        AppCanvas.QueueDraw();
+                        return;
+                    }
+                    if (MovementAllowed(_CurrentScene))
+                    {
                         CurrentPlayerY--;
-                        CurrentPlayerDir = 1;
-                        AppCanvas.QueueDraw();   
+                        if (CurrentScreenY > 0)
+                        {
+                            CurrentScreenY--;
+                        }
                     }
                     else
                     {
-                        CurrentPlayerY--;
-                        CurrentPlayerDir = 1;
-                        AppCanvas.QueueDraw();
+                        if (CurrentScreenY < 3)
+                        {
+                            CurrentScreenY++;   
+                        }
                     }
                 }
                 if (_AppMode == 4 && key == 65364)
                 {
-                    if (CurrentScreenY < 3)
+                    var orig_player_dir = CurrentPlayerDir;
+                    CurrentPlayerDir = 2;
+                    if (orig_player_dir != CurrentPlayerDir)
                     {
-                        CurrentScreenY++;
+                        AppCanvas.QueueDraw();
+                        return;
+                    }
+                    
+                    if (MovementAllowed(_CurrentScene))
+                    {
                         CurrentPlayerY++;
-                        CurrentPlayerDir = 2;
+                        if (CurrentScreenY < 3)
+                        {
+                            CurrentScreenY++;
+                        }
                     }
                     else
                     {
-                        CurrentPlayerY++;
-                        CurrentPlayerDir = 2;
-                        
+                        if (CurrentScreenY > 0)
+                        {
+                            CurrentScreenY--;   
+                        }
                     }
-                    AppCanvas.QueueDraw();
-                    
                 }
                 if (_AppMode == 4 && key == 65361)
                 {
-                    if (CurrentScreenX > 0)
+                    var orig_player_dir = CurrentPlayerDir;
+                    CurrentPlayerDir = 3;
+                    if (orig_player_dir != CurrentPlayerDir)
                     {
-                        CurrentScreenX--;
+                        AppCanvas.QueueDraw();
+                        return;
+                    }
+                    if (MovementAllowed(_CurrentScene))
+                    {
                         CurrentPlayerX--;
-                        CurrentPlayerDir = 3;   
+                        if (CurrentScreenX > 0)
+                        {
+                            CurrentScreenX--;
+                        }
                     }
                     else
                     {
-                        CurrentPlayerX--;
-                        CurrentPlayerDir = 3;   
+                        if (CurrentScreenX < 5)
+                        {
+                            CurrentScreenX++;   
+                        }
                     }
-                    AppCanvas.QueueDraw();
                 }
 
                 if (_AppMode == 4 && key == 65363)
                 {
-                    if (CurrentScreenX < 5)
+                    var orig_player_dir = CurrentPlayerDir;
+                    CurrentPlayerDir = 4;
+                    if (orig_player_dir != CurrentPlayerDir)
                     {
-                        CurrentPlayerDir = 4;
-                        CurrentScreenX++;
-                        CurrentPlayerX++;   
+                        AppCanvas.QueueDraw();
+                        return;
+                    }
+
+                    
+                    if (MovementAllowed((_CurrentScene)))
+                    {
+                        CurrentPlayerX++;         
+                        if (CurrentScreenX < 5)
+                        {
+                            CurrentScreenX++;
+                        }
                     }
                     else
                     {
-                        CurrentPlayerDir = 4;
-                        CurrentPlayerX++;
+                        if (CurrentScreenX > 0)
+                        {
+                            CurrentScreenX--;   
+                        }
                     }
-                    AppCanvas.QueueDraw();
                 }
+                AppCanvas.QueueDraw();
              });
         
             _Window.AddController(keyController);
@@ -231,6 +272,7 @@ class Program
         CurrentScreenY = 2;
 
         CurrentSceneTiles = GetSceneDataForTile_1();
+        CurrentForbiddenAllowed = GetForbiddenAllowedTilesForScene(_CurrentScene);
     }
 
     private static double _GetRedAsDecimal(int red)
@@ -248,27 +290,25 @@ class Program
 
     private static void RenderPlayer(Context ctx)
     {
+        var movement_allowed = MovementAllowed(_CurrentScene);
         if (CurrentPlayerDir == 1)
         {
             Renderplayerup(ctx, CurrentScreenX, CurrentScreenY);
-            return;
         }
 
         if (CurrentPlayerDir == 2)
         {
             Renderplayerdown(ctx, CurrentScreenX, CurrentScreenY);
-            return;
         }
         if (CurrentPlayerDir == 3)
         {
             Renderplayerleft(ctx, CurrentScreenX, CurrentScreenY);
-            return;
         }
         if (CurrentPlayerDir == 4)
         {
             Renderplayerright(ctx, CurrentScreenX, CurrentScreenY);
-            return;
         }
+
     }
     private static void RenderMap(Context ctx)
     {
@@ -635,6 +675,47 @@ class Program
     {
         return height / 212;
     }
+    public static bool MovementAllowed(int scene_num)
+        {
+            var next_x = -1;
+            var next_y = -1;
+    
+            if (CurrentPlayerDir == 1)
+            {
+                next_y = CurrentPlayerY - 1;
+                next_x = CurrentPlayerX;
+            }
+    
+            if (CurrentPlayerDir == 2)
+            {
+                next_y = CurrentPlayerY + 1;
+                next_x = CurrentPlayerX;
+            }
+    
+            if (CurrentPlayerDir == 3)
+            {
+                next_y = CurrentPlayerY;
+                next_x = CurrentPlayerX - 1;
+            }
+    
+            if (CurrentPlayerDir == 4)
+            {
+                next_y = CurrentPlayerY;
+                next_x = CurrentPlayerX + 1;
+            }
+    
+            int potential_match_idx = -1;
+            var negative_item_idx = CurrentForbiddenAllowed.FindIndex((i) => i < 0);
+    
+            if (negative_item_idx > -1)
+            {
+                potential_match_idx = CurrentForbiddenAllowed.FindIndex((i) => i == ((next_x * 1000 * 10) + next_y) * -1);
+                return (potential_match_idx > -1);
+            }
+    
+            potential_match_idx = CurrentForbiddenAllowed.FindIndex((i) => i == ((next_x * 1000 * 10) + next_y));
+            return (potential_match_idx == -1);
+        }
     [__ASSETS_CODE]
     
     [__TEXTRENDERING_CODE]
