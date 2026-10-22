@@ -1,10 +1,11 @@
-﻿using System;
+﻿using CalciumSDK.Scenes;
+using CalciumSDK.Text;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
-using CalciumSDK.Text;
 
 namespace CalciumSDK.Compilers
 {
@@ -143,7 +144,7 @@ namespace CalciumSDK.Compilers
                     var code = Encoding.UTF8.GetString(resourceBytes);
                     var tile_data_code = Scenes.ParseSceneDataPrime.GetTileData();
                     tile_data_code.Wait();
-                    code = code.Replace("[__TILE_DATA_FNs]", tile_data_code.Result);
+                    code = code.Replace("[__TILE_DATA_FNs]", tile_data_code.Result + "\n\n" + Scenes.ForbiddenAllowedPrime.Do());
 
                     var publish_path2 = Helpers.GetDocsFolder() + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "prime" + Path.DirectorySeparatorChar + "scenes.ppl";
                     File.WriteAllText(publish_path2, code);
