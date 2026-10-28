@@ -27,6 +27,36 @@ BEGIN
   FREEZE();
 END;
 
+EXPORT ZZZ_MOVEMENT_ALLOWED(x, y)
+BEGIN
+  LOCAL next_x = -1;
+  LOCAL next_y = -1;
+
+  IF ZZZ_CURRENT_PLAYER_DIR == 1 THEN
+    next_y = ZZZ_CURRENT_PLAYER_Y - 1;
+    next_x = ZZZ_CURRENT_PLAYER_X;
+  END;
+  IF ZZZ_CURRENT_PLAYER_DIR == 2 THEN		
+    next_y = ZZZ_CURRENT_PLAYERY + 1;
+	next_x = ZZZ_CURRENT_PLAYER_X;
+  END;
+  IF ZZZ_CURRENT_PLAYER_DIR == 3 THEN
+    next_y = ZZZ_CURRENT_PLAYER_Y;
+	next_x = ZZZ_CURRENT_PLAYER_X - 1;
+  END;
+  IF ZZZ_CURRENT_PLAYER_DIR == 4 THEN
+    next_y = ZZZ_CURRENT_PLAYER_Y;
+	next_x = ZZZ_CURRENT_PLAYER_X + 1;
+  END;
+  IF ZZZ_ARR_CONTAINS_NEG(ZZZ_CURRENT_FBID_ALLOWED) THEN
+	LOCAL found_idx := -1;
+	LOCAL potential_match_idx = GET_ARR_ITEM_IDX(ZZZ_CURRENT_FBID_ALLOWED, ((next_x * 1000 * 10) + next_y) * -1);
+	RETURN (found_idx > -1);
+  END;
+  LOCAL potential_match_idx = GET_ARR_ITEM_IDX(ZZZ_CURRENT_FBID_ALLOWED, ((next_x * 1000 * 10) + next_y));
+  RETURN (potential_match_idx == -1);
+END;
+
 [__CHARACTER_CODE_FNs]
 
 EXPORT GET_MATRIX_TALLY(m)
@@ -50,6 +80,17 @@ BEGIN
     ret[0] := lst[i];
   END;
   RETURN ret;
+END;
+EXPORT GET_ARR_ITEM_IDX(lst, val)
+BEGIN
+  LOCAL stop_at :-= GET_MATRIX_TALLY(lst);
+  LOCAL i := 1;
+  FOR i FROM 1 TO stop_at STEP 1 DO
+	IF lst[i] ==  val THEN
+		RETURN i;
+	END;
+  END;
+  RETURN -1;
 END;
 
 EXPORT ZZZ_GET_TEXT_PAGE(data, page_idx)
@@ -306,12 +347,28 @@ BEGIN
 	BLIT_P(G0, G1);
 END;
 
+[__PLAYER_RENDERING_CODE]
+
 EXPORT ZZZ_MAIN()
 BEGIN
     ZZZ_ENTER_SCENE(1);
 	ZZZ_RENDER_WORLD();
 	FREEZE();
 	WAIT(0);
+END;
+EXPORT ZZZ_ARR_CONTAINS_NEG(arr)
+  LOCAL sz := GET_LIST_SIZE(arr);
+  LOCAL i := 1;
+  FOR i FROM 1 TO sz STEP 1 DO
+	IF i < 0 THEN	
+		RETURN TRUE;
+	END;
+  END;
+  RETURN FALSE;
+END;
+EXPORT ZZZ_ARR_CONTAINS_VAL(val)
+BEGIN
+	LOCAL stop_at := GET_MAT
 END;
 
 EXPORT PLAY()

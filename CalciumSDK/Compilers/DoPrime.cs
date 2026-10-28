@@ -11,6 +11,81 @@ namespace CalciumSDK.Compilers
 {
     public static class Prime
     {
+        private static string GetPlayerAndFollowerCode()
+        {
+            var ret = new StringBuilder();
+        
+            new List<string>(){"player", "follower"}.ForEach((dir_name) =>
+            { 
+                new List<string>(){"up", "down", "left", "right"}.ForEach((dir) =>
+                {
+                    ret.AppendLine("EXPORT ZZZ_RENDER_" + dir_name + "_" + dir + "(x, y, G)");
+                    ret.AppendLine("BEGIN");
+                    ret.AppendLine("  LOCAL alpha_color := RGB(255, 255, 255);");
+                    ret.AppendLine("  LOCAL fore_color := RGB(0, 0, 0);");
+                    ret.AppendLine("");
+
+                    var this_asset = Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar + Program.SELECTED_PROJECT + Path.DirectorySeparatorChar + "player" + Path.DirectorySeparatorChar + dir_name + "_" + dir + ".bmp";
+                    var asset_bmp = SkiaSharp.SKBitmap.Decode(this_asset);
+                    var black_lines = new List<int>();
+                    for (int n = 0; n < 53; n++)
+                    {
+                        var line_scan = PixelHelpers.GetBlackLines(asset_bmp, n, 0);
+                        line_scan.ForEach((ls) =>
+                        {
+                            black_lines.Add(ls.y);
+                            black_lines.Add(ls.start);
+                            black_lines.Add(ls.end);
+                        });
+                    }
+
+                    var main_fill = "white";
+                    var lines_to_use = black_lines;
+                
+                    var rects_json = new StringBuilder();
+                    rects_json.Append("{");
+                
+                    var line_tally = 0;
+                    lines_to_use.ForEach((l) =>
+                    {
+                        rects_json.Append(l.ToString());
+                        if ((line_tally != lines_to_use.Count - 1) && lines_to_use.Count > 0)
+                        {
+                            rects_json.Append(",");
+                        }
+                        line_tally++;
+                    });
+                    rects_json.Append("}");
+                    if (lines_to_use.Count == 0)
+                    {
+                        rects_json.Clear();
+                        rects_json.Append("{}");
+                    }
+
+                    ret.AppendLine("");
+                    ret.AppendLine("  RECT_P(G, x * 53, y * 53, (x * 53) + 53, (y * 53) + 53, alpha_color, alpha_color);");
+                    ret.AppendLine("  LOCAL i := 1;");
+                    ret.AppendLine("  LOCAL y_start := -1;");
+                    ret.AppendLine("  LOCAL y_end := -1;");
+                    ret.AppendLine("  LOCAL x_start := -1;");
+                    ret.AppendLine("  LOCAL x_end := -1;");
+                    ret.AppendLine();
+                    ret.AppendLine("  LOCAL rects := [" + rects_json.ToString().Replace("{", "").Replace("}", "") + "];");
+                    ret.AppendLine("  LOCAL stop_at := " + (lines_to_use.Count - 3).ToString() + ";");
+                    ret.AppendLine("  FOR i FROM 1 TO stop_at STEP 3 DO"); ;
+                    ret.AppendLine("    y_start := (y * 53) + rects[i];");
+                    ret.AppendLine("    y_end := y_start;");
+                    ret.AppendLine("    x_start := (x * 53) + rects[i + 1];");
+                    ret.AppendLine("    x_end := (x * 53) + rects[i + 2];");
+                    ret.AppendLine("    RECT_P(G, x_start, y_start, x_end, y_end, fore_color, fore_color);");
+                    ret.AppendLine("  END;");
+                    ret.AppendLine("END;");
+                    ret.AppendLine("");
+                }); 
+            });
+        
+            return ret.ToString();
+        }
         public static void Generate(string projectName)
         {
             var path = Helpers.GET_ROOT_SDK_PATH() + Path.DirectorySeparatorChar + projectName +
@@ -125,6 +200,7 @@ namespace CalciumSDK.Compilers
                     code = code.Replace("[__RECTS]", rects_sb.ToString().Trim().Replace("\r", "").Replace("\n", ""));
                     code = code.Replace("[__STOP_AT]", ((lines_to_use.Count - 2)).ToString());
                     code = code.Replace("[__INITIAL_DIALOGS_CODE]", initial_ds);
+                    code = code.Replace("[__PLAYER_RENDERING_CODE]", GetPlayerAndFollowerCode());
 
                     var ts2 = Scenes.ParseSceneDataPrime.GetTileData();
 
