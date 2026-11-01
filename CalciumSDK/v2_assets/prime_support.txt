@@ -481,8 +481,7 @@ BEGIN
 END;
 EXPORT ZZZ_ARR_CONTAINS_NEG(arr)
   BEGIN
-  LOCAL sz := GET_LIST_SIZE(arr);
-  sz := sz[0];
+  LOCAL sz := GET_MATRIX_TALLY(arr);
   LOCAL i := 1;
   FOR i FROM 1 TO sz STEP 1 DO
 	IF i < 0 THEN	
