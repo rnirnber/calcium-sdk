@@ -50,7 +50,7 @@ BEGIN
   END;
   IF ZZZ_ARR_CONTAINS_NEG(ZZZ_CURRENT_FBID_ALLOWED) THEN
 	LOCAL found_idx := -1;
-	LOCAL potential_match_idx := GET_ARR_ITEM_IDX(ZZZ_CURRENT_FBID_ALLOWED, ((next_x * 1000 * 10) + next_y) * -1);
+	found_idx := GET_ARR_ITEM_IDX(ZZZ_CURRENT_FBID_ALLOWED, ((next_x * 1000 * 10) + next_y) * -1);
 	RETURN (found_idx > -1);
   END;
   LOCAL potential_match_idx := GET_ARR_ITEM_IDX(ZZZ_CURRENT_FBID_ALLOWED, ((next_x * 1000 * 10) + next_y));
@@ -484,7 +484,7 @@ EXPORT ZZZ_ARR_CONTAINS_NEG(arr)
   LOCAL sz := GET_MATRIX_TALLY(arr);
   LOCAL i := 1;
   FOR i FROM 1 TO sz STEP 1 DO
-	IF i < 0 THEN	
+	IF arr[i] < 0 THEN	
 		RETURN TRUE;
 	END;
   END;
