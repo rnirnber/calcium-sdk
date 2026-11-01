@@ -227,6 +227,32 @@ namespace CalciumSDK.Compilers
 
                 }
             }
+            var bulk_sb = new StringBuilder();
+            using (Stream stream = assembly.GetManifestResourceStream("CalciumSDK.v2_assets.vars.ppl"))
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    stream.CopyTo(ms);
+                    byte[] resourceBytes = ms.ToArray();
+                    var code = Encoding.UTF8.GetString(resourceBytes);
+                    bulk_sb.AppendLine(code);
+
+                }
+            }
+            new List<string>()
+            {
+                Helpers.GetDocsFolder() + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "prime" + Path.DirectorySeparatorChar + "assets.ppl",
+                Helpers.GetDocsFolder() + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "prime" + Path.DirectorySeparatorChar + "scenes.ppl",
+                Helpers.GetDocsFolder() + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "prime" + Path.DirectorySeparatorChar + "support.ppl"
+
+            }
+            .ForEach((t) =>
+            {
+                bulk_sb.AppendLine(File.ReadAllText(t));
+            });            
+
+            var bulk_path = Helpers.GetDocsFolder() + Path.DirectorySeparatorChar + "CalciumProjects" + Path.DirectorySeparatorChar + projectName + Path.DirectorySeparatorChar + "dist" + Path.DirectorySeparatorChar + "prime" + Path.DirectorySeparatorChar + "combined.ppl";
+            File.WriteAllText(bulk_path, bulk_sb.ToString());
         }
     }
 }

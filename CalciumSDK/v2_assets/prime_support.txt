@@ -33,27 +33,27 @@ BEGIN
   LOCAL next_y = -1;
 
   IF ZZZ_CURRENT_PLAYER_DIR == 1 THEN
-    next_y = ZZZ_CURRENT_PLAYER_Y - 1;
-    next_x = ZZZ_CURRENT_PLAYER_X;
+    next_y := ZZZ_CURRENT_PLAYER_Y - 1;
+    next_x := ZZZ_CURRENT_PLAYER_X;
   END;
   IF ZZZ_CURRENT_PLAYER_DIR == 2 THEN		
-    next_y = ZZZ_CURRENT_PLAYERY + 1;
-	next_x = ZZZ_CURRENT_PLAYER_X;
+    next_y := ZZZ_CURRENT_PLAYER_Y + 1;
+	next_x := ZZZ_CURRENT_PLAYER_X;
   END;
   IF ZZZ_CURRENT_PLAYER_DIR == 3 THEN
-    next_y = ZZZ_CURRENT_PLAYER_Y;
-	next_x = ZZZ_CURRENT_PLAYER_X - 1;
+    next_y := ZZZ_CURRENT_PLAYER_Y;
+	next_x := ZZZ_CURRENT_PLAYER_X - 1;
   END;
   IF ZZZ_CURRENT_PLAYER_DIR == 4 THEN
-    next_y = ZZZ_CURRENT_PLAYER_Y;
-	next_x = ZZZ_CURRENT_PLAYER_X + 1;
+    next_y := ZZZ_CURRENT_PLAYER_Y;
+	next_x := ZZZ_CURRENT_PLAYER_X + 1;
   END;
   IF ZZZ_ARR_CONTAINS_NEG(ZZZ_CURRENT_FBID_ALLOWED) THEN
 	LOCAL found_idx := -1;
-	LOCAL potential_match_idx = GET_ARR_ITEM_IDX(ZZZ_CURRENT_FBID_ALLOWED, ((next_x * 1000 * 10) + next_y) * -1);
+	LOCAL potential_match_idx := GET_ARR_ITEM_IDX(ZZZ_CURRENT_FBID_ALLOWED, ((next_x * 1000 * 10) + next_y) * -1);
 	RETURN (found_idx > -1);
   END;
-  LOCAL potential_match_idx = GET_ARR_ITEM_IDX(ZZZ_CURRENT_FBID_ALLOWED, ((next_x * 1000 * 10) + next_y));
+  LOCAL potential_match_idx := GET_ARR_ITEM_IDX(ZZZ_CURRENT_FBID_ALLOWED, ((next_x * 1000 * 10) + next_y));
   RETURN (potential_match_idx == -1);
 END;
 
@@ -83,7 +83,7 @@ BEGIN
 END;
 EXPORT GET_ARR_ITEM_IDX(lst, val)
 BEGIN
-  LOCAL stop_at :-= GET_MATRIX_TALLY(lst);
+  LOCAL stop_at := GET_MATRIX_TALLY(lst);
   LOCAL i := 1;
   FOR i FROM 1 TO stop_at STEP 1 DO
 	IF lst[i] ==  val THEN
@@ -298,9 +298,6 @@ BEGIN
 	LOCAL map_x := ZZZ_CURRENT_PLAYER_X - ZZZ_CURRENT_SCREEN_X;
 	LOCAL map_y := ZZZ_CURRENT_PLAYER_Y - ZZZ_CURRENT_SCREEN_Y;
 	
-	map_x := 0;
-	map_y := 0;
-	
 	LOCAL stop_at_1 := 5;
 	LOCAL i1 := 0;
 	LOCAL stop_at_2 := 3;
@@ -311,13 +308,12 @@ BEGIN
 	
 	FOR i1 FROM 0 TO stop_at_1 DO
 		FOR i2 FROM 0 TO stop_at_2 DO
-			tile := ZZZ_GET_TILE_FOR_SCENE(i1, i2);
-			EXPR("ZZZ_render_asset_" + STRING(tile) + "(" + STRING(map_x + i1) + "," + STRING(map_y + i2) + ")");
+			tile := ZZZ_GET_TILE_FOR_SCENE(i1 + map_x, i2 + map_y);
+			EXPR("ZZZ_render_asset_" + STRING(tile) + "(" + STRING(i1) + "," + STRING(i2) + ")");
 		END;
 	END;
 	BLIT_P(G0, G1);
 	FREEZE();
-	WAIT(0);
 END;
 
 EXPORT ZZZ_GET_TILE_FOR_SCENE(X, Y)
@@ -337,6 +333,7 @@ EXPORT ZZZ_ENTER_SCENE(num)
 BEGIN
 	ZZZ_CURRENT_SCENE_TILES := EXPR("ZZZ_GET_S_TILE_DAT_" + STRING(num) + "()");
 	ZZZ_CURRENT_SCENE_DEFAULT_TILE := EXPR("ZZZ_G_DEF_T_FOR_SC_" + STRING(num) + "()");
+	ZZZ_CURRENT_FBID_ALLOWED := ZZZ_GET_FBID_ALLW(num);
 END;
 
 EXPORT ZZZ_RENDER_WORLD()
@@ -349,15 +346,143 @@ END;
 
 [__PLAYER_RENDERING_CODE]
 
+EXPORT ZZZ_RENDER_PLAYER()
+BEGIN
+	IF (ZZZ_CURRENT_PLAYER_DIR == 1) THEN
+		ZZZ_RENDER_player_up(ZZZ_CURRENT_SCREEN_X, ZZZ_CURRENT_SCREEN_Y, G0);
+	END;
+	IF (ZZZ_CURRENT_PLAYER_DIR == 2) THEN
+		ZZZ_RENDER_player_down(ZZZ_CURRENT_SCREEN_X, ZZZ_CURRENT_SCREEN_Y, G0);
+	END;
+	IF (ZZZ_CURRENT_PLAYER_DIR == 3) THEN
+		ZZZ_RENDER_player_left(ZZZ_CURRENT_SCREEN_X, ZZZ_CURRENT_SCREEN_Y, G0);
+	END;
+	IF (ZZZ_CURRENT_PLAYER_DIR == 4) THEN
+		ZZZ_RENDER_player_right(ZZZ_CURRENT_SCREEN_X, ZZZ_CURRENT_SCREEN_Y, G0);
+	END;
+END;
+
+EXPORT ZZZ_HANDLE_KEY(k)
+BEGIN
+  // 1 is walking in main world
+  IF ZZZ_CURRENT_MODE == 1 THEN
+	IF k == 2 THEN	
+        LOCAL orig_player_dir := ZZZ_CURRENT_PLAYER_DIR + 0;
+        ZZZ_CURRENT_PLAYER_DIR := 1;
+        IF (orig_player_dir <> ZZZ_CURRENT_PLAYER_DIR) THEN
+            ZZZ_RENDER_WORLD();
+			ZZZ_RENDER_PLAYER();
+            RETURN;
+        END;
+
+		LOCAL allowed := ZZZ_MOVEMENT_ALLOWED(ZZZ_CURRENT_PLAYER_X, ZZZ_CURRENT_PLAYER_Y);
+
+        IF (allowed) THEN
+			ZZZ_CURRENT_PLAYER_Y := ZZZ_CURRENT_PLAYER_Y - 1;
+            IF ZZZ_CURRENT_SCREEN_Y > 0 THEN
+				ZZZ_CURRENT_SCREEN_Y := ZZZ_CURRENT_SCREEN_Y - 1;
+			END;		
+		END;
+		IF (allowed == 0) THEN
+			IF ZZZ_CURRENT_SCREEN_Y < 3 THEN
+				ZZZ_CURRENT_SCREEN_Y := ZZZ_CURRENT_SCREEN_Y + 1;
+			END;
+        END;
+	END;
+
+	IF k == 12 THEN
+	    LOCAL orig_player_dir := ZZZ_CURRENT_PLAYER_DIR + 0;
+		ZZZ_CURRENT_PLAYER_DIR := 2;
+        IF orig_player_dir <> ZZZ_CURRENT_PLAYER_DIR THEN
+            ZZZ_RENDER_WORLD();
+			ZZZ_RENDER_PLAYER();
+            RETURN;
+		END;
+                    
+		LOCAL allowed2 := ZZZ_MOVEMENT_ALLOWED(ZZZ_CURRENT_PLAYER_X, ZZZ_CURRENT_PLAYER_Y);
+        IF allowed2 THEN
+            ZZZ_CURRENT_PLAYER_Y := ZZZ_CURRENT_PLAYER_Y + 1;
+
+            IF ZZZ_CURRENT_SCREEN_Y < 3 THEN
+				ZZZ_CURRENT_SCREEN_Y := ZZZ_CURRENT_SCREEN_Y + 1;
+			END;
+		END;
+        IF allowed2 == 0 THEN
+			IF ZZZ_CURRENT_SCREEN_Y > 0 THEN
+				ZZZ_CURRENT_SCREEN_Y := ZZZ_CURRENT_SCREEN_Y - 1;
+			END;
+		END;
+	END;
+	IF k == 7 THEN
+		LOCAL orig_player_dir := ZZZ_CURRENT_PLAYER_DIR;
+        ZZZ_CURRENT_PLAYER_DIR := 3;
+
+        IF orig_player_dir <> ZZZ_CURRENT_PLAYER_DIR THEN
+			ZZZ_RENDER_WORLD();
+			ZZZ_RENDER_PLAYER();
+            RETURN;
+		END;
+        LOCAL allowed3 := ZZZ_MOVEMENT_ALLOWED(ZZZ_CURRENT_PLAYER_X, ZZZ_CURRENT_PLAYER_Y);
+        
+		IF allowed3 THEN
+			ZZZ_CURRENT_PLAYER_X := ZZZ_CURRENT_PLAYER_X - 1;
+			IF ZZZ_CURRENT_SCREEN_X > 0 THEN
+				ZZZ_CURRENT_SCREEN_X := ZZZ_CURRENT_SCREEN_X - 1;
+			END;
+		END;
+		IF allowed3 == 0 THEN
+			IF ZZZ_CURRENT_SCREEN_X < 5 THEN
+				ZZZ_CURRENT_SCREEN_X := ZZZ_CURRENT_SCREEN_X + 1;
+			END;
+		END;
+	END;
+	IF k == 8 THEN
+		
+        LOCAL orig_player_dir := ZZZ_CURRENT_PLAYER_DIR;
+        ZZZ_CURRENT_PLAYER_DIR := 4;
+            
+		IF orig_player_dir <> ZZZ_CURRENT_PLAYER_DIR THEN
+            ZZZ_RENDER_WORLD();		
+			ZZZ_RENDER_PLAYER();
+			RETURN;
+        END;
+
+        LOCAL allowed4 := ZZZ_MOVEMENT_ALLOWED(ZZZ_CURRENT_PLAYER_X, ZZZ_CURRENT_PLAYER_Y); 
+		IF allowed4 THEN
+			ZZZ_CURRENT_PLAYER_X := ZZZ_CURRENT_PLAYER_X + 1;         
+			IF ZZZ_CURRENT_SCREEN_X < 5 THEN
+                ZZZ_CURRENT_SCREEN_X := ZZZ_CURRENT_SCREEN_X + 1;
+            END;
+		END;
+		IF allowed4 == 0 THEN
+			IF ZZZ_CURRENT_SCREEN_X < 5 THEN
+				ZZZ_CURRENT_SCREEN_X := ZZZ_CURRENT_SCREEN_X + 1;
+			END;
+		END;		
+	END;
+	ZZZ_RENDER_WORLD();
+	ZZZ_RENDER_PLAYER();
+  END;
+END;
+
 EXPORT ZZZ_MAIN()
 BEGIN
     ZZZ_ENTER_SCENE(1);
 	ZZZ_RENDER_WORLD();
+	ZZZ_RENDER_PLAYER();
 	FREEZE();
-	WAIT(0);
+	LOCAL k := -1;
+
+	REPEAT
+        k := GETKEY();
+    UNTIL k >= 0; 
+	ZZZ_HANDLE_KEY(k);
+	FREEZE();
 END;
 EXPORT ZZZ_ARR_CONTAINS_NEG(arr)
+  BEGIN
   LOCAL sz := GET_LIST_SIZE(arr);
+  sz := sz[0];
   LOCAL i := 1;
   FOR i FROM 1 TO sz STEP 1 DO
 	IF i < 0 THEN	
@@ -365,10 +490,6 @@ EXPORT ZZZ_ARR_CONTAINS_NEG(arr)
 	END;
   END;
   RETURN FALSE;
-END;
-EXPORT ZZZ_ARR_CONTAINS_VAL(val)
-BEGIN
-	LOCAL stop_at := GET_MAT
 END;
 
 EXPORT PLAY()
