@@ -366,118 +366,126 @@ EXPORT ZZZ_HANDLE_KEY(k)
 BEGIN
   // 1 is walking in main world
   IF ZZZ_CURRENT_MODE == 1 THEN
-	IF k == 2 THEN	
-        LOCAL orig_player_dir := ZZZ_CURRENT_PLAYER_DIR + 0;
+    
+    IF k == 2 THEN  
+        LOCAL orig_player_dir := ZZZ_CURRENT_PLAYER_DIR;
         ZZZ_CURRENT_PLAYER_DIR := 1;
+        
         IF (orig_player_dir <> ZZZ_CURRENT_PLAYER_DIR) THEN
             ZZZ_RENDER_WORLD();
-			ZZZ_RENDER_PLAYER();
+            ZZZ_RENDER_PLAYER();
             RETURN;
         END;
 
-		LOCAL allowed := ZZZ_MOVEMENT_ALLOWED(ZZZ_CURRENT_PLAYER_X, ZZZ_CURRENT_PLAYER_Y);
-
-        IF (allowed) THEN
-			ZZZ_CURRENT_PLAYER_Y := ZZZ_CURRENT_PLAYER_Y - 1;
+		LOCAL allowed1 := ZZZ_MOVEMENT_ALLOWED(ZZZ_CURRENT_PLAYER_X, ZZZ_CURRENT_PLAYER_Y);
+        IF allowed1 THEN
+            ZZZ_CURRENT_PLAYER_Y := ZZZ_CURRENT_PLAYER_Y - 1;
             IF ZZZ_CURRENT_SCREEN_Y > 0 THEN
-				ZZZ_CURRENT_SCREEN_Y := ZZZ_CURRENT_SCREEN_Y - 1;
-			END;		
-		END;
-		IF (allowed == 0) THEN
+                ZZZ_CURRENT_SCREEN_Y := ZZZ_CURRENT_SCREEN_Y - 1;
+            END;        
+        END;
+		IF allowed1 <> TRUE THEN
 			IF ZZZ_CURRENT_SCREEN_Y < 3 THEN
 				ZZZ_CURRENT_SCREEN_Y := ZZZ_CURRENT_SCREEN_Y + 1;
 			END;
-        END;
-	END;
-
-	IF k == 12 THEN
-	    LOCAL orig_player_dir := ZZZ_CURRENT_PLAYER_DIR + 0;
-		ZZZ_CURRENT_PLAYER_DIR := 2;
-        IF orig_player_dir <> ZZZ_CURRENT_PLAYER_DIR THEN
-            ZZZ_RENDER_WORLD();
-			ZZZ_RENDER_PLAYER();
-            RETURN;
 		END;
+    END;
+
+    IF k == 12 THEN
+        LOCAL orig_player_dir := ZZZ_CURRENT_PLAYER_DIR;
+        ZZZ_CURRENT_PLAYER_DIR := 2;
+        
+        IF (orig_player_dir <> ZZZ_CURRENT_PLAYER_DIR) THEN
+            ZZZ_RENDER_WORLD();
+            ZZZ_RENDER_PLAYER();
+            RETURN;
+        END;
                     
 		LOCAL allowed2 := ZZZ_MOVEMENT_ALLOWED(ZZZ_CURRENT_PLAYER_X, ZZZ_CURRENT_PLAYER_Y);
-        IF allowed2 THEN
+        IF ZZZ_MOVEMENT_ALLOWED(ZZZ_CURRENT_PLAYER_X, ZZZ_CURRENT_PLAYER_Y) THEN
             ZZZ_CURRENT_PLAYER_Y := ZZZ_CURRENT_PLAYER_Y + 1;
-
             IF ZZZ_CURRENT_SCREEN_Y < 3 THEN
-				ZZZ_CURRENT_SCREEN_Y := ZZZ_CURRENT_SCREEN_Y + 1;
-			END;
-		END;
-        IF allowed2 == 0 THEN
+                ZZZ_CURRENT_SCREEN_Y := ZZZ_CURRENT_SCREEN_Y + 1;
+            END;
+        END;
+		IF allowed2 <> TRUE THEN
 			IF ZZZ_CURRENT_SCREEN_Y > 0 THEN
 				ZZZ_CURRENT_SCREEN_Y := ZZZ_CURRENT_SCREEN_Y - 1;
 			END;
 		END;
-	END;
-	IF k == 7 THEN
-		LOCAL orig_player_dir := ZZZ_CURRENT_PLAYER_DIR;
+    END;
+
+    IF k == 7 THEN
+        LOCAL orig_player_dir := ZZZ_CURRENT_PLAYER_DIR;
         ZZZ_CURRENT_PLAYER_DIR := 3;
 
-        IF orig_player_dir <> ZZZ_CURRENT_PLAYER_DIR THEN
-			ZZZ_RENDER_WORLD();
-			ZZZ_RENDER_PLAYER();
+        IF (orig_player_dir <> ZZZ_CURRENT_PLAYER_DIR) THEN
+            ZZZ_RENDER_WORLD();
+            ZZZ_RENDER_PLAYER();
             RETURN;
-		END;
+        END;
         LOCAL allowed3 := ZZZ_MOVEMENT_ALLOWED(ZZZ_CURRENT_PLAYER_X, ZZZ_CURRENT_PLAYER_Y);
-        
-		IF allowed3 THEN
-			ZZZ_CURRENT_PLAYER_X := ZZZ_CURRENT_PLAYER_X - 1;
+		
+        IF ZZZ_MOVEMENT_ALLOWED(ZZZ_CURRENT_PLAYER_X, ZZZ_CURRENT_PLAYER_Y) THEN
+            ZZZ_CURRENT_PLAYER_X := ZZZ_CURRENT_PLAYER_X - 1;
+            IF ZZZ_CURRENT_SCREEN_X > 0 THEN
+                ZZZ_CURRENT_SCREEN_X := ZZZ_CURRENT_SCREEN_X - 1;
+            END;
+        END;
+		IF allowed3 <> TRUE THEN
+			IF ZZZ_CURRENT_SCREEN_X < 5 THEN
+				ZZZ_CURRENT_SCREEN_X := ZZZ_CURRENT_SCREEN_X + 1;
+			END
+		END;
+    END;
+
+    IF k == 8 THEN
+        LOCAL orig_player_dir := ZZZ_CURRENT_PLAYER_DIR;
+        ZZZ_CURRENT_PLAYER_DIR := 4;
+            
+        IF (orig_player_dir <> ZZZ_CURRENT_PLAYER_DIR) THEN
+            ZZZ_RENDER_WORLD();     
+            ZZZ_RENDER_PLAYER();
+            RETURN;
+        END;
+
+		LOCAL allowed4 := ZZZ_MOVEMENT_ALLOWED(ZZZ_CURRENT_PLAYER_X, ZZZ_CURRENT_PLAYER_Y);
+        IF ZZZ_MOVEMENT_ALLOWED(ZZZ_CURRENT_PLAYER_X, ZZZ_CURRENT_PLAYER_Y) THEN
+            ZZZ_CURRENT_PLAYER_X := ZZZ_CURRENT_PLAYER_X + 1;          
+            IF ZZZ_CURRENT_SCREEN_X < 5 THEN
+                ZZZ_CURRENT_SCREEN_X := ZZZ_CURRENT_SCREEN_X + 1;
+            END;
+        END;
+		IF allowed4 <> TRUE THEN
 			IF ZZZ_CURRENT_SCREEN_X > 0 THEN
 				ZZZ_CURRENT_SCREEN_X := ZZZ_CURRENT_SCREEN_X - 1;
 			END;
 		END;
-		IF allowed3 == 0 THEN
-			IF ZZZ_CURRENT_SCREEN_X < 5 THEN
-				ZZZ_CURRENT_SCREEN_X := ZZZ_CURRENT_SCREEN_X + 1;
-			END;
-		END;
-	END;
-	IF k == 8 THEN
-		
-        LOCAL orig_player_dir := ZZZ_CURRENT_PLAYER_DIR;
-        ZZZ_CURRENT_PLAYER_DIR := 4;
-            
-		IF orig_player_dir <> ZZZ_CURRENT_PLAYER_DIR THEN
-            ZZZ_RENDER_WORLD();		
-			ZZZ_RENDER_PLAYER();
-			RETURN;
-        END;
+    END;
 
-        LOCAL allowed4 := ZZZ_MOVEMENT_ALLOWED(ZZZ_CURRENT_PLAYER_X, ZZZ_CURRENT_PLAYER_Y); 
-		IF allowed4 THEN
-			ZZZ_CURRENT_PLAYER_X := ZZZ_CURRENT_PLAYER_X + 1;         
-			IF ZZZ_CURRENT_SCREEN_X < 5 THEN
-                ZZZ_CURRENT_SCREEN_X := ZZZ_CURRENT_SCREEN_X + 1;
-            END;
-		END;
-		IF allowed4 == 0 THEN
-			IF ZZZ_CURRENT_SCREEN_X < 5 THEN
-				ZZZ_CURRENT_SCREEN_X := ZZZ_CURRENT_SCREEN_X + 1;
-			END;
-		END;		
-	END;
-	ZZZ_RENDER_WORLD();
-	ZZZ_RENDER_PLAYER();
+    ZZZ_RENDER_WORLD();
+    ZZZ_RENDER_PLAYER();
   END;
 END;
 
 EXPORT ZZZ_MAIN()
 BEGIN
     ZZZ_ENTER_SCENE(1);
-	ZZZ_RENDER_WORLD();
-	ZZZ_RENDER_PLAYER();
-	FREEZE();
-	LOCAL k := -1;
+    ZZZ_RENDER_WORLD();
+    ZZZ_RENDER_PLAYER();
 
-	REPEAT
-        k := GETKEY();
-    UNTIL k >= 0; 
-	ZZZ_HANDLE_KEY(k);
-	FREEZE();
+    LOCAL k := -1;
+
+    WHILE TRUE DO
+        REPEAT
+            k := GETKEY();
+            IF k < 0 THEN
+                WAIT(0.05);
+            END;
+        UNTIL k >= 0; 
+        
+        ZZZ_HANDLE_KEY(k);
+    END;    
 END;
 EXPORT ZZZ_ARR_CONTAINS_NEG(arr)
   BEGIN
